@@ -5,7 +5,25 @@
   "description": "SfeirSchool React v2019",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel src/ex*/index.html",
+    "test": "jest"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "^16.7.0-alpha.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^23.6.0",
+    "jest-dom": "^2.1.1",
+    "parcel-bundler": "^1.10.3",
+    "react-testing-library": "^5.2.3"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./jest.setup.js"
+  }
 }
