@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
+import { AppBar } from "./components/AppBar";
+import { Card } from "./components/Card";
+import "./App.css";
+
+const title = "React @ SFEIR";
 
 export function App() {
-  const [times, setTimes] = useState(0);
   return (
-    <button onClick={() => setTimes(c => c + 1)}>
-      I've been clicked {times} times
-    </button>
+    <div className="App">
+      <header>
+        <AppBar />
+      </header>
+      <main>
+        <Card title={title} />
+      </main>
+    </div>
   );
 }

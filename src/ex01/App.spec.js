@@ -2,17 +2,14 @@ import React from "react";
 import { render, fireEvent } from "react-testing-library";
 import { App } from "./App";
 
-test("App renders a button", () => {
-  const { getByText } = render(<App />);
-  const button = getByText(/clicked/, { selector: "button" });
-  expect(button).toBeInTheDocument();
+test("App renders a header with the app logo", () => {
+  const { getByAltText } = render(<App />);
+  const image = getByAltText("People", { selector: "header *" });
+  expect(image).toBeInTheDocument();
 });
 
-test("App button click count increments on click", () => {
+test("App renders React @ SFEIR in main", () => {
   const { getByText } = render(<App />);
-  const button = getByText(/clicked/, { selector: "button" });
-  fireEvent.click(button);
-  expect(button).toHaveTextContent(/1 times/);
-  fireEvent.click(button);
-  expect(button).toHaveTextContent(/2 times/);
+  const card = getByText("React @ SFEIR", { selector: "main *" });
+  expect(card).toBeInTheDocument();
 });
