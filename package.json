@@ -5,13 +5,15 @@
   "description": "SfeirSchool React v2019",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/ex*/index.html",
+    "start": "parcel src/ex$npm_config_ex/index.html",
+    "prestart": "rm -rf .cache & rm -rf dist",
     "test": "jest"
   },
   "license": "ISC",
   "dependencies": {
     "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2"
+    "react-dom": "^16.7.0-alpha.2",
+    "styled-components": "^4.1.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.1.6",
