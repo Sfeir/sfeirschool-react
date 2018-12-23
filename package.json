@@ -5,15 +5,16 @@
   "description": "SfeirSchool React v2019",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/ex$npm_config_ex/index.html",
+    "start": "parcel src/ex*/index.html",
+    "start:one": "parcel src/ex$npm_config_ex/index.html",
     "prestart": "rm -rf .cache & rm -rf dist",
     "test": "jest"
   },
   "license": "ISC",
   "dependencies": {
     "normalize.css": "^8.0.1",
-    "react": "16.7.0-alpha.2",
-    "react-dom": "16.7.0-alpha.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
     "rmwc": "^4.0.1",
     "styled-components": "^4.1.3"
   },

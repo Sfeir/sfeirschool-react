@@ -1,16 +1,18 @@
 import React from "react";
+
 import logo from "./AppBar.logo.svg";
-import "./AppBar.css";
 
 export function AppBar() {
   return (
-    <nav className="AppBar">
-      <img
-        className="AppBar-logo"
-        src={logo}
-        aria-label="people"
-        alt="People"
-      />
-    </nav>
+    <>
+      <header className="mdc-top-app-bar">
+        <div className="mdc-top-app-bar__row">
+          <section className="mdc-top-app-bar__section">
+            <img src={logo} alt="People logo" />
+          </section>
+        </div>
+      </header>
+      <div className="mdc-top-app-bar--fixed-adjust" />
+    </>
   );
 }

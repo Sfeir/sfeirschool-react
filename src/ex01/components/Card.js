@@ -1,11 +1,10 @@
 import React from "react";
-import "./Card.css";
 
 export function Card(props) {
   return (
-    <section className="Card card">
-      <div className="card-content">
-        <div className="card-title">{props.title}</div>
+    <section className="mdc-card" style={{ width: 480 }}>
+      <div style={{ padding: "1rem" }}>
+        <h1 className="mdc-typography--headline4">{props.title}</h1>
       </div>
     </section>
   );

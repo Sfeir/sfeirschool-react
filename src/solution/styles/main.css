@@ -1,0 +1,24 @@
+@import url("../../../node_modules/normalize.css/normalize.css");
+@import url("../../../node_modules/material-components-web/dist/material-components-web.css");
+
+:root {
+  --mdc-theme-background: #fafafa;
+  --mdc-theme-primary: #0168ab;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.mdc-top-app-bar {
+  background-image: url("./app-bar-bg.png");
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+img[alt="People logo"] {
+  height: 40px;
+}

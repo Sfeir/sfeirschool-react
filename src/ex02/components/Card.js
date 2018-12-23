@@ -1,23 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { Card as MdcCard } from "@rmwc/card";
+import { Typography } from "@rmwc/typography";
 
-const Container = styled.section.attrs({
-  className: "card"
-})`
-  width: 460px;
-  min-height: 180px;
-  margin: 10px;
-
-  &:hover {
-    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
-      0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
-  }
+const CardContent = styled.div`
+  padding: 1rem;
 `;
 
 export const Card = ({ title }) => (
-  <Container>
-    <div className="card-content">
-      <div className="card-title">{title}</div>
-    </div>
-  </Container>
+  <MdcCard style={{ width: "calc(50% - 0.5rem)" }}>
+    <CardContent>
+      <Typography use="headline4">{title}</Typography>
+    </CardContent>
+  </MdcCard>
 );

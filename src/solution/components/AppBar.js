@@ -3,20 +3,17 @@ import {
   TopAppBar,
   TopAppBarRow,
   TopAppBarSection,
-  TopAppBarTitle,
   TopAppBarFixedAdjust
 } from "@rmwc/top-app-bar";
 
-import { AppLogo } from "./AppLogo";
+import logo from "./AppBar.logo.svg";
 
 export const AppBar = () => (
   <>
-    <TopAppBar fixed>
+    <TopAppBar>
       <TopAppBarRow>
         <TopAppBarSection>
-          <TopAppBarTitle>
-            <AppLogo />
-          </TopAppBarTitle>
+          <img src={logo} alt="People logo" />
         </TopAppBarSection>
       </TopAppBarRow>
     </TopAppBar>

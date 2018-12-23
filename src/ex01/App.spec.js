@@ -1,10 +1,10 @@
 import React from "react";
-import { render, fireEvent } from "react-testing-library";
+import { render } from "react-testing-library";
 import { App } from "./App";
 
 test("App renders a header with the app logo", () => {
   const { getByAltText } = render(<App />);
-  const image = getByAltText("People", { selector: "header *" });
+  const image = getByAltText("People logo", { selector: "header *" });
   expect(image).toBeInTheDocument();
 });
 
