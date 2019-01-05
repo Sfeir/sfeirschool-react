@@ -1,16 +1,17 @@
 import React from "react";
-import styled from "styled-components";
 import { Card as MdcCard } from "@rmwc/card";
 import { Typography } from "@rmwc/typography";
 
-const CardContent = styled.div`
-  padding: 1rem;
-`;
+const CardContent = ({ children }) => (
+  <div style={{ padding: "1rem" }}>{children}</div>
+);
 
 export const Card = ({ title }) => (
-  <MdcCard style={{ width: "calc(50% - 0.5rem)" }}>
+  <MdcCard style={{ width: 480 }}>
     <CardContent>
-      <Typography use="headline4">{title}</Typography>
+      <Typography use="headline4" tag="h1">
+        {title}
+      </Typography>
     </CardContent>
   </MdcCard>
 );
