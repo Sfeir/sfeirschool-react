@@ -12,9 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "normalize.css": "^8.0.1",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "rmwc": "^4.0.3"
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "^16.7.0-alpha.2",
+    "rmwc": "^4.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
