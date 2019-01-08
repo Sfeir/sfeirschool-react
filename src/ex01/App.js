@@ -1,16 +1,13 @@
 import React from "react";
 
-import { AppBar } from "./components/AppBar";
-import { Card } from "./components/Card";
-
-const title = "React @ SFEIR";
+const message = "React @ SFEIR";
 
 export function App() {
   return (
     <>
-      <AppBar />
+      <header>replace this header with the AppBar</header>
       <main>
-        <Card title={title} />
+        put the Card component here and pass "{message}" as title prop
       </main>
     </>
   );
