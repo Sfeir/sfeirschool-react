@@ -7,8 +7,7 @@
   "scripts": {
     "start": "parcel src/ex*/index.html",
     "start:one": "parcel src/ex$npm_config_ex/index.html",
-    "prestart": "rm -rf .cache & rm -rf dist",
-    "test": "jest"
+    "prestart": "rm -rf .cache & rm -rf dist"
   },
   "license": "ISC",
   "dependencies": {
@@ -18,20 +17,9 @@
     "rmwc": "^4.0.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
-    "jest": "^23.6.0",
-    "jest-dom": "^2.1.1",
-    "parcel-bundler": "^1.11.0",
-    "react-testing-library": "^5.4.4"
-  },
-  "jest": {
-    "setupTestFrameworkScriptFile": "./jest.setup.js",
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
-    }
+    "parcel-bundler": "^1.11.0"
   }
 }
