@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Fab } from "@rmwc/fab";
 
 import { PersonCard } from "../../solution/components/PersonCard";
@@ -12,41 +12,35 @@ const getPreviousPersonIndex = (people, currentIndex) =>
 const getNextPersonIndex = (people, currentIndex) =>
   succ(currentIndex, 0, people.length - 1);
 
+// add a new Fab and handle a play/pause state to automatically show the next person after 2sec.
+
 export function Carousel({ people }) {
   const [currentPersonIndex, setCurrentPersonIndex] = useState(
     Math.floor(Math.random() * people.length)
   );
-  const showPrevPerson = () => {
-    setCurrentPersonIndex(getPreviousPersonIndex(people, currentPersonIndex));
-  };
-  const showNextPerson = () => {
-    setCurrentPersonIndex(getNextPersonIndex(people, currentPersonIndex));
-  };
-
-  const [isPlaying, setIsPlaying] = useState(false);
-  const togglePlaying = () => {
-    !isPlaying && showNextPerson();
-    setIsPlaying(!isPlaying);
-  };
-
-  useEffect(() => {
-    if (isPlaying) {
-      const timerId = setTimeout(showNextPerson, 2000);
-
-      return () => clearTimeout(timerId);
-    }
-  });
 
   return (
     <>
       <PersonCard person={people[currentPersonIndex]} />
       <footer>
-        <Fab icon="skip_previous" mini onClick={showPrevPerson} />
         <Fab
-          icon={isPlaying ? "pause" : "play_arrow"}
-          onClick={togglePlaying}
+          icon="skip_previous"
+          mini
+          onClick={() =>
+            setCurrentPersonIndex(
+              getPreviousPersonIndex(people, currentPersonIndex)
+            )
+          }
         />
-        <Fab icon="skip_next" mini onClick={showNextPerson} />
+        <Fab
+          icon="skip_next"
+          mini
+          onClick={() =>
+            setCurrentPersonIndex(
+              getNextPersonIndex(people, currentPersonIndex)
+            )
+          }
+        />
       </footer>
     </>
   );
