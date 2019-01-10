@@ -11,7 +11,7 @@ export const App = () => (
   <>
     <AppBar />
     <main>
-      <PersonCard person={randomPerson} />
+      <PersonCard />
     </main>
     <footer>
       <pre>{JSON.stringify(randomPerson, null, 2)}</pre>
