@@ -1,0 +1,79 @@
+@import url("../../../node_modules/normalize.css/normalize.css");
+@import url("../../../node_modules/material-components-web/dist/material-components-web.css");
+@import url("../../../node_modules/@rmwc/icon/icon.css");
+
+:root {
+  --mdc-theme-background: #fafafa;
+  --mdc-theme-primary: #0168ab;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.mdc-top-app-bar {
+  background-image: url("./app-bar-bg.png");
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+img[alt="People logo"] {
+  height: 40px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--mdc-theme-primary);
+}
+
+.mdc-card {
+  & > .person-info {
+    padding: 1.5rem;
+  }
+}
+
+.person-info {
+  width: 420px;
+
+  & > figure {
+    float: right;
+    margin: 0;
+    & > img {
+      border-radius: 50%;
+      width: 128px;
+      height: 128px;
+    }
+  }
+
+  & > header {
+    & > h1 {
+      margin: 0;
+    }
+    & > h2 {
+      margin: 0;
+      color: var(--mdc-theme-text-secondary-on-background);
+    }
+  }
+
+  & > p {
+    margin: 0.5em 0;
+    white-space: nowrap;
+
+    & > .rmwc-icon {
+      vertical-align: text-bottom;
+      color: var(--mdc-theme-text-secondary-on-background);
+    }
+  }
+}
