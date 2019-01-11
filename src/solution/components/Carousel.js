@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Fab } from "@rmwc/fab";
 
-import { PersonCard } from "../../solution/components/PersonCard";
+import { PersonCard } from "./PersonCard";
 
 const succ = (current, min, max) => (current === max ? min : current + 1);
 const pred = (current, min, max) => (current === min ? max : current - 1);
@@ -39,7 +39,9 @@ export function Carousel({ people }) {
 
   return (
     <>
-      <PersonCard person={people[currentPersonIndex]} />
+      <main>
+        <PersonCard person={people[currentPersonIndex]} />
+      </main>
       <footer>
         <Fab icon="skip_previous" mini onClick={showPrevPerson} />
         <Fab

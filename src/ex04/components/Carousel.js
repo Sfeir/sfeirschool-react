@@ -21,7 +21,9 @@ export function Carousel({ people }) {
 
   return (
     <>
-      <PersonCard person={people[currentPersonIndex]} />
+      <main>
+        <PersonCard person={people[currentPersonIndex]} />
+      </main>
       <footer>
         <Fab
           icon="skip_previous"

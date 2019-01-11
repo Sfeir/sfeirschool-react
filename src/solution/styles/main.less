@@ -22,10 +22,13 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 
   & > .mdc-fab {
-    margin: 10px;
     background-color: var(--mdc-theme-primary);
+    & + .mdc-fab {
+      margin-left: 1rem;
+    }
   }
 }
 

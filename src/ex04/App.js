@@ -8,8 +8,6 @@ import { Carousel } from "./components/Carousel";
 export const App = () => (
   <>
     <AppBar />
-    <main>
-      <Carousel people={people} />
-    </main>
+    <Carousel people={people} />
   </>
 );
