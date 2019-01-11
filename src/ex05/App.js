@@ -3,11 +3,11 @@ import React from "react";
 import { people } from "../../data/people.json";
 
 import { AppBar } from "../solution/components/AppBar";
-import { ListAll } from "./components/ListAll.js";
+import { Carousel } from "./components/Carousel";
 
 export const App = () => (
   <>
     <AppBar />
-    <ListAll people={people} />
+    <Carousel people={people} />
   </>
 );

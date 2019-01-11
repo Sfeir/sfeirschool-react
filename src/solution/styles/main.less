@@ -48,41 +48,40 @@ a {
 }
 
 .mdc-card {
+  margin: 1rem;
+
   & > .person-info {
     padding: 1.5rem;
-  }
-}
+    width: 420px;
 
-.person-info {
-  width: 420px;
-
-  & > figure {
-    float: right;
-    margin: 0;
-    & > img {
-      border-radius: 50%;
-      width: 128px;
-      height: 128px;
-    }
-  }
-
-  & > header {
-    & > h1 {
+    & > figure {
+      float: right;
       margin: 0;
+      & > img {
+        border-radius: 50%;
+        width: 128px;
+        height: 128px;
+      }
     }
-    & > h2 {
-      margin: 0;
-      color: var(--mdc-theme-text-secondary-on-background);
+
+    & > header {
+      & > h1 {
+        margin: 0;
+      }
+      & > h2 {
+        margin: 0;
+        color: var(--mdc-theme-text-secondary-on-background);
+      }
     }
-  }
 
-  & > p {
-    margin: 0.5em 0;
-    white-space: nowrap;
+    & > p {
+      margin: 0.5em 0;
+      white-space: nowrap;
 
-    & > .rmwc-icon {
-      vertical-align: text-bottom;
-      color: var(--mdc-theme-text-secondary-on-background);
+      & > .rmwc-icon {
+        vertical-align: text-bottom;
+        color: var(--mdc-theme-text-secondary-on-background);
+      }
     }
   }
 }
