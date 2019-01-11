@@ -1,13 +1,11 @@
 import React from "react";
 
-import { PersonCard } from "../../solution/components/PersonCard";
-
-export function ListAll({ people }) {
+export function ListAll() {
   return (
     <main>
-      {people.map(person => (
-        <PersonCard person={person} />
-      ))}
+      Display the list of all the people using the PersonCard component.
+      <br />
+      What if a person has no manager?
     </main>
   );
 }
