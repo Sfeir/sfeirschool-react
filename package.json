@@ -12,8 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "normalize.css": "^8.0.1",
-    "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2",
+    "react": "next",
+    "react-dom": "next",
     "rmwc": "^4.0.6"
   },
   "devDependencies": {
