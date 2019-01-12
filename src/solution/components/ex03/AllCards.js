@@ -2,11 +2,11 @@ import React from "react";
 
 import { PersonCard } from "../PersonCard";
 
-export function ListAll({ people }) {
+export function AllCards({ people }) {
   return (
     <main>
       {people.map(person => (
-        <PersonCard person={person} />
+        <PersonCard person={person} key={person.id} />
       ))}
     </main>
   );

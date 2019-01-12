@@ -1,6 +1,6 @@
 import React from "react";
 
-export function ListAll() {
+export function AllCards() {
   return (
     <main>
       Display the list of all the people using the PersonCard component.

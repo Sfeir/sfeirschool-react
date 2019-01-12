@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import { Card, CardImage, CardTitle, CardInfo } from "./Card";
 
-export const PersonCard = ({ person }) => (
+export const PersonCard = memo(({ person }) => (
   <Card>
     <CardImage url={person.photo} desc={`face of ${person.firstname}`} />
     <CardTitle
@@ -24,4 +24,4 @@ export const PersonCard = ({ person }) => (
       </CardInfo>
     )}
   </Card>
-);
+));

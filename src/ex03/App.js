@@ -1,13 +1,19 @@
 import React from "react";
-
-import { people } from "../../data/people.json";
+import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 
 import { AppBar } from "../solution/components/AppBar";
-import { ListAll } from "./components/ListAll.js";
+import { usePeople } from "../solution/components/ex03/usePeople";
 
-export const App = () => (
-  <>
-    <AppBar />
-    <ListAll people={people} />
-  </>
-);
+import { AllCards } from "./components/AllCards.js";
+
+export function App() {
+  const { people, shuffle } = usePeople();
+  return (
+    <>
+      <AppBar>
+        <TopAppBarActionItem onClick={shuffle}>shuffle</TopAppBarActionItem>
+      </AppBar>
+      <AllCards people={people} />
+    </>
+  );
+}
