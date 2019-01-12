@@ -4,10 +4,10 @@
 
 ### Day 1
 
-- HandOn (JSX)
-- Components (composition and children)
-- Conditional, Lists (show 'em all)
-- Local state and clicks (get interactive)
+- ex01 - HandsOn (JSX and props)
+- ex02 - Components (composition and children)
+- ex03 - Local state and clicks (get interactive)
+- ex04 - Conditional, Lists (show 'em all)
 - Lifecycle and Effects (async ftw)
 - Controlled Components - Input (search)
 
