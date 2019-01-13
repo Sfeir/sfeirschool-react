@@ -1,27 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Fab } from "@rmwc/fab";
 
+import { cycleNext, cyclePrev } from "../../utils";
 import { PersonCard } from "./PersonCard";
 
-const succ = (current, min, max) => (current === max ? min : current + 1);
-const pred = (current, min, max) => (current === min ? max : current - 1);
-
-const getPreviousPersonIndex = (people, currentIndex) =>
-  pred(currentIndex, 0, people.length - 1);
-
-const getNextPersonIndex = (people, currentIndex) =>
-  succ(currentIndex, 0, people.length - 1);
-
 export function Carousel({ people }) {
-  const [currentPersonIndex, setCurrentPersonIndex] = useState(
-    Math.floor(Math.random() * people.length)
-  );
-  const showPrevPerson = () => {
-    setCurrentPersonIndex(getPreviousPersonIndex(people, currentPersonIndex));
-  };
-  const showNextPerson = () => {
-    setCurrentPersonIndex(getNextPersonIndex(people, currentPersonIndex));
-  };
+  const [currentPersonIndex, setCurrentPersonIndex] = useState(0);
+  const next = cycleNext(0, people.length - 1);
+  const prev = cyclePrev(0, people.length - 1);
+  const showNextPerson = () => setCurrentPersonIndex(next);
+  const showPrevPerson = () => setCurrentPersonIndex(prev);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const togglePlaying = () => {
@@ -32,7 +20,6 @@ export function Carousel({ people }) {
   useEffect(() => {
     if (isPlaying) {
       const timerId = setTimeout(showNextPerson, 2000);
-
       return () => clearTimeout(timerId);
     }
   });

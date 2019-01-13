@@ -2,21 +2,19 @@ import React, { useState } from "react";
 import { Fab } from "@rmwc/fab";
 
 import { PersonCard } from "../PersonCard";
-import { shuffleArray } from "../../../utils";
+import { shuffleArray, useForceUpdate } from "../../../utils";
 
 export function AllCards({ people }) {
-  const [shuffled, setShuffled] = useState(shuffleArray(people));
-  const shuffle = () => setShuffled(shuffleArray);
-
+  const forceUpdate = useForceUpdate();
   return (
     <>
       <main>
-        {shuffled.map(person => (
+        {shuffleArray(people).map(person => (
           <PersonCard person={person} key={person.id} />
         ))}
       </main>
       <footer>
-        <Fab icon="shuffle" onClick={shuffle} />
+        <Fab icon="shuffle" onClick={forceUpdate} />
       </footer>
     </>
   );

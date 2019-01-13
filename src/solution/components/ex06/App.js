@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 
-import { people } from "../../../../data/people.json";
-
 import { AppBar } from "../AppBar";
-import { Carousel } from "../ex03/Carousel";
-import { AllCards } from "./AllCards.js";
+import { AllCards } from "../ex04/AllCards";
+
+import { Carousel } from "../Carousel";
 
 export function App() {
   const [showAll, setShowAll] = useState(true);
   const toggle = () => setShowAll(x => !x);
+
+  const [people, setPeople] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/people")
+      .then(res => res.json())
+      .then(setPeople);
+  }, []);
 
   return (
     <>

@@ -8,8 +8,8 @@
 - ex02 - Components (composition and children)
 - ex03 - Local state and clicks (get interactive)
 - ex04 - Conditional, Lists (show 'em all)
-- Lifecycle and Effects (async ftw)
-- Controlled Components - Input (search)
+- ex05 - Controlled Components - Input (search)
+- ex06 - Lifecycle and Effects (async ftw)
 
 ### Day 2
 

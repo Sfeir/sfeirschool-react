@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export const cycleNext = (min, max) => current =>
   current === max ? min : current + 1;
 
@@ -12,3 +14,8 @@ export const shuffleArray = xs =>
     ),
     []
   );
+
+export const useForceUpdate = () => {
+  const [, setUpdate] = useState(0);
+  return () => setUpdate(x => x + 1);
+};

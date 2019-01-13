@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 
-import { people } from "../../../../data/people.json";
+import { people } from "../../data/people.json";
 
-import { AppBar } from "../AppBar";
-import { Carousel } from "../ex03/Carousel";
-import { AllCards } from "./AllCards.js";
+import { AppBar } from "../solution/components/AppBar";
+import { AllCards } from "../solution/components/ex04/AllCards";
+
+import { Carousel } from "./components/Carousel";
+// import { Carousel } from "../solution/components/Carousel";
 
 export function App() {
-  const [showAll, setShowAll] = useState(true);
+  const [showAll, setShowAll] = useState(false);
   const toggle = () => setShowAll(x => !x);
 
   return (
