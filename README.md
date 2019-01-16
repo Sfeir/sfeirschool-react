@@ -4,12 +4,23 @@
 
 ### Day 1
 
-- ex01 - HandsOn (JSX and props)
-- ex02 - Components (composition and children)
-- ex03 - Local state and clicks (get interactive)
-- ex04 - Conditional, Lists (show 'em all)
-- ex05 - Controlled Components - Input (search)
-- ex06 - Lifecycle and Effects (async ftw)
+- Intro JSX, Elements, Components as functions, Props
+- Do not show advanced composition yet
+
+  - ex01 - HandsOn (JSX and props)
+    only use function
+
+- Intro Component composition, Component Tree, Elements as Props, Children
+
+  - ex02 - Components (composition and children)
+
+* ex03 - Local state and clicks (get interactive)
+  -> carousel with arbitrary children
+* ex04 - Conditional, Lists (show 'em all)
+* ex05 - Controlled Components - Input (search)
+* ex06 - Lifecycle and Effects (async ftw)
+
+* ???? - refs, instances and the DOM
 
 ### Day 2
 

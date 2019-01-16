@@ -6,9 +6,9 @@ import {
   TopAppBarFixedAdjust
 } from "@rmwc/top-app-bar";
 
-import logo from "./AppBar.logo.svg";
+import logo from "../images/Header.logo.svg";
 
-export const AppBar = ({ children }) => (
+export const Header = ({ children }) => (
   <>
     <TopAppBar>
       <TopAppBarRow>
