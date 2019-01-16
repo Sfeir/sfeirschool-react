@@ -1,8 +1,8 @@
 import React from "react";
 
-import logo from "../AppBar.logo.svg";
+import logo from "../images/Header.logo.svg";
 
-export function AppBar() {
+export function Header() {
   return (
     <>
       <header className="mdc-top-app-bar">
