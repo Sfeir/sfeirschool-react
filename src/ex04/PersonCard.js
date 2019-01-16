@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardImage,
-  CardTitle,
-  CardInfo
-} from "../../solution/components/Card";
+import { Card, CardImage, CardTitle, CardInfo } from "../solution/Card";
 
 export const PersonCard = ({ person }) => (
   <Card>
