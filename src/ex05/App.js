@@ -2,23 +2,28 @@ import React, { useState } from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 
 import { people } from "../../data/people.json";
+import { Header } from "../solution/Header";
 
-import { AppBar } from "../solution/components/AppBar";
-import { AllCards } from "./components/AllCards";
-import { Carousel } from "../solution/components/Carousel";
+import { SearchableList } from "./SearchableList";
+import { Player } from "./Player";
+
+// import { SearchableList } from "../solution/SearchableList";
+// import { Player } from "../solution/Player_ex05";
 
 export function App() {
-  const [showAll, setShowAll] = useState(true);
-  const toggle = () => setShowAll(x => !x);
+  const [showList, setShowList] = useState(true);
+  const toggleView = () => setShowList(x => !x);
+  const toggleIcon = showList ? "view_carousel" : "view_module";
+  const CurrentView = showList ? SearchableList : Player;
 
   return (
     <>
-      <AppBar>
-        <TopAppBarActionItem onClick={toggle}>
-          {showAll ? "view_carousel" : "view_module"}
+      <Header>
+        <TopAppBarActionItem onClick={toggleView}>
+          {toggleIcon}
         </TopAppBarActionItem>
-      </AppBar>
-      {showAll ? <AllCards people={people} /> : <Carousel people={people} />}
+      </Header>
+      <CurrentView people={people} />
     </>
   );
 }

@@ -33,12 +33,13 @@ Class Components, this binding, What's an element anyway
 - ex04 - Conditional, Lists (show 'em all)
   -> carousel with arbitrary children
 
-### Input / Refs
+### Input / Refs / controlled and uncontrolled components
 
 - ex05 - Controlled Components - Input (search)
-- ex06 - Lifecycle and Effects (async ftw)
 
-- ???? - refs, instances and the DOM
+### Lifecycle, Effects and lifting state up
+
+- ex06 - Lifecycle and Effects (async ftw)
 
 ### Day 2
 

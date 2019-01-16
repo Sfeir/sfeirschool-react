@@ -5,7 +5,7 @@ import { people } from "../../data/people.json";
 import { Header } from "./Header";
 
 import { PersonCard } from "./PersonCard";
-import { Carousel } from "./Carousel";
+import { Carousel } from "./Carousel_ex04";
 
 const personCards = people.map(person => (
   <PersonCard person={person} key={person.id} />
