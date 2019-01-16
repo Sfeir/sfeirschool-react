@@ -11,7 +11,14 @@ main {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 1rem;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 footer {
@@ -24,14 +31,15 @@ footer {
   align-items: center;
   padding: 1rem;
 
-  & > .mdc-fab {
-    background-color: var(--mdc-theme-primary);
-    & + .mdc-fab {
-      margin-left: 1rem;
-    }
+  & > .mdc-fab + .mdc-fab {
+    margin-left: 1rem;
   }
 
   background-color: rgba(250, 250, 250, 0.9);
+}
+
+.mdc-fab {
+  background-color: var(--mdc-theme-primary);
 }
 
 .mdc-top-app-bar {
@@ -55,6 +63,7 @@ a {
   & > .person-info {
     padding: 1.5rem;
     width: 420px;
+    min-height: 155px;
 
     & > figure {
       float: right;

@@ -4,23 +4,41 @@
 
 ### Day 1
 
-- Intro JSX, Elements, Components as functions, Props
-- Do not show advanced composition yet
+### Intro JSX, Elements, Components as functions, Props
 
-  - ex01 - HandsOn (JSX and props)
-    only use function
+Do not show advanced composition yet
 
-- Intro Component composition, Component Tree, Elements as Props, Children
+- ex01 - HandsOn (JSX and props)
+  only use function
 
-  - ex02 - Components (composition and children)
+### Component composition, Component Tree, Elements as Props, Children
 
-* ex03 - Local state and clicks (get interactive)
+Components/Functions as values => prefer lambda notation as of now
+Component Tree != Flow of Props -> Elements as Props (Children are just that)
+Do not show Components / factories as Props yet
+
+- ex02 - Components (composition and children)
+
+### Local State and Simple Events
+
+Events, Syntheticevents - just a callback (nothing special here)
+Class Components, this binding, What's an element anyway
+-> the class is just a representation
+-> hooks FTW - a gentle introduction
+
+- ex03 - Local state and clicks (get interactive)
+
+### Lists, Conditional rendering, more about children
+
+- ex04 - Conditional, Lists (show 'em all)
   -> carousel with arbitrary children
-* ex04 - Conditional, Lists (show 'em all)
-* ex05 - Controlled Components - Input (search)
-* ex06 - Lifecycle and Effects (async ftw)
 
-* ???? - refs, instances and the DOM
+### Input / Refs
+
+- ex05 - Controlled Components - Input (search)
+- ex06 - Lifecycle and Effects (async ftw)
+
+- ???? - refs, instances and the DOM
 
 ### Day 2
 

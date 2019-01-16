@@ -1,13 +1,16 @@
 import React from "react";
 
 import { people } from "../../data/people.json";
+import { Header } from "../solution/Header";
 
-import { AppBar } from "../solution/components/AppBar";
-import { Carousel } from "./components/Carousel";
+import { PersonCarousel } from "./PersonCarousel";
+// import { PersonCarousel } from "../solution/PersonCarousel";
 
 export const App = () => (
   <>
-    <AppBar />
-    <Carousel people={people} />
+    <Header />
+    <main>
+      <PersonCarousel people={people} />
+    </main>
   </>
 );
