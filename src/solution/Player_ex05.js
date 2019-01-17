@@ -2,7 +2,7 @@ import React, {
   useRef,
   forwardRef,
   useState,
-  useImperativeMethods
+  useImperativeHandle
 } from "react";
 import { Fab } from "@rmwc/fab";
 import { cycleNext, cyclePrev } from "../utils";
@@ -14,7 +14,7 @@ const Carousel = forwardRef(({ children }, ref) => {
   const nextIndex = cycleNext(0, childArray.length - 1);
   const prevIndex = cyclePrev(0, childArray.length - 1);
 
-  useImperativeMethods(ref, () => ({
+  useImperativeHandle(ref, () => ({
     next: () => setCurrentIndex(nextIndex)
   }));
 
