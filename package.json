@@ -7,7 +7,7 @@
   "scripts": {
     "start": "run-p watch:exos api",
     "prestart": "rm -rf .cache & rm -rf dist",
-    "watch:exos": "parcel src/ex*/index.html",
+    "watch:exos": "parcel src/ex*/index.html src/favicon.ico",
     "api": "json-server ./data/people.json"
   },
   "license": "ISC",
