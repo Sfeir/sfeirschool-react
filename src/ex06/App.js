@@ -1,26 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 
-import { people } from "../../data/people.json";
+import { Header } from "../solution/Header";
+import { SearchableList } from "../solution/SearchableList";
 
-import { AppBar } from "../solution/components/AppBar";
-import { AllCards } from "../solution/components/ex04/AllCards";
-
-import { Carousel } from "./components/Carousel";
-// import { Carousel } from "../solution/components/Carousel";
+import { Player } from "./Player";
+// import { Player } from "../solution/Player";
 
 export function App() {
-  const [showAll, setShowAll] = useState(false);
-  const toggle = () => setShowAll(x => !x);
+  const [showList, setShowList] = useState(false);
+  const toggleView = () => setShowList(x => !x);
+  const toggleIcon = showList ? "view_carousel" : "view_module";
+  const CurrentView = showList ? SearchableList : Player;
+
+  const [people, setPeople] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/people")
+      .then(res => res.json())
+      .then(setPeople);
+  }, []);
 
   return (
     <>
-      <AppBar>
-        <TopAppBarActionItem onClick={toggle}>
-          {showAll ? "view_carousel" : "view_module"}
+      <Header>
+        <TopAppBarActionItem onClick={toggleView}>
+          {toggleIcon}
         </TopAppBarActionItem>
-      </AppBar>
-      {showAll ? <AllCards people={people} /> : <Carousel people={people} />}
+      </Header>
+      <CurrentView people={people} />
     </>
   );
 }
