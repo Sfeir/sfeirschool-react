@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Demo 1 - Introducing React</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="/modules/react/umd/react.production.min.js"></script>
+    <script src="/modules/react-dom/umd/react-dom.production.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      let root = document.getElementById("root");
+      let count = 0;
+
+      function buttonClicked() {
+        count++;
+        render();
+      }
+
+      function render() {
+        const style = {
+          color: count % 2 === 0 ? "green" : "red"
+        };
+
+        const element = React.createElement(
+          "button",
+          { onClick: buttonClicked },
+          "clicked ",
+          React.createElement("span", { style }, count),
+          " times"
+        );
+
+        ReactDOM.render(element, root);
+      }
+
+      render();
+    </script>
+  </body>
+</html>

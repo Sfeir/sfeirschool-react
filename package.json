@@ -5,25 +5,26 @@
   "description": "SfeirSchool React v2019",
   "main": "index.js",
   "scripts": {
-    "start": "run-p watch:exos api",
+    "start": "run-p watch:exos api serve",
     "prestart": "rm -rf .cache & rm -rf dist",
     "watch:exos": "parcel src/ex*/index.html src/favicon.ico",
-    "api": "json-server ./data/people.json"
+    "api": "json-server --quiet ./data/people.json",
+    "serve": "live-server --quiet --watch=\"demo01/,demo02/\" --mount=/modules:./node_modules ./src"
   },
   "license": "ISC",
   "dependencies": {
-    "json-server": "^0.14.2",
-    "normalize.css": "^8.0.1",
-    "npm-run-all": "^4.1.5",
-    "react": "next",
-    "react-dom": "next",
-    "rmwc": "^4.0.6"
-  },
-  "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
+    "@babel/standalone": "^7.2.5",
+    "json-server": "^0.14.2",
     "less": "^3.9.0",
-    "parcel-bundler": "^1.11.0"
+    "live-server": "^1.2.1",
+    "normalize.css": "^8.0.1",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.11.0",
+    "react": "next",
+    "react-dom": "next",
+    "rmwc": "^4.0.6"
   }
 }

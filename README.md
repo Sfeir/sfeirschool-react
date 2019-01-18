@@ -23,10 +23,13 @@ Do not show Components / factories as Props yet
 
 Events, Syntheticevents - just a callback (nothing special here)
 Class Components, this binding, What's an element anyway
+
+- ex03 - Local state and clicks (get interactive)
+
 -> the class is just a representation
 -> hooks FTW - a gentle introduction
 
-- ex03 - Local state and clicks (get interactive)
+- ex03bis -> use useState
 
 ### Lists, Conditional rendering, more about children
 
