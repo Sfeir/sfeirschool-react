@@ -1,0 +1,36 @@
+#root {
+  height: 100vh;
+  font-size: 4em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.target {
+  border-radius: 50%;
+  cursor: crosshair;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 4em;
+  height: 4em;
+  background-color: black;
+}
+
+.target > .target {
+  width: calc(100% - 1em);
+  height: calc(100% - 1em);
+  background-color: blue;
+}
+
+.target > .target > .target {
+  background-color: red;
+}
+
+.target > .target > .target > .target {
+  background-color: yellow;
+}
