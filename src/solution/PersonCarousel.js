@@ -33,7 +33,9 @@ export class PersonCarousel extends React.Component {
     return (
       <div className="flex-row">
         <Fab icon="skip_previous" mini onClick={this.setPrev} />
-        <PersonCard person={people[currentIndex]} />
+        <div className="carousel">
+          <PersonCard person={people[currentIndex]} className="current" />
+        </div>
         <Fab icon="skip_next" mini onClick={this.setNext} />
       </div>
     );
@@ -55,7 +57,9 @@ export const PersonCarouselHooks = ({ people }) => {
   return (
     <div className="flex-row">
       <Fab icon="skip_previous" mini onClick={setPrev} />
-      <PersonCard person={people[currentIndex]} />
+      <div className="carousel">
+        <PersonCard person={people[currentIndex]} className="current" />
+      </div>
       <Fab icon="skip_next" mini onClick={setNext} />
     </div>
   );

@@ -15,7 +15,9 @@ const Fab = ({ icon }) => (
 export const PersonCarousel = ({ people }) => (
   <div className="flex-row">
     <Fab icon="skip_previous" />
-    <PersonCard person={people[0]} />
+    <div className="carousel">
+      <PersonCard person={people[0]} className="current" />
+    </div>
     <Fab icon="skip_next" />
   </div>
 );
