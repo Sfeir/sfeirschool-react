@@ -18,8 +18,8 @@ main {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 footer {
@@ -100,4 +100,36 @@ a {
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
   color: var(--mdc-theme-primary);
+}
+
+.carousel {
+  position: relative;
+  flex-grow: 1;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > .mdc-card {
+    position: absolute;
+    margin: 0;
+    display: none;
+
+    &.current,
+    &.prev,
+    &.next {
+      display: initial;
+      transition: transform 0.5s ease;
+    }
+
+    &.prev {
+      transform: scale(0.6) translateY(150px);
+      z-index: -1;
+    }
+
+    &.next {
+      transform: scale(0.6) translateY(-150px);
+      z-index: -1;
+    }
+  }
 }

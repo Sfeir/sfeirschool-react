@@ -7,7 +7,11 @@ export const Carousel = () => {
   return (
     <div className="flex-row">
       <Fab icon="skip_previous" mini />
-      What will you put here?
+      <div className="carousel">
+        Display PersonCards here. The current needs to have className="current",
+        the previous "prev" and the next "next" respectively. Use
+        React.cloneElement to add className prop to children
+      </div>
       <Fab icon="skip_next" mini />
     </div>
   );
