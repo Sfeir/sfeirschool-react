@@ -2,7 +2,8 @@ import React, {
   useRef,
   forwardRef,
   useState,
-  useImperativeHandle
+  useImperativeHandle,
+  cloneElement
 } from "react";
 import { Fab } from "@rmwc/fab";
 import { range } from "../utils";
@@ -19,10 +20,20 @@ const Carousel = forwardRef(({ children }, ref) => {
     next: onNext
   }));
 
+  const cards = [
+    [succ(currentIndex), "next"],
+    [currentIndex, "current"],
+    [pred(currentIndex), "prev"]
+  ];
+
   return (
     <div className="flex-row">
       <Fab icon="skip_previous" mini onClick={onPrev} />
-      {childArray[currentIndex]}
+      <div className="carousel">
+        {cards.map(([i, className]) =>
+          cloneElement(childArray[i], { className })
+        )}
+      </div>
       <Fab icon="skip_next" mini onClick={onNext} />
     </div>
   );
