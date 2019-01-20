@@ -1,33 +1,17 @@
 import React, { useState } from "react";
 import { Fab } from "@rmwc/fab";
 
-import { cycleNext, cyclePrev } from "../utils";
+import { range } from "../utils";
 import { PersonCard } from "./PersonCard";
 
-export const PersonCarousel = ({ people }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const next = cycleNext(0, people.length - 1);
-  const prev = cyclePrev(0, people.length - 1);
-
-  return (
-    <div className="flex-row">
-      <Fab icon="skip_previous" mini onClick={() => setCurrentIndex(prev)} />
-      <PersonCard person={people[currentIndex]} />
-      <Fab icon="skip_next" mini onClick={() => setCurrentIndex(next)} />
-    </div>
-  );
-};
-
-///////////////////////////////////////////////////////////
-
 const setPrevIndex = ({ currentIndex }, { people }) => ({
-  currentIndex: cyclePrev(0, people.length - 1)(currentIndex)
+  currentIndex: range(0, people.length - 1).pred(currentIndex)
 });
 const setNextIndex = ({ currentIndex }, { people }) => ({
-  currentIndex: cycleNext(0, people.length - 1)(currentIndex)
+  currentIndex: range(0, people.length - 1).succ(currentIndex)
 });
 
-export class PersonCarouselClass extends React.Component {
+export class PersonCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = { currentIndex: 0 };
@@ -55,3 +39,18 @@ export class PersonCarouselClass extends React.Component {
     );
   }
 }
+
+///////////////////////////////////////////////////////////
+
+export const PersonCarouselHooks = ({ people }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const { pred, succ } = range(0, people.length - 1);
+
+  return (
+    <div className="flex-row">
+      <Fab icon="skip_previous" mini onClick={() => setCurrentIndex(pred)} />
+      <PersonCard person={people[currentIndex]} />
+      <Fab icon="skip_next" mini onClick={() => setCurrentIndex(succ)} />
+    </div>
+  );
+};

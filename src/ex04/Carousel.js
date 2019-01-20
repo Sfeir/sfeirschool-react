@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Fab } from "@rmwc/fab";
 
-import { cycleNext, cyclePrev } from "../utils";
+import { range } from "../utils";
 
 export const Carousel = () => {
   return (

@@ -1,10 +1,9 @@
 import { useState } from "react";
 
-export const cycleNext = (min, max) => current =>
-  current === max ? min : current + 1;
-
-export const cyclePrev = (min, max) => current =>
-  current === min ? max : current - 1;
+export const range = (min, max) => ({
+  succ: x => (x === max ? min : x + 1),
+  pred: x => (x === min ? max : x - 1)
+});
 
 export const shuffleArray = xs =>
   xs.reduce(
@@ -16,6 +15,6 @@ export const shuffleArray = xs =>
   );
 
 export const useForceUpdate = () => {
-  const [, setUpdate] = useState(0);
-  return () => setUpdate(x => x + 1);
+  const [, setUpdate] = useState(false);
+  return () => setUpdate(x => !x);
 };

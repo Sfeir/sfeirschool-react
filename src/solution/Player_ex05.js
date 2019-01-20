@@ -5,28 +5,25 @@ import React, {
   useImperativeHandle
 } from "react";
 import { Fab } from "@rmwc/fab";
-import { cycleNext, cyclePrev } from "../utils";
+import { range } from "../utils";
 import { PersonCard } from "./PersonCard";
 
 const Carousel = forwardRef(({ children }, ref) => {
   const childArray = React.Children.toArray(children);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const nextIndex = cycleNext(0, childArray.length - 1);
-  const prevIndex = cyclePrev(0, childArray.length - 1);
+  const { pred, succ } = range(0, childArray.length - 1);
+  const onPrev = () => setCurrentIndex(pred);
+  const onNext = () => setCurrentIndex(succ);
 
   useImperativeHandle(ref, () => ({
-    next: () => setCurrentIndex(nextIndex)
+    next: onNext
   }));
 
   return (
     <div className="flex-row">
-      <Fab
-        icon="skip_previous"
-        mini
-        onClick={() => setCurrentIndex(prevIndex)}
-      />
+      <Fab icon="skip_previous" mini onClick={onPrev} />
       {childArray[currentIndex]}
-      <Fab icon="skip_next" mini onClick={() => setCurrentIndex(nextIndex)} />
+      <Fab icon="skip_next" mini onClick={onNext} />
     </div>
   );
 });

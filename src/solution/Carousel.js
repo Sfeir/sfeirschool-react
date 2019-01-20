@@ -1,6 +1,6 @@
 import React from "react";
 import { Fab } from "@rmwc/fab";
-import { cycleNext, cyclePrev } from "../utils";
+import { range } from "../utils";
 
 export const Carousel = ({
   currentIndex = 0,
@@ -18,22 +18,15 @@ export const Carousel = ({
     onChange(currentIndex);
   }
 
-  const nextIndex = cycleNext(0, childArray.length - 1);
-  const prevIndex = cyclePrev(0, childArray.length - 1);
+  const { pred, succ } = range(0, childArray.length - 1);
+  const onPrev = () => onChange(pred(currentIndex));
+  const onNext = () => onChange(succ(currentIndex));
 
   return (
     <div className="flex-row">
-      <Fab
-        icon="skip_previous"
-        mini
-        onClick={() => onChange(prevIndex(currentIndex))}
-      />
+      <Fab icon="skip_previous" mini onClick={onPrev} />
       {childArray[currentIndex]}
-      <Fab
-        icon="skip_next"
-        mini
-        onClick={() => onChange(nextIndex(currentIndex))}
-      />
+      <Fab icon="skip_next" mini onClick={onNext} />
     </div>
   );
 };
