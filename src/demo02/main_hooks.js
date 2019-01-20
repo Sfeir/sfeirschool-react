@@ -6,10 +6,10 @@ const Target = ({ onHit, children }) => (
 
 const App = () => {
   const [score, setScore] = React.useState(0);
-  const incrementScore = () => {
+  const incrementScore = React.useCallback(() => {
     console.count("hits");
     setScore(score => score + 1);
-  };
+  }, []);
 
   return (
     <>

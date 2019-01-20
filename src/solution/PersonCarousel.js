@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { Fab } from "@rmwc/fab";
 
 import { range } from "../utils";
@@ -44,13 +44,19 @@ export class PersonCarousel extends React.Component {
 
 export const PersonCarouselHooks = ({ people }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { pred, succ } = range(0, people.length - 1);
+  const [setPrev, setNext] = useMemo(
+    () => {
+      const { pred, succ } = range(0, people.length - 1);
+      return [() => setCurrentIndex(pred), () => setCurrentIndex(succ)];
+    },
+    [people, setCurrentIndex]
+  );
 
   return (
     <div className="flex-row">
-      <Fab icon="skip_previous" mini onClick={() => setCurrentIndex(pred)} />
+      <Fab icon="skip_previous" mini onClick={setPrev} />
       <PersonCard person={people[currentIndex]} />
-      <Fab icon="skip_next" mini onClick={() => setCurrentIndex(succ)} />
+      <Fab icon="skip_next" mini onClick={setNext} />
     </div>
   );
 };
