@@ -3,9 +3,9 @@ import { Card as MdcCard } from "@rmwc/card";
 import { Typography } from "@rmwc/typography";
 import { Icon } from "@rmwc/icon";
 
-export const Card = ({ children }) => (
-  <MdcCard tag="section">
-    <div className="person-info">{children}</div>
+export const Card = ({ className, contentClass, children }) => (
+  <MdcCard tag="section" className={className}>
+    <div className={contentClass}>{children}</div>
   </MdcCard>
 );
 

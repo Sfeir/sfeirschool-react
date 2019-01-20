@@ -1,8 +1,8 @@
 import React, { memo } from "react";
 import { Card, CardImage, CardTitle, CardInfo } from "./Card";
 
-const PersonCard = ({ person }) => (
-  <Card>
+const PersonCard = ({ person, className }) => (
+  <Card className={className} contentClass="person-info">
     <CardImage url={person.photo} desc={`face of ${person.firstname}`} />
     <CardTitle
       title={
