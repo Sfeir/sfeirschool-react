@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, cloneElement } from "react";
 import { Fab } from "@rmwc/fab";
 import { range } from "../utils";
 import { PersonCard } from "../solution/PersonCard";
@@ -8,10 +8,20 @@ const Carousel = ({ children }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { pred, succ } = range(0, childArray.length - 1);
 
+  const cards = [
+    [succ(currentIndex), "next"],
+    [currentIndex, "current"],
+    [pred(currentIndex), "prev"]
+  ];
+
   return (
     <div className="flex-row">
       <Fab icon="skip_previous" mini onClick={() => setCurrentIndex(pred)} />
-      {childArray[currentIndex]}
+      <div className="carousel">
+        {cards.map(([i, className]) =>
+          cloneElement(childArray[i], { className })
+        )}
+      </div>
       <Fab icon="skip_next" mini onClick={() => setCurrentIndex(succ)} />
     </div>
   );
@@ -29,6 +39,7 @@ export const Player = ({ people }) => {
       </main>
       <footer>
         <Fab icon="play_arrow" />
+        {/* show the pause icon when playing */}
       </footer>
     </>
   );

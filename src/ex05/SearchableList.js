@@ -3,9 +3,11 @@ import { TextField, TextFieldIcon } from "@rmwc/textfield";
 
 import { PersonCard } from "../solution/PersonCard";
 
-const nameContains = query => {
-  const re = new RegExp(query, "i");
-  return p => re.test(p.firstname) || re.test(p.lastname);
+// hint: to check if a string contains some substring,
+// create a case insensitive regular expression
+const containsSubstring = (str, sub) => {
+  const re = new RegExp(sub, "i");
+  return re.test(str);
 };
 
 const toPersonCard = person => <PersonCard person={person} key={person.id} />;
