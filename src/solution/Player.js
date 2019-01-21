@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Fab } from "@rmwc/fab";
 import { Carousel } from "./Carousel";
-import { PersonCard } from "../solution/PersonCard";
+import { PersonCard } from "./PersonCard";
 
 export const Player = ({ people }) => {
   const [currentIndex, setCurrentIndex] = useState(0);

@@ -25,6 +25,7 @@
     "parcel-bundler": "^1.11.0",
     "react": "next",
     "react-dom": "next",
+    "react-router-dom": "^4.3.1",
     "rmwc": "^4.0.6"
   }
 }

@@ -10,7 +10,7 @@ import { Player } from "./Player";
 // import { SearchableList } from "../solution/SearchableList";
 // import { Player } from "../solution/Player_ex05";
 
-export function App() {
+export const App = () => {
   const [showList, setShowList] = useState(true);
   const toggleView = () => setShowList(x => !x);
   const toggleIcon = showList ? "view_carousel" : "view_module";
@@ -26,4 +26,4 @@ export function App() {
       <CurrentView people={people} />
     </>
   );
-}
+};
