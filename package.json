@@ -1,9 +1,13 @@
 {
   "name": "react-people",
-  "version": "0.0.1",
-  "private": true,
+  "version": "2.0.0-beta",
   "description": "SfeirSchool React v2019",
-  "main": "index.js",
+  "author": "Wolfgang Goedel <goedel.w@sfeir.com>",
+  "contributors": [
+    "Rudy Weber <weber.r@sfeir.com>"
+  ],
+  "private": true,
+  "license": "SEE LICENSE IN LICENSE.md",
   "scripts": {
     "start": "run-p watch:exos api serve",
     "prestart": "rm -rf .cache & rm -rf dist",
@@ -11,7 +15,6 @@
     "api": "json-server --quiet ./data/people.json",
     "serve": "live-server --quiet --watch=\"demo01/,demo02/,demo03/\" --mount=/modules:./node_modules ./src"
   },
-  "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
@@ -23,8 +26,8 @@
     "normalize.css": "^8.0.1",
     "npm-run-all": "^4.1.5",
     "parcel-bundler": "^1.11.0",
-    "react": "next",
-    "react-dom": "next",
+    "react": "16.8.0-alpha.1",
+    "react-dom": "16.8.0-alpha.1",
     "react-router-dom": "^4.3.1",
     "rmwc": "^4.0.6"
   }

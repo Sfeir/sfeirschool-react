@@ -1,15 +1,15 @@
 # SfeirSchool React
 
-## Plan Exos
+## Exercise plan
 
 ## Day 1
 
 ### Intro JSX, Elements, Components as functions, Props
 
-Do not show advanced composition yet
+No advanced composition yet
 
 - ex01 - HandsOn (JSX and props)
-  only use function
+  only use function - no lambdas
 
 ### Component composition, Component Tree, Elements as Props, Children
 
@@ -40,34 +40,42 @@ Class Components, this binding, What's an element anyway
 
 - ex05 - Controlled Components - Input (search)
 
+## Day 2
+
 ### Lifecycle, Effects and lifting state up
 
 - ex06 - Lifecycle and Effects (async ftw)
 
-## Day 2
-
 ### Routing and Context
 
-- react-router
-- share people through context
-- Suspense / Lazy ???
+intro react-router
 
-### Forms - problem statement
+- ex07 - Navigation
+  (Suspense / Lazy ???)
+
+share people through context
+
+- ex08 - Context
+
+### Forms - the problem statement
 
 - Forms (a code review)
 
-### Reusing Logic !
+# TODO
 
-- HOC
+### Reusing Logic
+
 - RenderProps
+- HOCs
 - custom hooks
+
+- ex09 - Manage a form
+  Form{sy|ik}
 
 ### Managing State
 
-- Context (a kind of tradeoff)
-- props forwarding
-- A word on Redux
+the transactional state pattern => useReducer
+A reducer through Context (write our own Redux)
+Why Redux is so popular
 
-  - a pattern => useReducer
-
-- Form{sy|ik}
+- ex10 - Application state
