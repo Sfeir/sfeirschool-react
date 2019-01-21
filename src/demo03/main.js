@@ -1,1 +1,11 @@
-ReactDOM.render("Demo03", document.getElementById("root"));
+const InputApp = () => {
+  const value = "Sfeir";
+
+  return (
+    <>
+      <div>Hello {value}</div>
+    </>
+  );
+};
+
+ReactDOM.render(<InputApp />, document.getElementById("root"));
