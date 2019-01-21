@@ -1,17 +1,17 @@
 import React from "react";
 import { render } from "react-dom";
 
-import { PeopleProvider } from "./PeopleContext";
 import { Config } from "../solution/Config";
 
+import { PeopleProvider } from "./PeopleContext";
+// import { PeopleProvider } from "../solution/PeopleContext";
+
 import { App } from "./App";
-// import { App } from "../solution/App_ex06";
+// import { App } from "../solution/App_ex07";
 
 render(
   <Config useRouter>
-    <PeopleProvider>
-      <App />
-    </PeopleProvider>
+    <App />
   </Config>,
   document.getElementById("root")
 );

@@ -1,35 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
-import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Header } from "../solution/Header";
 import { SearchableList } from "./SearchableList";
 import { Player } from "./Player";
-import { Person } from "./Person";
-
-const RouteActionItem = ({ to, children }) => (
-  <Route path={to}>
-    {({ history, match }) => (
-      <TopAppBarActionItem onClick={() => !match && history.push(to)}>
-        {children}
-      </TopAppBarActionItem>
-    )}
-  </Route>
-);
 
 export const App = () => {
+  const [showList, setShowList] = useState(true);
+  const toggleView = () => setShowList(x => !x);
+  const toggleIcon = showList ? "view_carousel" : "view_module";
+  const CurrentView = showList ? SearchableList : Player;
+
+  const [people, setPeople] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/people")
+      .then(res => res.json())
+      .then(setPeople);
+  }, []);
+
   return (
     <>
       <Header>
-        <RouteActionItem to="/player">view_carousel</RouteActionItem>
-        <RouteActionItem to="/list">view_module</RouteActionItem>
+        <TopAppBarActionItem onClick={toggleView}>
+          {toggleIcon}
+        </TopAppBarActionItem>
       </Header>
-      <Switch>
-        <Route path="/list" component={SearchableList} />
-        <Route path="/player" component={Player} />
-        <Route path="/person/:id" component={Person} />
-        <Redirect to="/list" />
-      </Switch>
+      <CurrentView people={people} />
     </>
   );
 };
