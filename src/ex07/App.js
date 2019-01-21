@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 
 import { Header } from "../solution/Header";
-import { SearchableList } from "./SearchableList";
-import { Player } from "./Player";
+import { SearchableList } from "../solution/SearchableList";
+import { Player } from "../solution/Player";
 
 export const App = () => {
   const [showList, setShowList] = useState(true);

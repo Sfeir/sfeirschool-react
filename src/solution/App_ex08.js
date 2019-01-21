@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Header } from "./Header";
-import { SearchableList } from "./SearchableList";
-import { Player } from "./Player";
-import { Person } from "./Person_ex07";
+import { SearchableList } from "./SearchableList_ex08";
+import { Player } from "./Player_ex08";
+import { Person } from "./Person";
 
 const RouteActionItem = ({ to, children }) => (
   <Route path={to}>
@@ -18,13 +18,6 @@ const RouteActionItem = ({ to, children }) => (
 );
 
 export const App = () => {
-  const [people, setPeople] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:3000/people")
-      .then(res => res.json())
-      .then(setPeople);
-  }, []);
-
   return (
     <>
       <Header>
@@ -32,14 +25,9 @@ export const App = () => {
         <RouteActionItem to="/list">view_module</RouteActionItem>
       </Header>
       <Switch>
-        <Route path="/list" render={() => <SearchableList people={people} />} />
-        <Route path="/player" render={() => <Player people={people} />} />
-        <Route
-          path="/person/:id"
-          render={({ match }) => (
-            <Person person={people.find(p => p.id === match.params.id)} />
-          )}
-        />
+        <Route path="/list" component={SearchableList} />
+        <Route path="/player" component={Player} />
+        <Route path="/person/:id" component={Person} />
         <Redirect to="/list" />
       </Switch>
     </>

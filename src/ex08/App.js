@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import { Header } from "./Header";
+import { Header } from "../solution/Header";
 import { SearchableList } from "./SearchableList";
 import { Player } from "./Player";
-import { Person } from "./Person_ex07";
+import { Person } from "./Person";
 
 const RouteActionItem = ({ to, children }) => (
   <Route path={to}>

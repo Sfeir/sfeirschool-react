@@ -2,7 +2,7 @@
 
 ## Plan Exos
 
-### Day 1
+## Day 1
 
 ### Intro JSX, Elements, Components as functions, Props
 
@@ -44,24 +44,30 @@ Class Components, this binding, What's an element anyway
 
 - ex06 - Lifecycle and Effects (async ftw)
 
-### Day 2
+## Day 2
 
-- Fake routing
-- Routing
-- Suspense / Lazy
+### Routing and Context
+
+- react-router
+- share people through context
+- Suspense / Lazy ???
+
+### Forms - problem statement
+
 - Forms (a code review)
 
-- Reusing Logic !
+### Reusing Logic !
 
-  - HOC
-  - RenderProps
-  - custom hooks
+- HOC
+- RenderProps
+- custom hooks
 
-- Managing State
+### Managing State
 
-  - Context (a kind of tradeoff)
-  - props forwarding
-  - A word on Redux
-    - a pattern => useReducer
+- Context (a kind of tradeoff)
+- props forwarding
+- A word on Redux
+
+  - a pattern => useReducer
 
 - Form{sy|ik}

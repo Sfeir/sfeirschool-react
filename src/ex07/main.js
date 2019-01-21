@@ -1,17 +1,13 @@
 import React from "react";
 import { render } from "react-dom";
-
-import { Config } from "../solution/Config";
-
-import { PeopleProvider } from "./PeopleContext";
-// import { PeopleProvider } from "../solution/PeopleContext";
+import { HashRouter as Router } from "react-router-dom";
 
 import { App } from "./App";
 // import { App } from "../solution/App_ex07";
 
 render(
-  <Config useRouter>
+  <Router>
     <App />
-  </Config>,
+  </Router>,
   document.getElementById("root")
 );
