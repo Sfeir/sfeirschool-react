@@ -20,6 +20,7 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "@babel/standalone": "^7.2.5",
+    "formik": "2.0.0-gamma.1",
     "json-server": "^0.14.2",
     "less": "^3.9.0",
     "live-server": "^1.2.1",
