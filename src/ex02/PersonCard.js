@@ -17,7 +17,7 @@ export const PersonCard = () => (
         <h1 className="mdc-typography--headline5">
           <a href="/person/5763cd4d9d2a4f259b53c901">Leanne Woodard</a>
         </h1>
-        <h2 className="mdc-typography--subtitle1">BIOSPAN</h2>
+        <h2 className="mdc-typography--subtitle1">Developer</h2>
       </header>
       <p>
         <i
@@ -27,9 +27,7 @@ export const PersonCard = () => (
           email
         </i>
         &nbsp;
-        <a href="mailto:Leanne.Woodard@BIOSPAN.com">
-          Leanne.Woodard@BIOSPAN.com
-        </a>
+        <a href="mailto:Leanne.Woodard@BIOSPAN.com">woodard.l@acme.com</a>
       </p>
       <p>
         <i
