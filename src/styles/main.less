@@ -12,6 +12,7 @@ main {
   justify-content: center;
   flex-wrap: wrap;
   padding: 1rem;
+  margin-bottom: 4rem;
 }
 
 .flex-row {
@@ -71,10 +72,13 @@ a {
 .mdc-card {
   margin: 1rem;
 
-  & > .person-info {
-    padding: 1.5rem;
+  .card-content {
+    padding: 1.3em;
+  }
+
+  .content-type-person-info {
     width: 420px;
-    min-height: 155px;
+    min-height: 150px;
 
     & > figure {
       float: right;

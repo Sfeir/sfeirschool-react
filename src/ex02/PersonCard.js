@@ -6,7 +6,7 @@ import React from "react";
 
 export const PersonCard = () => (
   <section className="mdc-card">
-    <div className="person-info">
+    <div className="card-content content-type-person-info">
       <figure>
         <img
           src="https://randomuser.me/portraits/women/85.jpg"

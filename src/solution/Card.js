@@ -1,12 +1,17 @@
 import React from "react";
-import { Card as MdcCard } from "@rmwc/card";
+import {
+  Card as MdcCard,
+  CardActions as MdcCardActions,
+  CardAction,
+  CardActionButtons
+} from "@rmwc/card";
 import { Typography } from "@rmwc/typography";
 import { Icon } from "@rmwc/icon";
 
-export const Card = ({ className, contentClass, children }) => (
-  <MdcCard tag="section" className={className}>
-    <div className={contentClass}>{children}</div>
-  </MdcCard>
+export const Card = props => <MdcCard {...props} tag="section" />;
+
+export const CardContent = ({ type, children }) => (
+  <div className={`card-content content-type-${type}`}>{children}</div>
 );
 
 export const CardImage = ({ url, desc }) => (
@@ -33,3 +38,11 @@ export const CardInfo = ({ icon, desc = icon, children }) => (
     {children}
   </p>
 );
+
+export const CardActions = ({ children }) => (
+  <MdcCardActions>
+    <CardActionButtons>{children}</CardActionButtons>
+  </MdcCardActions>
+);
+
+export { CardAction };
