@@ -20,7 +20,9 @@ export const PeopleProvider = ({ children }) => {
       body: JSON.stringify(person)
     })
       .then(res => res.json())
-      .then(console.log);
+      .then(person =>
+        setPeople(people.map(p => (p.id === person.id ? person : p)))
+      );
   };
 
   useEffect(loadPeople, []);

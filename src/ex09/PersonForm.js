@@ -7,23 +7,34 @@ import { Formik, useField, Field } from "formik";
 const PersonFields = () => {
   const [firstname] = useField("firstname");
   const [lastname] = useField("lastname");
+  const [entity] = useField("entity");
   const [phone] = useField("phone");
   const [email] = useField("email");
   return (
     <CardContent type="person-form">
       <TextField label="first name" {...firstname} />
       <TextField label="last name" {...lastname} />
-      <Select label="entity" enhanced options={["DIR", "DEV"]} />
+      <Select
+        label="position"
+        options={[
+          "Director",
+          "Developer",
+          "Product Owner",
+          "Sales",
+          "Human Resources"
+        ]}
+        {...entity}
+      />
       <TextField label="phone" {...phone} />
       <TextField label="email" {...email} />
     </CardContent>
   );
 };
 
-export const PersonForm = ({ person, onReset }) => {
+export const PersonForm = ({ person, onSubmit, onReset }) => {
   return (
     <Card>
-      <Formik initialValues={person} onSubmit={console.log} onReset={onReset}>
+      <Formik initialValues={person} onSubmit={onSubmit} onReset={onReset}>
         {({ handleSubmit, handleReset, dirty, isValid }) => {
           return (
             <form onSubmit={handleSubmit} onReset={handleReset}>

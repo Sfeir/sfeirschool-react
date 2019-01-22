@@ -7,11 +7,17 @@ import { PersonForm } from "./PersonForm";
 
 export const Person = ({ match }) => {
   const [editing, setEditing] = useState(false);
-  const { getPersonById } = usePeople();
+  const { getPersonById, savePerson } = usePeople();
   const person = getPersonById(match.params.id);
 
+  const onSubmit = person => savePerson(person).then(() => setEditing(false));
+
   const card = editing ? (
-    <PersonForm person={person} onReset={() => setEditing(false)} />
+    <PersonForm
+      person={person}
+      onReset={() => setEditing(false)}
+      onSubmit={onSubmit}
+    />
   ) : (
     <PersonCard person={person}>
       <CardActions>
