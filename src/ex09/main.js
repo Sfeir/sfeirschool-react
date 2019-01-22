@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 
 import { Config } from "../solution/Config";
-import { PeopleProvider } from "../solution/PeopleContext";
+import { PeopleProvider } from "./PeopleContext";
 
 import { App } from "./App";
 

@@ -8,13 +8,13 @@ import { Player } from "./Player_ex08";
 import { Person } from "./Person";
 
 const RouteActionItem = ({ to, children }) => (
-  <Route path={to}>
-    {({ history, match }) => (
-      <TopAppBarActionItem onClick={() => !match && history.push(to)}>
+  <Route
+    render={({ history }) => (
+      <TopAppBarActionItem onClick={() => history.push(to)}>
         {children}
       </TopAppBarActionItem>
     )}
-  </Route>
+  />
 );
 
 export const App = () => {

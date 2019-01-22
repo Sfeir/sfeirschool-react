@@ -16,7 +16,6 @@ const PersonFields = () => {
       <Select label="entity" enhanced options={["DIR", "DEV"]} />
       <TextField label="phone" {...phone} />
       <TextField label="email" {...email} />
-      <Select label="manager" enhanced options={[]} />
     </CardContent>
   );
 };

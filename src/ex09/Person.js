@@ -1,19 +1,14 @@
 import React, { useState, useContext } from "react";
-import { PeopleContext } from "../solution/PeopleContext";
 import { PersonCard } from "../solution/PersonCard";
-import { PersonForm } from "./PersonForm";
-
-import { useField } from "formik";
 import { CardActions, CardAction } from "../solution/Card";
+
+import { usePeople } from "./PeopleContext";
+import { PersonForm } from "./PersonForm";
 
 export const Person = ({ match }) => {
   const [editing, setEditing] = useState(false);
-  const people = useContext(PeopleContext);
-  const person = people.find(p => p.id === match.params.id);
-
-  const actions = editing
-    ? [["save", console.log], ["cancel", () => setEditing(false)]]
-    : [["edit", () => setEditing(true)]];
+  const { getPersonById } = usePeople();
+  const person = getPersonById(match.params.id);
 
   const card = editing ? (
     <PersonForm person={person} onReset={() => setEditing(false)} />

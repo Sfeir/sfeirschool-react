@@ -3,8 +3,8 @@ import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Header } from "../solution/Header";
-import { SearchableList } from "../solution/SearchableList_ex08";
-import { Player } from "../solution/Player_ex08";
+import { SearchableList } from "./SearchableList";
+import { Player } from "./Player";
 import { Person } from "./Person";
 
 const RouteActionItem = ({ to, children }) => (
