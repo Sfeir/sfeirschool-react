@@ -17,7 +17,7 @@ export const PersonCard = ({ person, ...props }) => (
             {person.firstname} {person.lastname}
           </a>
         }
-        subTitle={person.entity}
+        subTitle={person.position}
       />
       <CardInfo icon="email">
         <a href={`mailto:${person.email}`}>{person.email}</a>

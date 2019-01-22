@@ -24,7 +24,7 @@ const PersonCard = ({ person, children, ...props }) => {
               name={`${person.firstname} ${person.lastname}`}
             />
           }
-          subTitle={person.entity}
+          subTitle={person.position}
         />
         <CardInfo icon="email">
           <a href={`mailto:${person.email}`}>{person.email}</a>

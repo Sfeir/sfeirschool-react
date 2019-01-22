@@ -7,7 +7,7 @@ import { Formik, useField, Field } from "formik";
 const PersonFields = () => {
   const [firstname] = useField("firstname");
   const [lastname] = useField("lastname");
-  const [entity] = useField("entity");
+  const [position] = useField("position");
   const [phone] = useField("phone");
   const [email] = useField("email");
   return (
@@ -23,7 +23,7 @@ const PersonFields = () => {
           "Sales",
           "Human Resources"
         ]}
-        {...entity}
+        {...position}
       />
       <TextField label="phone" {...phone} />
       <TextField label="email" {...email} />
