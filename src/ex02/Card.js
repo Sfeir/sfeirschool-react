@@ -6,4 +6,8 @@ export const Card = ({ children }) => (
   </section>
 );
 
-// declare and export subcomponents here
+// implement these subcomponents
+
+export const CardImage = () => null;
+export const CardHeader = () => null;
+export const CardInfo = () => null;
