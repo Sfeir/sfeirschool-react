@@ -18,9 +18,10 @@ export const App = () => {
   return (
     <>
       <Header>
-        <TopAppBarActionItem onClick={toggleView}>
-          {showCarousel ? "view_module" : "view_carousel"}
-        </TopAppBarActionItem>
+        <TopAppBarActionItem
+          icon={showCarousel ? "view_module" : "view_carousel"}
+          onClick={toggleView}
+        />
       </Header>
       <main>
         {showCarousel ? <Carousel>{personCards}</Carousel> : personCards}

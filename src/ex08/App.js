@@ -1,21 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import { Header } from "../solution/Header";
+import { Header, HeaderActionItem } from "../solution/Header";
 import { SearchableList } from "./SearchableList";
 import { Player } from "./Player";
 import { Person } from "./Person";
-
-const RouteActionItem = ({ to, children }) => (
-  <Route
-    render={({ history }) => (
-      <TopAppBarActionItem onClick={() => history.push(to)}>
-        {children}
-      </TopAppBarActionItem>
-    )}
-  />
-);
 
 export const App = () => {
   const [people, setPeople] = useState([]);
@@ -28,8 +17,8 @@ export const App = () => {
   return (
     <>
       <Header>
-        <RouteActionItem to="/player">view_carousel</RouteActionItem>
-        <RouteActionItem to="/list">view_module</RouteActionItem>
+        <HeaderActionItem to="/player" icon="view_carousel" />
+        <HeaderActionItem to="/list" icon="view_module" />
       </Header>
       <Switch>
         <Route path="/list" render={() => <SearchableList people={people} />} />

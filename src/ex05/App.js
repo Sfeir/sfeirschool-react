@@ -19,9 +19,7 @@ export const App = () => {
   return (
     <>
       <Header>
-        <TopAppBarActionItem onClick={toggleView}>
-          {toggleIcon}
-        </TopAppBarActionItem>
+        <TopAppBarActionItem icon={toggleIcon} onClick={toggleView} />
       </Header>
       <CurrentView people={people} />
     </>

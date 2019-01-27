@@ -11,7 +11,7 @@ export const App = () => {
   return (
     <>
       <Header>
-        <TopAppBarActionItem>view_carousel</TopAppBarActionItem>
+        <TopAppBarActionItem icon="view_carousel" />
         {/* use "view_module" as icon for showing the list */}
       </Header>
       <main>
