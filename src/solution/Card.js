@@ -20,7 +20,7 @@ export const CardImage = ({ url, desc }) => (
   </figure>
 );
 
-export const CardTitle = ({ title, subTitle }) => (
+export const CardHeader = ({ title, subTitle }) => (
   <header>
     <Typography tag="h1" use="headline5">
       {title}

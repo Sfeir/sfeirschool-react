@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardImage, CardTitle, CardInfo, CardContent } from "./Card";
+import { Card, CardImage, CardHeader, CardInfo, CardContent } from "./Card";
 import { useConfig } from "./Config";
 
 const PersonCard = ({ person, children, ...props }) => {
@@ -17,7 +17,7 @@ const PersonCard = ({ person, children, ...props }) => {
     <Card {...props}>
       <CardContent type="person-info">
         <CardImage url={person.photo} desc={`face of ${person.firstname}`} />
-        <CardTitle
+        <CardHeader
           title={
             <PersonLink
               toId={person.id}

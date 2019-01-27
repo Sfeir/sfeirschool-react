@@ -2,7 +2,7 @@ import React from "react";
 import {
   Card,
   CardImage,
-  CardTitle,
+  CardHeader,
   CardInfo,
   CardContent
 } from "../solution/Card";
@@ -11,7 +11,7 @@ export const PersonCard = ({ person, ...props }) => (
   <Card {...props}>
     <CardContent type="person-info">
       <CardImage url={person.photo} desc={`face of ${person.firstname}`} />
-      <CardTitle
+      <CardHeader
         title={
           <a href={`/person/${person.id}`}>
             {person.firstname} {person.lastname}
