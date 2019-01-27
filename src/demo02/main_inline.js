@@ -13,10 +13,9 @@ class App extends React.Component {
   }
 
   render() {
-    const score = this.state.score;
     return (
       <>
-        <div>score: {score}</div>
+        <div>score: {this.state.score}</div>
         <Target onHit={() => this.setState({ score: score + 1 })} />
       </>
     );
