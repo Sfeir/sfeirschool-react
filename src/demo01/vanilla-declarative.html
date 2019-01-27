@@ -21,13 +21,15 @@
       function render() {
         const style = `color: ${count % 2 === 0 ? "green" : "red"}`;
 
-        root.innerHTML = `
+        const html = `
           <button onclick="buttonClicked()">
             clicked
             <span style="${style}">${count}</span>
             times
           </button>
         `;
+
+        root.innerHTML = html;
       }
 
       render();

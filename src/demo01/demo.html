@@ -12,35 +12,9 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="text/babel">
+    <script>
       let root = document.getElementById("root");
-      let count = 0;
-
-      function CountButton(props) {
-        const style = {
-          color: props.count % 2 === 0 ? "green" : "red"
-        };
-
-        return (
-          <button onClick={props.onClick}>
-            clicked <span style={style}>{props.count}</span> times
-          </button>
-        );
-      }
-
-      function buttonClicked() {
-        count++;
-        render();
-      }
-
-      function render() {
-        ReactDOM.render(
-          <CountButton count={count} onClick={buttonClicked} />,
-          root
-        );
-      }
-
-      render();
+      root.innerHTML = "Hello World";
     </script>
   </body>
 </html>
