@@ -1,7 +1,10 @@
 import React from "react";
-import { WithPeople } from "./PeopleContext";
+import { PeopleContext } from "./PeopleContext";
 import { Player as Original } from "./Player";
+import { Loading } from "./Loading";
 
 export const Player = () => (
-  <WithPeople>{people => <Original people={people} />}</WithPeople>
+  <PeopleContext.Consumer>
+    {people => (people.length > 0 ? <Original people={people} /> : <Loading />)}
+  </PeopleContext.Consumer>
 );

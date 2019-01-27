@@ -1,28 +1,17 @@
 import React from "react";
-import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import { Header } from "./Header";
+import { Header, HeaderActionItem } from "./Header";
 import { SearchableList } from "./SearchableList_ex08";
 import { Player } from "./Player_ex08";
-import { Person } from "./Person";
-
-const RouteActionItem = ({ to, children }) => (
-  <Route
-    render={({ history }) => (
-      <TopAppBarActionItem onClick={() => history.push(to)}>
-        {children}
-      </TopAppBarActionItem>
-    )}
-  />
-);
+import { Person } from "./Person_ex08";
 
 export const App = () => {
   return (
     <>
       <Header>
-        <RouteActionItem to="/player">view_carousel</RouteActionItem>
-        <RouteActionItem to="/list">view_module</RouteActionItem>
+        <HeaderActionItem to="/player" icon="view_carousel" />
+        <HeaderActionItem to="/list" icon="view_module" />
       </Header>
       <Switch>
         <Route path="/list" component={SearchableList} />
