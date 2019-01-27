@@ -1,7 +1,7 @@
 import React from "react";
 import { WithPeople } from "./PeopleContext";
-import { Player as WrappedPlayer } from "./Player";
+import { Player as Original } from "./Player";
 
 export const Player = () => (
-  <WithPeople>{people => <WrappedPlayer people={people} />}</WithPeople>
+  <WithPeople>{people => <Original people={people} />}</WithPeople>
 );
