@@ -1,5 +1,5 @@
 import React from "react";
-import { PeopleContext } from "./PeopleContext";
+import { PeopleContext } from "./PeopleContext_ex08";
 import { Player as Original } from "./Player";
 import { Loading } from "./Loading";
 

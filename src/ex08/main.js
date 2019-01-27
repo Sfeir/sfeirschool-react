@@ -4,7 +4,7 @@ import { render } from "react-dom";
 import { Config } from "../solution/Config";
 
 import { PeopleProvider } from "./PeopleContext";
-// import { PeopleProvider } from "../solution/PeopleContext";
+// import { PeopleProvider } from "../solution/PeopleContext_ex08";
 import { App } from "./App";
 // import { App } from "../solution/App_ex08";
 
