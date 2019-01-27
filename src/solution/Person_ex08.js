@@ -1,5 +1,5 @@
 import React from "react";
-import { Person as Original } from "./Person_ex07";
+import { Person as Original } from "./Person";
 import { WithPeople } from "./PeopleContext_ex08";
 
 // Wrap Original and provide required props from context

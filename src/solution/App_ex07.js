@@ -5,7 +5,7 @@ import { Header, HeaderActionItem } from "./Header";
 import { Loading } from "./Loading";
 import { SearchableList } from "./SearchableList";
 import { Player } from "./Player";
-import { Person } from "./Person_ex07";
+import { Person } from "./Person";
 
 export const App = () => {
   const [people, setPeople] = useState([]);

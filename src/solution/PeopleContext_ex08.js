@@ -22,5 +22,3 @@ export const WithPeople = ({ children }) => (
     {people => (people.length > 0 ? children(people) : <Loading />)}
   </PeopleContext.Consumer>
 );
-
-export const usePeople = () => useContext(PeopleContext);
