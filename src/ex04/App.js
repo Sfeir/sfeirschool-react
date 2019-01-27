@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 
-import { people } from "../../data/people.json";
 import { Header } from "../solution/Header";
 
 import { PersonCard } from "./PersonCard";
 import { Carousel } from "./Carousel";
 
-export const App = () => {
+export const App = ({ people }) => {
   return (
     <>
       <Header>

@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 
-import { people } from "../../data/people.json";
 import { Header } from "../solution/Header";
 
 import { SearchableList } from "./SearchableList";
-import { Player } from "./Player";
-
 // import { SearchableList } from "../solution/SearchableList";
+import { Player } from "./Player";
 // import { Player } from "../solution/Player_ex05";
 
-export const App = () => {
+export const App = ({ people }) => {
   const [showList, setShowList] = useState(true);
   const toggleView = () => setShowList(x => !x);
   const toggleIcon = showList ? "view_carousel" : "view_module";

@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 
-import { people } from "../../data/people.json";
 import { Header } from "./Header";
-
 import { PersonCard } from "./PersonCard";
 import { Carousel } from "./Carousel_ex04";
 
-const personCards = people.map(person => (
-  <PersonCard person={person} key={person.id} />
-));
-
-export const App = () => {
+export const App = ({ people }) => {
   const [showCarousel, setShowCarousel] = useState(false);
   const toggleView = () => setShowCarousel(x => !x);
+
+  const personCards = people.map(person => (
+    <PersonCard person={person} key={person.id} />
+  ));
 
   return (
     <>
