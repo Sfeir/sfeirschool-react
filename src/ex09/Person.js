@@ -1,22 +1,23 @@
 import React, { useState, useContext } from "react";
 import { PersonCard } from "../solution/PersonCard";
 import { CardActions, CardAction } from "../solution/Card";
+import { Loading } from "../solution/Loading";
 
 import { usePeople } from "./PeopleContext";
 import { PersonForm } from "./PersonForm";
 
 export const Person = ({ match }) => {
   const [editing, setEditing] = useState(false);
-  const { getPersonById, savePerson } = usePeople();
+  const { loading, getPersonById, savePerson } = usePeople();
   const person = getPersonById(match.params.id);
 
-  const onSubmit = person => savePerson(person).then(() => setEditing(false));
+  if (loading) return <Loading />;
 
   const card = editing ? (
     <PersonForm
       person={person}
       onReset={() => setEditing(false)}
-      onSubmit={onSubmit}
+      onSubmit={p => savePerson(p).then(() => setEditing(false))}
     />
   ) : (
     <PersonCard person={person}>

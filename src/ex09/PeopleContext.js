@@ -1,15 +1,20 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
+import { Loading } from "../solution/Loading";
 
-export const PeopleContext = createContext();
+const PeopleContext = createContext();
 
 export const PeopleProvider = ({ children }) => {
+  const [loading, setLoading] = useState(true);
   const [people, setPeople] = useState([]);
 
-  const loadPeople = () => {
+  useEffect(() => {
     fetch("http://localhost:3000/people")
       .then(res => res.json())
-      .then(setPeople);
-  };
+      .then(data => {
+        setPeople(data);
+        setLoading(false);
+      });
+  }, []);
 
   const savePerson = person => {
     return fetch("http://localhost:3000/people/" + person.id, {
@@ -25,10 +30,9 @@ export const PeopleProvider = ({ children }) => {
       );
   };
 
-  useEffect(loadPeople, []);
-
   const context = {
     people,
+    loading,
     getPersonById: id => people.find(p => p.id === id),
     savePerson
   };
@@ -38,5 +42,9 @@ export const PeopleProvider = ({ children }) => {
   );
 };
 
-export const WithPeople = PeopleContext.Consumer;
 export const usePeople = () => useContext(PeopleContext);
+
+export const withPeopleOrLoading = Component => () => {
+  const { people, loading } = usePeople();
+  return loading ? <Loading /> : <Component people={people} />;
+};

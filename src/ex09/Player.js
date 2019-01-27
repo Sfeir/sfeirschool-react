@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Fab } from "@rmwc/fab";
 import { Carousel } from "../solution/Carousel";
 import { PersonCard } from "../solution/PersonCard";
-import { usePeople } from "./PeopleContext";
+import { withPeopleOrLoading } from "./PeopleContext";
 
 const useScheduler = (f, interval) => {
   const [running, setRunning] = useState(false);
@@ -22,8 +22,7 @@ const useScheduler = (f, interval) => {
   return { running, toggleRunning };
 };
 
-export const Player = () => {
-  const { people } = usePeople();
+export const Player = withPeopleOrLoading(({ people }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const showNextPerson = () => setCurrentIndex(i => i + 1);
@@ -43,4 +42,4 @@ export const Player = () => {
       </footer>
     </>
   );
-};
+});
