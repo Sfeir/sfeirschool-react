@@ -1,10 +1,9 @@
 import React from "react";
 
 import { Header } from "./Header";
+// import { Header } from "../solution/ex01/Header";
 import { Card } from "./Card";
-
-// import { Header } from "../solution/Header_ex01";
-// import { Card } from "../solution/Card_ex01";
+// import { Card } from "../solution/ex01/Card";
 
 const message = "React @ SFEIR";
 
