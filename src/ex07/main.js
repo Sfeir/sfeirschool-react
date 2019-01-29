@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { HashRouter as Router } from "react-router-dom";
 
 import { App } from "./App";
-// import { App } from "../solution/App_ex07";
+// import { App } from "../solution/ex07/App";
 
 render(
   <Router>

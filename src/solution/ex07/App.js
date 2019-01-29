@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import { Header, HeaderActionItem } from "./Header";
-import { Loading } from "./Loading";
-import { SearchableList } from "./SearchableList";
-import { Player } from "./Player";
-import { Person } from "./Person";
-import { loadPeople } from "../utils";
+import { Header, HeaderActionItem } from "../Header";
+import { Loading } from "../Loading";
+import { SearchableList } from "../SearchableList";
+import { Player } from "../Player";
+import { Person } from "../Person";
+import { loadPeople } from "../../utils";
 
 export const App = () => {
   const [people, setPeople] = useState([]);
