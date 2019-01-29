@@ -1,7 +1,7 @@
 import React, { useState, cloneElement } from "react";
 import { Fab } from "@rmwc/fab";
 
-import { range } from "../utils";
+import { range } from "../../utils";
 
 export const Carousel = ({ children }) => {
   const childArray = React.Children.toArray(children);

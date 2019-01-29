@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 
-import { Header } from "./Header";
-import { PersonCard } from "./PersonCard";
-import { Carousel } from "./Carousel_ex04";
+import { Header } from "../Header";
+import { PersonCard } from "../PersonCard";
+import { Carousel } from "./Carousel";
 
 export const App = ({ people }) => {
   const [showCarousel, setShowCarousel] = useState(false);
