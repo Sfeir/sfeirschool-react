@@ -2,14 +2,15 @@ import React from "react";
 
 import { Header } from "../solution/Header";
 
-import { PersonCarousel } from "./PersonCarousel";
-// import { PersonCarousel } from "../solution/PersonCarousel";
+import { Carousel } from "./Carousel";
+// import { Carousel } from "../solution/ex03/Carousel.class";
+// import { Carousel } from "../solution/ex03/Carousel.hooks";
 
 export const App = ({ people }) => (
   <>
     <Header />
     <main>
-      <PersonCarousel people={people} />
+      <Carousel people={people} />
     </main>
   </>
 );

@@ -12,7 +12,7 @@ const Fab = ({ icon }) => (
   </button>
 );
 
-export const PersonCarousel = ({ people }) => (
+export const Carousel = ({ people }) => (
   <div className="flex-row">
     <Fab icon="skip_previous" />
     <div className="carousel">
