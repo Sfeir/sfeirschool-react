@@ -2,6 +2,6 @@ import React from "react";
 import { render } from "react-dom";
 
 import { App } from "./App";
-// import { App } from "../solution/App_ex06";
+// import { App } from "../solution/ex06/App";
 
 render(<App />, document.getElementById("root"));
