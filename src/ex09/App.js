@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { Header, HeaderActionItem } from "../solution/Header";
 import { SearchableList } from "./SearchableList";
 import { Player } from "./Player";
-import { Person } from "./Person";
+import { Person } from "./EditablePerson";
 
 export const App = () => {
   return (

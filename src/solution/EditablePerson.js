@@ -8,7 +8,7 @@ import { PersonForm } from "./PersonForm";
 
 export const Person = ({ match }) => {
   const [editing, setEditing] = useState(false);
-  const { loading, getPersonById, savePerson } = usePeople();
+  const { loading, getPersonById, updatePerson } = usePeople();
   const person = getPersonById(match.params.id);
 
   if (loading) return <Loading />;
@@ -17,7 +17,7 @@ export const Person = ({ match }) => {
     <PersonForm
       person={person}
       onReset={() => setEditing(false)}
-      onSubmit={p => savePerson(p).then(() => setEditing(false))}
+      onSubmit={p => updatePerson(p).then(() => setEditing(false))}
     />
   ) : (
     <PersonCard person={person}>

@@ -6,6 +6,7 @@ import React, {
   useMemo
 } from "react";
 import { Loading } from "./Loading";
+import { loadPeople, savePerson } from "../utils";
 
 const PeopleContext = createContext();
 
@@ -14,37 +15,27 @@ export const PeopleProvider = ({ children }) => {
   const [people, setPeople] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/people")
-      .then(res => res.json())
-      .then(data => {
-        setPeople(data);
-        setLoading(false);
-      });
+    loadPeople().then(data => {
+      setPeople(data);
+      setLoading(false);
+    });
   }, []);
 
   const context = useMemo(
     () => {
       const getPersonById = id => people.find(p => p.id === id);
 
-      const savePerson = person => {
-        return fetch("http://localhost:3000/people/" + person.id, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(person)
-        })
-          .then(res => res.json())
-          .then(person =>
-            setPeople(people.map(p => (p.id === person.id ? person : p)))
-          );
+      const updatePerson = person => {
+        return savePerson(person).then(person =>
+          setPeople(people.map(p => (p.id === person.id ? person : p)))
+        );
       };
 
       return {
         people,
         loading,
         getPersonById,
-        savePerson
+        updatePerson
       };
     },
     [people, loading]

@@ -1,5 +1,6 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { Loading } from "./Loading";
+import { loadPeople } from "../utils";
 
 export const PeopleContext = createContext();
 
@@ -7,9 +8,7 @@ export const PeopleProvider = ({ children }) => {
   const [people, setPeople] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/people")
-      .then(res => res.json())
-      .then(setPeople);
+    loadPeople().then(setPeople);
   }, []);
 
   return (

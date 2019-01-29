@@ -1,34 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Fab } from "@rmwc/fab";
 import { Carousel } from "../solution/Carousel";
 import { PersonCard } from "../solution/PersonCard";
-import { withPeopleOrLoading } from "./PeopleContext";
+import { PeopleContext } from "./PeopleContext";
+import { Loading } from "../solution/Loading";
 
-const useScheduler = (f, interval) => {
-  const [running, setRunning] = useState(false);
-  const toggleRunning = () => {
-    !running && f();
-    setRunning(!running);
-  };
-  useEffect(
-    () => {
-      if (running) {
-        const iid = setInterval(f, interval);
-        return () => clearInterval(iid);
-      }
-    },
-    [running]
-  );
-  return { running, toggleRunning };
-};
-
-export const Player = withPeopleOrLoading(({ people }) => {
+export const Player = () => {
+  const people = useContext(PeopleContext);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const showNextPerson = () => setCurrentIndex(i => i + 1);
-  const { running, toggleRunning } = useScheduler(showNextPerson, 1000);
+  const showNextPerson = () => setCurrentIndex(currentIndex + 1);
 
-  return (
+  const [isPlaying, setIsPlaying] = useState(false);
+  const togglePlaying = () => {
+    !isPlaying && showNextPerson();
+    setIsPlaying(!isPlaying);
+  };
+
+  useEffect(() => {
+    if (isPlaying) {
+      const timerId = setTimeout(showNextPerson, 2000);
+      return () => clearTimeout(timerId);
+    }
+  });
+
+  return people.length === 0 ? (
+    <Loading />
+  ) : (
     <>
       <main>
         <Carousel currentIndex={currentIndex} onChange={setCurrentIndex}>
@@ -38,8 +36,11 @@ export const Player = withPeopleOrLoading(({ people }) => {
         </Carousel>
       </main>
       <footer>
-        <Fab icon={running ? "pause" : "play_arrow"} onClick={toggleRunning} />
+        <Fab
+          icon={isPlaying ? "pause" : "play_arrow"}
+          onClick={togglePlaying}
+        />
       </footer>
     </>
   );
-});
+};
