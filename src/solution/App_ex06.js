@@ -5,6 +5,7 @@ import { Header } from "./Header";
 import { Loading } from "./Loading";
 import { SearchableList } from "./SearchableList";
 import { Player } from "./Player";
+import { loadPeople } from "../utils";
 
 export const App = () => {
   const [showList, setShowList] = useState(false);
@@ -13,9 +14,7 @@ export const App = () => {
 
   const [people, setPeople] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/people")
-      .then(res => res.json())
-      .then(setPeople);
+    loadPeople().then(setPeople);
   }, []);
 
   const CurrentView =

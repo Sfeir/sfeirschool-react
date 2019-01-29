@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Header, HeaderActionItem } from "../solution/Header";
 import { Loading } from "../solution/Loading";
+import { loadPeople } from "../utils";
+
 import { SearchableList } from "./SearchableList";
 import { Player } from "./Player";
 import { Person } from "./Person";
@@ -10,9 +12,7 @@ import { Person } from "./Person";
 export const App = () => {
   const [people, setPeople] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/people")
-      .then(res => res.json())
-      .then(setPeople);
+    loadPeople().then(setPeople);
   }, []);
 
   return (

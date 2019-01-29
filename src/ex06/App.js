@@ -14,6 +14,7 @@ export const App = () => {
   const toggleIcon = showList ? "view_carousel" : "view_module";
 
   // get people from http://localhost:3000/people
+  // you can use loadPeople in ../utils.js
   const people = [];
 
   const CurrentView =
