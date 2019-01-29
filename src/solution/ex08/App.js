@@ -1,10 +1,10 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import { Header, HeaderActionItem } from "./Header";
-import { SearchableList } from "./SearchableList_ex08";
-import { Player } from "./Player_ex08";
-import { Person } from "./Person_ex08";
+import { Header, HeaderActionItem } from "../Header";
+import { SearchableList } from "./SearchableList";
+import { Player } from "./Player";
+import { Person } from "./Person";
 
 export const App = () => {
   return (

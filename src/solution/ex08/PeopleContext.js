@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
-import { Loading } from "./Loading";
-import { loadPeople } from "../utils";
+import { Loading } from "../Loading";
+import { loadPeople } from "../../utils";
 
 export const PeopleContext = createContext();
 

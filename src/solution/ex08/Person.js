@@ -1,6 +1,6 @@
 import React from "react";
-import { Person as Original } from "./Person";
-import { WithPeopleOrLoading } from "./PeopleContext_ex08";
+import { Person as Original } from "../Person";
+import { WithPeopleOrLoading } from "./PeopleContext";
 
 // Wrap Original and provide required props from context
 export const Person = ({ match }) => (

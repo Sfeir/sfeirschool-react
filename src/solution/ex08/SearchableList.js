@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { PeopleContext } from "./PeopleContext_ex08";
-import { SearchableList as Original } from "./SearchableList";
-import { Loading } from "./Loading";
+import { PeopleContext } from "./PeopleContext";
+import { SearchableList as Original } from "../SearchableList";
+import { Loading } from "../Loading";
 
 export const SearchableList = () => {
   const people = useContext(PeopleContext);
