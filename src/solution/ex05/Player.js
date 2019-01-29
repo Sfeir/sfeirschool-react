@@ -6,8 +6,8 @@ import React, {
   cloneElement
 } from "react";
 import { Fab } from "@rmwc/fab";
-import { range } from "../utils";
-import { PersonCard } from "./PersonCard";
+import { range } from "../../utils";
+import { PersonCard } from "../PersonCard";
 
 const Carousel = forwardRef(({ children }, ref) => {
   const childArray = React.Children.toArray(children);
@@ -55,7 +55,7 @@ export const Player = ({ people }) => {
         </Carousel>
       </main>
       <footer>
-        <Fab icon="play_arrow" onClick={showNext} />
+        <Fab icon="skip_next" onClick={showNext} />
       </footer>
     </>
   );

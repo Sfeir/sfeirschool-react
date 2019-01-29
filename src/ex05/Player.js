@@ -38,7 +38,7 @@ export const Player = ({ people }) => {
         </Carousel>
       </main>
       <footer>
-        <Fab icon="play_arrow" />
+        <Fab icon="skip_next" />
       </footer>
     </>
   );

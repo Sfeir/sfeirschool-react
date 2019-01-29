@@ -6,7 +6,7 @@ import { Header } from "../solution/Header";
 import { SearchableList } from "./SearchableList";
 // import { SearchableList } from "../solution/SearchableList";
 import { Player } from "./Player";
-// import { Player } from "../solution/Player_ex05";
+// import { Player } from "../solution/ex05/Player";
 
 export const App = ({ people }) => {
   const [showList, setShowList] = useState(true);
