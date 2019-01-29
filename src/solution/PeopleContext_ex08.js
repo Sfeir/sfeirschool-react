@@ -17,7 +17,7 @@ export const PeopleProvider = ({ children }) => {
   );
 };
 
-export const WithPeople = ({ children }) => (
+export const WithPeopleOrLoading = ({ children }) => (
   <PeopleContext.Consumer>
     {people => (people.length > 0 ? children(people) : <Loading />)}
   </PeopleContext.Consumer>
