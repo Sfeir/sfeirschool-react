@@ -1,8 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 
-import { Config } from "../solution/Config";
-
+import { Config } from "./Config";
 import { PeopleProvider } from "./PeopleContext";
 import { App } from "./App";
 
