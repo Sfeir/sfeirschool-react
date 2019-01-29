@@ -2,18 +2,12 @@ import React from "react";
 import { Card, CardContent, CardActions, CardAction } from "../solution/Card";
 import { TextField } from "@rmwc/textfield";
 import { Select } from "@rmwc/select";
-import { Formik, useField } from "formik";
 
 const PersonFields = () => {
-  const [firstname] = useField("firstname");
-  const [lastname] = useField("lastname");
-  const [position] = useField("position");
-  const [phone] = useField("phone");
-  const [email] = useField("email");
   return (
     <CardContent type="person-form">
-      <TextField label="first name" {...firstname} />
-      <TextField label="last name" {...lastname} />
+      <TextField label="first name" />
+      <TextField label="last name" />
       <Select
         label="position"
         options={[
@@ -23,32 +17,23 @@ const PersonFields = () => {
           "Sales",
           "Human Resources"
         ]}
-        {...position}
       />
-      <TextField label="phone" {...phone} />
-      <TextField label="email" {...email} />
+      <TextField label="phone" />
+      <TextField label="email" />
     </CardContent>
   );
 };
 
-export const PersonForm = ({ person, onSubmit, onReset }) => {
+export const PersonForm = ({ person }) => {
   return (
     <Card>
-      <Formik initialValues={person} onSubmit={onSubmit} onReset={onReset}>
-        {({ handleSubmit, handleReset, dirty, isValid }) => {
-          return (
-            <form onSubmit={handleSubmit} onReset={handleReset}>
-              <PersonFields />
-              <CardActions>
-                <CardAction type="submit" disabled={!isValid || !dirty}>
-                  save
-                </CardAction>
-                <CardAction type="reset">cancel</CardAction>
-              </CardActions>
-            </form>
-          );
-        }}
-      </Formik>
+      <form>
+        <PersonFields />
+        <CardActions>
+          <CardAction type="submit">save</CardAction>
+          <CardAction type="reset">cancel</CardAction>
+        </CardActions>
+      </form>
     </Card>
   );
 };
