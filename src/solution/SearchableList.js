@@ -18,14 +18,11 @@ export const SearchableList = ({ people }) => {
       <main>{people.filter(nameContains(query)).map(toPersonCard)}</main>
       <footer>
         <TextField
-          withLeadingIcon="search"
-          withTrailingIcon={
-            <TextFieldIcon
-              tabIndex="0"
-              icon="close"
-              onClick={() => setQuery("")}
-            />
-          }
+          icon="search"
+          trailingIcon={{
+            icon: "close",
+            onClick: () => setQuery("")
+          }}
           label="search by name"
           value={query}
           onChange={e => setQuery(e.target.value)}

@@ -2,7 +2,7 @@ import React from "react";
 import {
   Card as MdcCard,
   CardActions as MdcCardActions,
-  CardAction,
+  CardActionButton,
   CardActionButtons
 } from "@rmwc/card";
 import { Typography } from "@rmwc/typography";
@@ -33,7 +33,7 @@ export const CardHeader = ({ title, subTitle }) => (
 
 export const CardInfo = ({ icon, desc = icon, children }) => (
   <p>
-    <Icon icon={icon} title={desc} iconOptions={{ size: "small" }} />
+    <Icon icon={{ icon, size: "small" }} title={desc} />
     &nbsp;
     {children}
   </p>
@@ -45,4 +45,4 @@ export const CardActions = ({ children }) => (
   </MdcCardActions>
 );
 
-export { CardAction };
+export { CardActionButton as CardAction };

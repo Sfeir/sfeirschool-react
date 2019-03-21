@@ -18,8 +18,8 @@ export const SearchableList = ({ people }) => {
       <main>{people.map(toPersonCard)}</main>
       <footer>
         <TextField
-          withLeadingIcon="search"
-          withTrailingIcon={<TextFieldIcon tabIndex="0" icon="close" />}
+          icon="search"
+          trailingIcon={{ icon: "close" }}
           label="search by name"
         />
       </footer>
