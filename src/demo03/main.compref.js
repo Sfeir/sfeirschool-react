@@ -1,3 +1,5 @@
+/*global React ReactDOM*/
+
 class Input extends React.Component {
   constructor(props) {
     super(props);

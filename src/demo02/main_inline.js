@@ -1,3 +1,5 @@
+/*global React ReactDOM*/
+
 const Target = ({ onHit, children }) => (
   <div className="target" onClick={onHit}>
     {children}
@@ -16,7 +18,7 @@ class App extends React.Component {
     return (
       <>
         <div>score: {this.state.score}</div>
-        <Target onHit={() => this.setState({ score: score + 1 })} />
+        <Target onHit={() => this.setState({ score: this.state.score + 1 })} />
       </>
     );
   }

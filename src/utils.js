@@ -3,15 +3,6 @@ export const range = (min, max) => ({
   pred: x => (x === min ? max : x - 1)
 });
 
-export const shuffleArray = xs =>
-  xs.reduce(
-    (shuffled, x) => (
-      shuffled.splice((Math.random() * (shuffled.length + 1)) | 0, 0, x),
-      shuffled
-    ),
-    []
-  );
-
 export const loadPeople = () =>
   fetch("http://localhost:3000/people").then(res => res.json());
 

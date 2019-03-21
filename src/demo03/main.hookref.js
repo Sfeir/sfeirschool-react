@@ -1,3 +1,5 @@
+/*global React ReactDOM*/
+
 const InputWithRef = ({ init }, ref) => {
   const [value, setValue] = React.useState(init);
   const inputRef = React.useRef();

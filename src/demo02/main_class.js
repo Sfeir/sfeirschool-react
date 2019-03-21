@@ -1,3 +1,5 @@
+/*global React ReactDOM*/
+
 const Target = ({ onHit, children }) => (
   <div className="target" onClick={onHit}>
     {children}

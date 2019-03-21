@@ -21,25 +21,22 @@ export const PeopleProvider = ({ children }) => {
     });
   }, []);
 
-  const context = useMemo(
-    () => {
-      const getPersonById = id => people.find(p => p.id === id);
+  const context = useMemo(() => {
+    const getPersonById = id => people.find(p => p.id === id);
 
-      const updatePerson = person => {
-        return savePerson(person).then(person =>
-          setPeople(people.map(p => (p.id === person.id ? person : p)))
-        );
-      };
+    const updatePerson = person => {
+      return savePerson(person).then(person =>
+        setPeople(people.map(p => (p.id === person.id ? person : p)))
+      );
+    };
 
-      return {
-        people,
-        loading,
-        getPersonById,
-        updatePerson
-      };
-    },
-    [people, loading]
-  );
+    return {
+      people,
+      loading,
+      getPersonById,
+      updatePerson
+    };
+  }, [people, loading]);
 
   return (
     <PeopleContext.Provider value={context}>{children}</PeopleContext.Provider>

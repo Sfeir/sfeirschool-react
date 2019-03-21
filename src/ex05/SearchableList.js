@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, TextFieldIcon } from "@rmwc/textfield";
+import { TextField } from "@rmwc/textfield";
 
 import { PersonCard } from "../solution/PersonCard";
 

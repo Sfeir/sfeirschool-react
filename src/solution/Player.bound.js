@@ -10,15 +10,12 @@ const useScheduler = (f, interval) => {
     !running && f();
     setRunning(!running);
   };
-  useEffect(
-    () => {
-      if (running) {
-        const iid = setInterval(f, interval);
-        return () => clearInterval(iid);
-      }
-    },
-    [running]
-  );
+  useEffect(() => {
+    if (running) {
+      const iid = setInterval(f, interval);
+      return () => clearInterval(iid);
+    }
+  }, [f, interval, running]);
   return { running, toggleRunning };
 };
 

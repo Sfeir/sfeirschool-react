@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardActions, CardAction } from "./Card";
 import { TextField } from "@rmwc/textfield";
 import { Select } from "@rmwc/select";
-import { Formik, useField, Field } from "formik";
+import { Formik, useField } from "formik";
 
 const PersonFields = () => {
   const [firstname] = useField("firstname");

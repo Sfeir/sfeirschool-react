@@ -1,6 +1,8 @@
+/*global React ReactDOM*/
+
 const InputApp = () => {
   const [value, setValue] = React.useState("Sfeir");
-  const changeValue = React.useCallback(e => setValue(e.target.value));
+  const changeValue = React.useCallback(e => setValue(e.target.value), []);
   const inputRef = React.useRef();
 
   return (

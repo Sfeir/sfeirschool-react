@@ -1,3 +1,5 @@
+/*global React ReactDOM*/
+
 const InputApp = () => {
   const value = "Sfeir";
 
