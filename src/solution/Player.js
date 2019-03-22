@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Fab } from "@rmwc/fab";
 import { Carousel } from "./Carousel";
 import { PersonCard } from "./PersonCard";
 
+const useScheduler = (f, interval) => {
+  const [running, setRunning] = useState(false);
+  const toggleRunning = () => {
+    !running && f();
+    setRunning(!running);
+  };
+  useEffect(() => {
+    if (running) {
+      const iid = setInterval(f, interval);
+      return () => clearInterval(iid);
+    }
+  }, [f, interval, running]);
+  return { running, toggleRunning };
+};
+
 export const Player = ({ people }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const showNextPerson = () => setCurrentIndex(currentIndex + 1);
-
-  const [isPlaying, setIsPlaying] = useState(false);
-  const togglePlaying = () => {
-    !isPlaying && showNextPerson();
-    setIsPlaying(!isPlaying);
-  };
-
-  useEffect(() => {
-    if (isPlaying) {
-      const timerId = setTimeout(showNextPerson, 2000);
-      return () => clearTimeout(timerId);
-    }
-  });
+  const showNextPerson = useCallback(() => setCurrentIndex(i => i + 1), []);
+  const { running, toggleRunning } = useScheduler(showNextPerson, 1000);
 
   return (
     <>
@@ -31,10 +34,7 @@ export const Player = ({ people }) => {
         </Carousel>
       </main>
       <footer>
-        <Fab
-          icon={isPlaying ? "pause" : "play_arrow"}
-          onClick={togglePlaying}
-        />
+        <Fab icon={running ? "pause" : "play_arrow"} onClick={toggleRunning} />
       </footer>
     </>
   );
