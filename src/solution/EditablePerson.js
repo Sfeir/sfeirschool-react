@@ -1,23 +1,16 @@
 import React, { useState } from "react";
 import { PersonCard } from "./PersonCard";
 import { CardActions, CardAction } from "./Card";
-import { Loading } from "./Loading";
-
-import { usePeople } from "./PeopleContext";
 import { PersonForm } from "./PersonForm";
 
-export const Person = ({ match }) => {
+export const Person = ({ person, onUpdate }) => {
   const [editing, setEditing] = useState(false);
-  const { loading, getPersonById, updatePerson } = usePeople();
-  const person = getPersonById(match.params.id);
-
-  if (loading) return <Loading />;
 
   const card = editing ? (
     <PersonForm
       person={person}
       onReset={() => setEditing(false)}
-      onSubmit={p => updatePerson(p).then(() => setEditing(false))}
+      onSubmit={p => onUpdate(p).then(() => setEditing(false))}
     />
   ) : (
     <PersonCard person={person}>
@@ -27,7 +20,5 @@ export const Person = ({ match }) => {
     </PersonCard>
   );
 
-  return (
-    <main>{person ? card : `404 - no person with id ${match.params.id}`}</main>
-  );
+  return <main>{person ? card : "404 - this person could not be found"}</main>;
 };
