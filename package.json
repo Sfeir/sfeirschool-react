@@ -11,7 +11,7 @@
   "scripts": {
     "start": "run-p watch:exos api serve",
     "watch:exos": "parcel src/ex*/index.html src/solution/index.html src/favicon.ico",
-    "api": "json-server --quiet --delay=500 ./data/people.json",
+    "api": "json-server --quiet --delay=500 ./data/peopleServed.json",
     "serve": "live-server --quiet --watch=\"demo01/,demo02/,demo03/\" --mount=/modules:./node_modules ./src"
   },
   "dependencies": {
@@ -32,7 +32,10 @@
     "parcel-bundler": "^1.12.3",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
+    "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
     "rmwc": "^5.2.1"
   }
 }
