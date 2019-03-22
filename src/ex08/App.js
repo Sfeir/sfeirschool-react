@@ -5,9 +5,9 @@ import { Header, HeaderActionItem } from "../solution/Header";
 import { Loading } from "../solution/Loading";
 import { loadPeople } from "../utils";
 
-import { SearchableList } from "./SearchableList";
-import { Player } from "./Player";
-import { Person } from "./Person";
+import { SearchableList } from "../solution/SearchableList";
+import { Player } from "../solution/Player";
+import { Person } from "../solution/Person";
 
 export const App = () => {
   const [people, setPeople] = useState([]);

@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from "react";
-import { Loading } from "../Loading";
 import { loadPeople } from "../../utils";
 
 export const PeopleContext = createContext();
@@ -16,8 +15,4 @@ export const PeopleProvider = ({ children }) => {
   );
 };
 
-export const WithPeopleOrLoading = ({ children }) => (
-  <PeopleContext.Consumer>
-    {people => (people.length > 0 ? children(people) : <Loading />)}
-  </PeopleContext.Consumer>
-);
+export const WithPeople = PeopleContext.Consumer;
