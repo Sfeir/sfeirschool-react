@@ -1,28 +1,13 @@
 import { connect } from "react-redux";
 import { savePerson, loadPeople } from "../utils";
 
-export const withPeople = connect(state => ({
-  people: state.people
-}));
+// provide people from state
+export const withPeople = connect();
 
-export const withLoading = connect(
-  state => ({
-    loading: state.loading
-  }),
-  dispatch => ({
-    loadPeople: () =>
-      loadPeople().then(people => dispatch({ type: "SET_PEOPLE", people }))
-  })
-);
+// provide loading from state
+// and the loadPeople function dispatching SET_PEOPLE
+export const withLoading = connect();
 
-export const withPerson = connect(
-  (state, { personId }) => ({
-    person: state.people.find(p => p.id === personId)
-  }),
-  dispatch => ({
-    onUpdate: person =>
-      savePerson(person).then(person =>
-        dispatch({ type: "SET_PERSON", person })
-      )
-  })
-);
+// provide person from state using the personId prop
+// and the onUpdate callback dispatching SET_PERSON
+export const withPerson = connect();

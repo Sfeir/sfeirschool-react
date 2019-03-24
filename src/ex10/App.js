@@ -8,12 +8,13 @@ import { Person } from "../solution/EditablePerson";
 import { Loading } from "../solution/Loading";
 
 import { withLoading, withPeople, withPerson } from "./connect";
+// import { withLoading, withPeople, withPerson } from "../solution/ex10/connect";
 
 const ConnectedList = withPeople(SearchableList);
 const ConnectedPlayer = withPeople(Player);
 const ConnectedPerson = withPerson(Person);
 
-export const App = withLoading(({ loadPeople, loading }) => {
+export const App = withLoading(({ loadPeople = () => {}, loading = true }) => {
   useEffect(() => void loadPeople(), [loadPeople]);
   return (
     <>

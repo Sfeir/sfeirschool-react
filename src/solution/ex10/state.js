@@ -1,12 +1,9 @@
-import { createStore } from "redux";
-import { devToolsEnhancer } from "redux-devtools-extension";
-
 const initialState = {
   people: [],
   loading: true
 };
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_PEOPLE":
       return {
@@ -25,5 +22,3 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export const store = createStore(reducer, devToolsEnhancer());
