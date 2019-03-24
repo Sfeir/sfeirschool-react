@@ -1,39 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Header, HeaderActionItem } from "./Header";
-import { withPeopleOrLoading, usePeople } from "./PeopleContext";
 import { SearchableList } from "./SearchableList";
 import { Player } from "./Player";
 import { Person } from "./EditablePerson";
 import { Loading } from "./Loading";
 
-const WrappedList = withPeopleOrLoading(SearchableList);
-const WrappedPlayer = withPeopleOrLoading(Player);
+import { withLoading, withPeople, withPerson } from "./connect";
 
-const WrappedPerson = ({ match }) => {
-  const { loading, getPersonById, updatePerson } = usePeople();
-  const person = getPersonById(match.params.id);
-  return loading ? (
-    <Loading />
-  ) : (
-    <Person person={person} onUpdate={updatePerson} />
-  );
-};
+const ConnectedList = withPeople(SearchableList);
+const ConnectedPlayer = withPeople(Player);
+const ConnectedPerson = withPerson(Person);
 
-export const App = () => {
+export const App = withLoading(({ loadPeople, loading }) => {
+  useEffect(() => void loadPeople(), [loadPeople]);
   return (
     <>
       <Header>
         <HeaderActionItem to="/player" icon="view_carousel" />
         <HeaderActionItem to="/list" icon="view_module" />
       </Header>
-      <Switch>
-        <Route path="/list" component={WrappedList} />
-        <Route path="/player" component={WrappedPlayer} />
-        <Route path="/person/:id" component={WrappedPerson} />
-        <Redirect to="/list" />
-      </Switch>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Switch>
+          <Route path="/list" component={ConnectedList} />
+          <Route path="/player" component={ConnectedPlayer} />
+          <Route
+            path="/person/:id"
+            render={({ match }) => (
+              <ConnectedPerson personId={match.params.id} />
+            )}
+          />
+          <Redirect to="/list" />
+        </Switch>
+      )}
     </>
   );
-};
+});
