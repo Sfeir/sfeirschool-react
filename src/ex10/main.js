@@ -6,7 +6,6 @@ import { Config } from "../solution/Config";
 import { App } from "./App";
 
 import { store } from "./store";
-import { loadPeople } from "../utils";
 
 render(
   <Config useRouter>
@@ -16,5 +15,3 @@ render(
   </Config>,
   document.getElementById("root")
 );
-
-loadPeople().then(people => store.dispatch({ type: "SET_PEOPLE", people }));

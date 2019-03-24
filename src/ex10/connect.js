@@ -1,17 +1,23 @@
 import { connect } from "react-redux";
-import { savePerson } from "../utils";
+import { savePerson, loadPeople } from "../utils";
 
 export const withPeople = connect(state => ({
   people: state.people
 }));
 
-export const withLoading = connect(state => ({
-  loading: state.loading
-}));
+export const withLoading = connect(
+  state => ({
+    loading: state.loading
+  }),
+  dispatch => ({
+    loadPeople: () =>
+      loadPeople().then(people => dispatch({ type: "SET_PEOPLE", people }))
+  })
+);
 
-export const withPersonFromIdParam = connect(
-  (state, { match }) => ({
-    person: state.people.find(p => p.id === match.params.id)
+export const withPerson = connect(
+  (state, { personId }) => ({
+    person: state.people.find(p => p.id === personId)
   }),
   dispatch => ({
     onUpdate: person =>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Header, HeaderActionItem } from "../solution/Header";
@@ -7,13 +7,14 @@ import { Player } from "../solution/Player";
 import { Person } from "../solution/EditablePerson";
 import { Loading } from "../solution/Loading";
 
-import { withLoading, withPeople, withPersonFromIdParam } from "./connect";
+import { withLoading, withPeople, withPerson } from "./connect";
 
 const ConnectedList = withPeople(SearchableList);
 const ConnectedPlayer = withPeople(Player);
-const ConnectedPerson = withPersonFromIdParam(Person);
+const ConnectedPerson = withPerson(Person);
 
-export const App = withLoading(({ loading }) => {
+export const App = withLoading(({ loadPeople, loading }) => {
+  useEffect(() => void loadPeople(), [loadPeople]);
   return (
     <>
       <Header>
@@ -26,7 +27,12 @@ export const App = withLoading(({ loading }) => {
         <Switch>
           <Route path="/list" component={ConnectedList} />
           <Route path="/player" component={ConnectedPlayer} />
-          <Route path="/person/:id" component={ConnectedPerson} />
+          <Route
+            path="/person/:id"
+            render={({ match }) => (
+              <ConnectedPerson personId={match.params.id} />
+            )}
+          />
           <Redirect to="/list" />
         </Switch>
       )}

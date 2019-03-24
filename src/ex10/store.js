@@ -27,12 +27,3 @@ const reducer = (state = initialState, action) => {
 };
 
 export const store = createStore(reducer, devToolsEnhancer());
-
-export const getPersonById = (state, personId) =>
-  state.people.find(p => p.id === personId);
-
-export const getPeople = state => state.people;
-export const getPeopleLoading = state => state.loading;
-
-export const SetPeople = people => ({ type: "SET_PEOPLE", people });
-export const SetPerson = person => ({ type: "SET_PERSON", person });
