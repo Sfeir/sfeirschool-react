@@ -1,21 +1,41 @@
 import React from "react";
-import { Card, CardContent, CardActions, CardAction } from "./Card";
 import { TextField } from "@rmwc/textfield";
 import { Select } from "@rmwc/select";
-import { Formik, useField } from "formik";
+import { Formik } from "formik";
+import { Prompt } from "react-router-dom";
+
+import { Card, CardContent, CardActions, CardAction } from "./Card";
+import { useField } from "./hooks";
+
+const required = value => (!!value ? null : "required");
+
+const validate = ({ phone, email }) => {
+  const errors = {};
+  if (!(phone || email)) {
+    errors.phone = errors.email =
+      "provide either a phone number or an email address";
+  }
+  return errors;
+};
 
 const PersonFields = () => {
-  const [firstname] = useField("firstname");
-  const [lastname] = useField("lastname");
-  const [position] = useField("position");
-  const [phone] = useField("phone");
-  const [email] = useField("email");
+  const firstname = useField("firstname", {
+    label: "first name",
+    validate: required
+  });
+  const lastname = useField("lastname", {
+    label: "last name",
+    validate: required
+  });
+  const position = useField("position");
+  const phone = useField("phone");
+  const email = useField("email");
+
   return (
     <CardContent type="person-form">
-      <TextField label="first name" {...firstname} />
-      <TextField label="last name" {...lastname} />
+      <TextField {...firstname} />
+      <TextField {...lastname} />
       <Select
-        label="position"
         options={[
           "Director",
           "Developer",
@@ -25,8 +45,8 @@ const PersonFields = () => {
         ]}
         {...position}
       />
-      <TextField label="phone" {...phone} />
-      <TextField label="email" {...email} />
+      <TextField {...phone} />
+      <TextField {...email} />
     </CardContent>
   );
 };
@@ -34,9 +54,14 @@ const PersonFields = () => {
 export const PersonForm = ({ person, onSubmit, onReset }) => {
   return (
     <Card>
-      <Formik initialValues={person} onSubmit={onSubmit} onReset={onReset}>
-        {({ handleSubmit, handleReset, dirty, isValid }) => {
-          return (
+      <Formik
+        initialValues={person}
+        onSubmit={onSubmit}
+        onReset={onReset}
+        validate={validate}
+      >
+        {({ handleSubmit, handleReset, dirty, isValid }) => (
+          <>
             <form onSubmit={handleSubmit} onReset={handleReset}>
               <PersonFields />
               <CardActions>
@@ -46,8 +71,9 @@ export const PersonForm = ({ person, onSubmit, onReset }) => {
                 <CardAction type="reset">cancel</CardAction>
               </CardActions>
             </form>
-          );
-        }}
+            <Prompt when={dirty} message="discard unsaved?" />
+          </>
+        )}
       </Formik>
     </Card>
   );
