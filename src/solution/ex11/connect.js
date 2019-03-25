@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { savePerson, loadPeople } from "../utils";
+import { savePerson, loadPeople } from "../../utils";
 import {
   getPeopleIds,
   getPeopleLoading,

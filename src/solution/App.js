@@ -2,18 +2,24 @@ import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Header, HeaderActionItem } from "./Header";
-import { SearchableList } from "./SearchableList";
+import { SearchableListView } from "./SearchableList";
 import { Player } from "./Player";
 import { Person } from "./EditablePerson";
 import { Loading } from "./Loading";
 
-import { withLoading, withPeople, withPerson } from "./connect";
+import {
+  withLoadPeople,
+  withPeopleIds,
+  withPersonFromPersonId,
+  withPersonHandlers,
+  withFilteredPeopleIds
+} from "./connect";
 
-const ConnectedList = withPeople(SearchableList);
-const ConnectedPlayer = withPeople(Player);
-const ConnectedPerson = withPerson(Person);
+const ConnectedList = withFilteredPeopleIds(SearchableListView);
+const ConnectedPlayer = withPeopleIds(Player);
+const ConnectedPerson = withPersonFromPersonId(withPersonHandlers(Person));
 
-export const App = withLoading(({ loadPeople, loading }) => {
+export const App = withLoadPeople(({ loadPeople, loading }) => {
   useEffect(() => void loadPeople(), [loadPeople]);
   return (
     <>
