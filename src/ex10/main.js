@@ -4,9 +4,11 @@ import { createStore } from "redux";
 import { devToolsEnhancer } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 
-import { Config } from "./Config";
+import { Config } from "../solution/Config";
+
 import { App } from "./App";
 import { reducer } from "./state";
+// import { reducer } from "../solution/ex10/state";
 
 const store = createStore(reducer, devToolsEnhancer());
 
