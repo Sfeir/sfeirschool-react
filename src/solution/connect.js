@@ -1,18 +1,21 @@
 import { connect } from "react-redux";
 import { savePerson, loadPeople } from "../utils";
 import {
-  getPeople,
+  getPeopleIds,
   getPeopleLoading,
+  getFilteredPeopleIds,
   getPersonById,
   SetPeople,
-  SetPerson
+  SetPerson,
+  getQuery,
+  SetQuery
 } from "./state";
 
-export const withPeople = connect(state => ({
-  people: getPeople(state)
+export const withPeopleIds = connect(state => ({
+  people: getPeopleIds(state)
 }));
 
-export const withLoading = connect(
+export const withLoadPeople = connect(
   state => ({
     loading: getPeopleLoading(state)
   }),
@@ -21,12 +24,24 @@ export const withLoading = connect(
   })
 );
 
-export const withPerson = connect(
-  (state, { personId }) => ({
-    person: getPersonById(state, personId)
-  }),
+export const withPersonFromPersonId = connect((state, { personId }) => ({
+  person: getPersonById(state, personId)
+}));
+
+export const withPersonHandlers = connect(
+  undefined,
   dispatch => ({
     onUpdate: person =>
       savePerson(person).then(person => dispatch(SetPerson(person)))
+  })
+);
+
+export const withFilteredPeopleIds = connect(
+  state => ({
+    people: getFilteredPeopleIds(state),
+    query: getQuery(state)
+  }),
+  dispatch => ({
+    setQuery: query => dispatch(SetQuery(query))
   })
 );

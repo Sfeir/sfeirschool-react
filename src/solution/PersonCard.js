@@ -2,8 +2,9 @@ import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardImage, CardHeader, CardInfo, CardContent } from "./Card";
 import { useConfig } from "./Config";
+import { withPersonFromPersonId } from "./connect";
 
-const PersonCard = ({ person, children, ...props }) => {
+const PersonCard = ({ person, children, className }) => {
   const { useRouter } = useConfig();
 
   const PersonLink = ({ toId, name }) =>
@@ -14,7 +15,7 @@ const PersonCard = ({ person, children, ...props }) => {
     );
 
   return (
-    <Card {...props}>
+    <Card className={className}>
       <CardContent type="person-info">
         <CardImage url={person.photo} desc={`face of ${person.firstname}`} />
         <CardHeader
@@ -44,4 +45,13 @@ const PersonCard = ({ person, children, ...props }) => {
 };
 
 const MemoizedPersonCard = memo(PersonCard);
-export { MemoizedPersonCard as PersonCard };
+const ConnectedPersonCard = withPersonFromPersonId(PersonCard);
+
+const toPersonCard = person =>
+  typeof person === "string" ? (
+    <ConnectedPersonCard personId={person} key={person} />
+  ) : (
+    <MemoizedPersonCard person={person} key={person.id} />
+  );
+
+export { MemoizedPersonCard as PersonCard, ConnectedPersonCard, toPersonCard };

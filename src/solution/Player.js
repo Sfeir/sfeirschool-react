@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { Fab } from "@rmwc/fab";
 import { useScheduler } from "./hooks";
 import { Carousel } from "./Carousel";
-import { PersonCard } from "./PersonCard";
+import { toPersonCard } from "./PersonCard";
 
 export const Player = ({ people }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,9 +14,7 @@ export const Player = ({ people }) => {
     <>
       <main>
         <Carousel currentIndex={currentIndex} onChange={setCurrentIndex}>
-          {people.map(person => (
-            <PersonCard person={person} key={person.id} />
-          ))}
+          {people.map(toPersonCard)}
         </Carousel>
       </main>
       <footer>
