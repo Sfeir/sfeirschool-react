@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PersonCard } from "./PersonCard";
 import { CardActions, CardAction } from "./Card";
 import { PersonForm } from "./PersonForm";
 
-export const Person = ({ person, onUpdate }) => {
+export const Person = ({ person, onUpdate, onDisplay = () => {} }) => {
   const [editing, setEditing] = useState(false);
+  useEffect(() => void onDisplay(person.id), [person.id, onDisplay]);
 
   const card = editing ? (
     <PersonForm

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import { Header, HeaderActionItem } from "./Header";
-import { SearchableListView } from "./SearchableList";
-import { PlayerView } from "./Player";
-import { Person } from "./EditablePerson";
-import { Loading } from "./Loading";
+import { Header, HeaderActionItem } from "../solution/Header";
+import { SearchableListView } from "../solution/SearchableList";
+import { PlayerView } from "../solution/Player";
+import { Person } from "../solution/EditablePerson";
+import { Loading } from "../solution/Loading";
 
 import {
   withLoadPeople,
@@ -14,6 +14,7 @@ import {
   withFilteredPeopleIds,
   withPeopleTriptych
 } from "./connect";
+// } from "../solution/ex12/connect";
 
 const ConnectedList = withFilteredPeopleIds(SearchableListView);
 const ConnectedPlayer = withPeopleTriptych(PlayerView);

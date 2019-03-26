@@ -3,6 +3,17 @@ export const range = (min, max) => ({
   pred: x => (x === min ? max : x - 1)
 });
 
+export const toRing = (xs, current) => {
+  const { succ, pred } = range(0, xs.length - 1);
+  const currentIndex = xs.indexOf(current);
+  return currentIndex >= 0
+    ? {
+        prev: xs[pred(currentIndex)],
+        next: xs[succ(currentIndex)]
+      }
+    : { prev: null, succ: null };
+};
+
 export const loadPeople = () =>
   fetch("http://localhost:3000/people").then(res => res.json());
 

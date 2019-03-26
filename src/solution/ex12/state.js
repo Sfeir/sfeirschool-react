@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { toRing } from "../utils";
+import { toRing } from "../../utils";
 
 const initialState = {
   people: {
