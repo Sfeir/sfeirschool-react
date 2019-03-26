@@ -16,7 +16,7 @@ export const useScheduler = (callback, interval) => {
 
   useEffect(() => {
     if (running) {
-      const iid = setInterval(callbackRef.current, interval);
+      const iid = setInterval(() => callbackRef.current(), interval);
       return () => clearInterval(iid);
     }
   }, [interval, running]);
