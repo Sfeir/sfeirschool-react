@@ -2,14 +2,29 @@ import { createSelector } from "reselect";
 import { RSAA } from "redux-api-middleware";
 import { toRing } from "../utils";
 
-const initialState = {
+const initialState = (patch = {}) => ({
   people: {
     map: {},
     all: [],
     loading: true
   },
   query: "",
-  current: null
+  current: null,
+  ...patch
+});
+
+const SESSION_STORAGE_KEY = "people-state";
+
+export const loadFromSession = () => {
+  const json = sessionStorage.getItem(SESSION_STORAGE_KEY);
+  return initialState((json && JSON.parse(json)) || undefined);
+};
+
+export const saveToSession = ({ query, current }) => {
+  sessionStorage.setItem(
+    SESSION_STORAGE_KEY,
+    JSON.stringify({ query, current })
+  );
 };
 
 const onSetPeople = (state, { payload: people }) => {
@@ -43,7 +58,7 @@ const onSetPerson = (state, { payload: person }) => ({
   }
 });
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState(), action) => {
   switch (action.type) {
     case "SET_PEOPLE":
       return onSetPeople(state, action);

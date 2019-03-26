@@ -8,12 +8,17 @@ import { Provider } from "react-redux";
 
 import { Config } from "./Config";
 import { App } from "./App";
-import { reducer } from "./state";
+import { reducer, loadFromSession, saveToSession } from "./state";
 
 const store = createStore(
   reducer,
+  loadFromSession(),
   composeWithDevTools(applyMiddleware(thunkMiddleware, apiMiddleware))
 );
+
+store.subscribe(() => {
+  saveToSession(store.getState());
+});
 
 render(
   <Config useRouter>
