@@ -15,11 +15,7 @@ export const Player = ({ people }) => {
     i => people[i]
   );
 
-  return PlayerView({
-    triptych,
-    onNext,
-    onPrev
-  });
+  return PlayerView({ triptych, onNext, onPrev });
 };
 
 export const PlayerView = ({

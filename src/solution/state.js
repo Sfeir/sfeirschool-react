@@ -85,7 +85,11 @@ export const getQuery = state => state.query;
 export const getCurrent = state => state.current;
 export const getTriptych = createSelector(
   getCurrent,
-  state => toRing(state.people.all, state.current),
+  createSelector(
+    getPeopleIds,
+    getCurrent,
+    toRing
+  ),
   (curr, { next, prev }) => [prev, curr, next]
 );
 
