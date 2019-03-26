@@ -3,7 +3,7 @@ import { PersonCard } from "./PersonCard";
 import { CardActions, CardAction } from "./Card";
 import { PersonForm } from "./PersonForm";
 
-export const Person = ({ person, onUpdate, onDisplay }) => {
+export const Person = ({ person, onUpdate, onDisplay = () => {} }) => {
   const [editing, setEditing] = useState(false);
   useEffect(() => void onDisplay(person.id), [person.id, onDisplay]);
 

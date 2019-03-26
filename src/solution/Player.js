@@ -22,7 +22,11 @@ export const Player = ({ people }) => {
   });
 };
 
-export const PlayerView = ({ triptych, onNext, onPrev }) => {
+export const PlayerView = ({
+  triptych = [],
+  onNext = () => {},
+  onPrev = () => {}
+}) => {
   const { running, toggleRunning } = useScheduler(onNext, 1000);
 
   return (

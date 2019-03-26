@@ -1,5 +1,4 @@
 import { createSelector } from "reselect";
-import { toRing } from "../utils";
 
 const initialState = {
   people: {
@@ -8,33 +7,28 @@ const initialState = {
     loading: true
   },
   query: "",
-  current: null
+  current: null // this one is new
 };
 
-const onSetPeople = (state, { people }) => {
-  const map = people.reduce(
-    (acc, cur) => Object.assign(acc, { [cur.id]: cur }),
-    {}
-  );
-  const all = people.map(p => p.id);
-  const current =
-    all.length > 0
-      ? all.includes(state.current)
-        ? state.current
-        : all[0]
-      : null;
-
-  return {
-    ...state,
-    people: { map, all, loading: false },
-    current
-  };
-};
+// manage transitions for the `current` state property
+// you should define actions for SET_NEXT_PERSON and SET_PREVIOUS_PERSON
+// and expose all necessary selectors to connect the Player
+// (look at utils... there may be some function you could use)
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_PEOPLE":
-      return onSetPeople(state, action);
+      return {
+        ...state,
+        people: {
+          map: action.people.reduce(
+            (acc, cur) => Object.assign(acc, { [cur.id]: cur }),
+            {}
+          ),
+          all: action.people.map(p => p.id),
+          loading: false
+        }
+      };
     case "SET_PERSON":
       return {
         ...state,
@@ -51,24 +45,6 @@ export const reducer = (state = initialState, action) => {
         ...state,
         query: action.query
       };
-    case "SET_CURRENT_PERSON":
-      return state.people.all.includes(action.personId) &&
-        state.current !== action.personId
-        ? {
-            ...state,
-            current: action.personId
-          }
-        : state;
-    case "SET_NEXT_PERSON":
-      return {
-        ...state,
-        current: toRing(state.people.all, state.current).next
-      };
-    case "SET_PREV_PERSON":
-      return {
-        ...state,
-        current: toRing(state.people.all, state.current).prev
-      };
     default:
       return state;
   }
@@ -82,12 +58,11 @@ export const getPeopleLoading = state => state.people.loading;
 
 export const getQuery = state => state.query;
 
+// this one is already done
 export const getCurrent = state => state.current;
-export const getTriptych = createSelector(
-  getCurrent,
-  state => toRing(state.people.all, state.current),
-  (curr, { next, prev }) => [prev, curr, next]
-);
+// but define another getter returning the triple
+// [previous, current, next]
+//
 
 const nameContains = query => {
   const re = new RegExp(query, "i");
@@ -108,9 +83,3 @@ export const getFilteredPeopleIds = createSelector(
 export const SetPeople = (people = []) => ({ type: "SET_PEOPLE", people });
 export const SetPerson = person => ({ type: "SET_PERSON", person });
 export const SetQuery = query => ({ type: "SET_QUERY", query });
-export const SetCurrentPerson = personId => ({
-  type: "SET_CURRENT_PERSON",
-  personId
-});
-export const SetNextPerson = () => ({ type: "SET_NEXT_PERSON" });
-export const SetPrevPerson = () => ({ type: "SET_PREV_PERSON" });
