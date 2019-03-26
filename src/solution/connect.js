@@ -3,6 +3,7 @@ import { savePerson, loadPeople } from "../utils";
 import {
   getPeopleLoading,
   getFilteredPeopleIds,
+  getCurrent,
   getTriptych,
   getPersonById,
   getQuery,
@@ -10,7 +11,8 @@ import {
   SetPerson,
   SetQuery,
   SetNextPerson,
-  SetPrevPerson
+  SetPrevPerson,
+  SetCurrentPerson
 } from "./state";
 
 export const withLoadPeople = connect(
@@ -30,13 +32,15 @@ export const withPersonHandlers = connect(
   undefined,
   dispatch => ({
     onUpdate: person =>
-      savePerson(person).then(person => dispatch(SetPerson(person)))
+      savePerson(person).then(person => dispatch(SetPerson(person))),
+    onDisplay: personId => dispatch(SetCurrentPerson(personId))
   })
 );
 
 export const withFilteredPeopleIds = connect(
   state => ({
     people: getFilteredPeopleIds(state),
+    currentId: getCurrent(state),
     query: getQuery(state)
   }),
   dispatch => ({

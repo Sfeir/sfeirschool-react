@@ -15,7 +15,7 @@ const PersonCard = ({ person, children, className }) => {
     );
 
   return (
-    <Card className={className}>
+    <Card className={className} id={`p-${person.id}`}>
       <CardContent type="person-info">
         <CardImage url={person.photo} desc={`face of ${person.firstname}`} />
         <CardHeader

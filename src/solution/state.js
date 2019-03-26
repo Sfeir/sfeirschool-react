@@ -51,6 +51,14 @@ export const reducer = (state = initialState, action) => {
         ...state,
         query: action.query
       };
+    case "SET_CURRENT_PERSON":
+      return state.people.all.includes(action.personId) &&
+        state.current !== action.personId
+        ? {
+            ...state,
+            current: action.personId
+          }
+        : state;
     case "SET_NEXT_PERSON":
       return {
         ...state,
@@ -100,5 +108,9 @@ export const getFilteredPeopleIds = createSelector(
 export const SetPeople = (people = []) => ({ type: "SET_PEOPLE", people });
 export const SetPerson = person => ({ type: "SET_PERSON", person });
 export const SetQuery = query => ({ type: "SET_QUERY", query });
+export const SetCurrentPerson = personId => ({
+  type: "SET_CURRENT_PERSON",
+  personId
+});
 export const SetNextPerson = () => ({ type: "SET_NEXT_PERSON" });
 export const SetPrevPerson = () => ({ type: "SET_PREV_PERSON" });
