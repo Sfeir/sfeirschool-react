@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { toRing } from "../utils";
 
 const initialState = {
   people: {
@@ -6,23 +7,34 @@ const initialState = {
     all: [],
     loading: true
   },
-  query: ""
+  query: "",
+  current: null
+};
+
+const onSetPeople = (state, { people }) => {
+  const map = people.reduce(
+    (acc, cur) => Object.assign(acc, { [cur.id]: cur }),
+    {}
+  );
+  const all = people.map(p => p.id);
+  const current =
+    all.length > 0
+      ? all.includes(state.current)
+        ? state.current
+        : all[0]
+      : null;
+
+  return {
+    ...state,
+    people: { map, all, loading: false },
+    current
+  };
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_PEOPLE":
-      return {
-        ...state,
-        people: {
-          map: action.people.reduce(
-            (acc, cur) => Object.assign(acc, { [cur.id]: cur }),
-            {}
-          ),
-          all: action.people.map(p => p.id),
-          loading: false
-        }
-      };
+      return onSetPeople(state, action);
     case "SET_PERSON":
       return {
         ...state,
@@ -39,6 +51,16 @@ export const reducer = (state = initialState, action) => {
         ...state,
         query: action.query
       };
+    case "SET_NEXT_PERSON":
+      return {
+        ...state,
+        current: toRing(state.people.all, state.current).next
+      };
+    case "SET_PREV_PERSON":
+      return {
+        ...state,
+        current: toRing(state.people.all, state.current).prev
+      };
     default:
       return state;
   }
@@ -51,6 +73,13 @@ export const getPeopleMap = state => state.people.map;
 export const getPeopleLoading = state => state.people.loading;
 
 export const getQuery = state => state.query;
+
+export const getCurrent = state => state.current;
+export const getTriptych = createSelector(
+  getCurrent,
+  state => toRing(state.people.all, state.current),
+  (curr, { next, prev }) => [prev, curr, next]
+);
 
 const nameContains = query => {
   const re = new RegExp(query, "i");
@@ -68,6 +97,8 @@ export const getFilteredPeopleIds = createSelector(
       .map(p => p.id)
 );
 
-export const SetPeople = people => ({ type: "SET_PEOPLE", people });
+export const SetPeople = (people = []) => ({ type: "SET_PEOPLE", people });
 export const SetPerson = person => ({ type: "SET_PERSON", person });
 export const SetQuery = query => ({ type: "SET_QUERY", query });
+export const SetNextPerson = () => ({ type: "SET_NEXT_PERSON" });
+export const SetPrevPerson = () => ({ type: "SET_PREV_PERSON" });

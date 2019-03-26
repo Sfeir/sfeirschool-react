@@ -3,20 +3,20 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Header, HeaderActionItem } from "./Header";
 import { SearchableListView } from "./SearchableList";
-import { Player } from "./Player";
+import { PlayerView } from "./Player";
 import { Person } from "./EditablePerson";
 import { Loading } from "./Loading";
 
 import {
   withLoadPeople,
-  withPeopleIds,
   withPersonFromPersonId,
   withPersonHandlers,
-  withFilteredPeopleIds
+  withFilteredPeopleIds,
+  withPeopleTriptych
 } from "./connect";
 
 const ConnectedList = withFilteredPeopleIds(SearchableListView);
-const ConnectedPlayer = withPeopleIds(Player);
+const ConnectedPlayer = withPeopleTriptych(PlayerView);
 const ConnectedPerson = withPersonFromPersonId(withPersonHandlers(Person));
 
 export const App = withLoadPeople(({ loadPeople, loading }) => {

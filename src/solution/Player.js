@@ -11,25 +11,25 @@ export const Player = ({ people }) => {
 
   const onNext = () => setCurrentIndex(succ);
   const onPrev = () => setCurrentIndex(pred);
-  const troika = [pred(currentIndex), currentIndex, succ(currentIndex)].map(
+  const triptych = [pred(currentIndex), currentIndex, succ(currentIndex)].map(
     i => people[i]
   );
 
   return PlayerView({
-    troika,
+    triptych,
     onNext,
     onPrev
   });
 };
 
-export const PlayerView = ({ troika, onNext, onPrev }) => {
+export const PlayerView = ({ triptych, onNext, onPrev }) => {
   const { running, toggleRunning } = useScheduler(onNext, 1000);
 
   return (
     <>
       <main>
         <Carousel onNext={onNext} onPrev={onPrev}>
-          {troika.map(toPersonCard)}
+          {triptych.map(toPersonCard)}
         </Carousel>
       </main>
       <footer>

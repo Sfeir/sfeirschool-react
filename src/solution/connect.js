@@ -1,19 +1,17 @@
 import { connect } from "react-redux";
 import { savePerson, loadPeople } from "../utils";
 import {
-  getPeopleIds,
   getPeopleLoading,
   getFilteredPeopleIds,
+  getTriptych,
   getPersonById,
   getQuery,
   SetPeople,
   SetPerson,
-  SetQuery
+  SetQuery,
+  SetNextPerson,
+  SetPrevPerson
 } from "./state";
-
-export const withPeopleIds = connect(state => ({
-  people: getPeopleIds(state)
-}));
 
 export const withLoadPeople = connect(
   state => ({
@@ -43,5 +41,15 @@ export const withFilteredPeopleIds = connect(
   }),
   dispatch => ({
     setQuery: query => dispatch(SetQuery(query))
+  })
+);
+
+export const withPeopleTriptych = connect(
+  state => ({
+    triptych: getTriptych(state)
+  }),
+  dispatch => ({
+    onNext: () => dispatch(SetNextPerson()),
+    onPrev: () => dispatch(SetPrevPerson())
   })
 );
