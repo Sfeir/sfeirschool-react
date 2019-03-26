@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { savePerson, loadPeople } from "../utils";
+
 import {
   getPeopleLoading,
   getFilteredPeopleIds,
@@ -7,12 +7,12 @@ import {
   getTriptych,
   getPersonById,
   getQuery,
-  SetPeople,
-  SetPerson,
   SetQuery,
   SetNextPerson,
   SetPrevPerson,
-  SetCurrentPerson
+  SetCurrentPerson,
+  LoadPeople,
+  SavePerson
 } from "./state";
 
 export const withLoadPeople = connect(
@@ -20,7 +20,7 @@ export const withLoadPeople = connect(
     loading: getPeopleLoading(state)
   }),
   dispatch => ({
-    loadPeople: () => loadPeople().then(people => dispatch(SetPeople(people)))
+    loadPeople: () => dispatch(LoadPeople())
   })
 );
 
@@ -31,8 +31,7 @@ export const withPersonFromPersonId = connect((state, { personId }) => ({
 export const withPersonHandlers = connect(
   undefined,
   dispatch => ({
-    onUpdate: person =>
-      savePerson(person).then(person => dispatch(SetPerson(person))),
+    onUpdate: person => dispatch(SavePerson(person)),
     onDisplay: personId => dispatch(SetCurrentPerson(personId))
   })
 );

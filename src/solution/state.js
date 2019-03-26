@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { RSAA } from "redux-api-middleware";
 import { toRing } from "../utils";
 
 const initialState = {
@@ -11,7 +12,7 @@ const initialState = {
   current: null
 };
 
-const onSetPeople = (state, { people }) => {
+const onSetPeople = (state, { payload: people }) => {
   const map = people.reduce(
     (acc, cur) => Object.assign(acc, { [cur.id]: cur }),
     {}
@@ -31,21 +32,23 @@ const onSetPeople = (state, { people }) => {
   };
 };
 
+const onSetPerson = (state, { payload: person }) => ({
+  ...state,
+  people: {
+    ...state.people,
+    map: {
+      ...state.people.map,
+      [person.id]: person
+    }
+  }
+});
+
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_PEOPLE":
       return onSetPeople(state, action);
     case "SET_PERSON":
-      return {
-        ...state,
-        people: {
-          ...state.people,
-          map: {
-            ...state.people.map,
-            [action.person.id]: action.person
-          }
-        }
-      };
+      return onSetPerson(state, action);
     case "SET_QUERY":
       return {
         ...state,
@@ -109,8 +112,6 @@ export const getFilteredPeopleIds = createSelector(
       .map(p => p.id)
 );
 
-export const SetPeople = (people = []) => ({ type: "SET_PEOPLE", people });
-export const SetPerson = person => ({ type: "SET_PERSON", person });
 export const SetQuery = query => ({ type: "SET_QUERY", query });
 export const SetCurrentPerson = personId => ({
   type: "SET_CURRENT_PERSON",
@@ -118,3 +119,23 @@ export const SetCurrentPerson = personId => ({
 });
 export const SetNextPerson = () => ({ type: "SET_NEXT_PERSON" });
 export const SetPrevPerson = () => ({ type: "SET_PREV_PERSON" });
+
+export const LoadPeople = () => ({
+  [RSAA]: {
+    endpoint: "http://localhost:3000/people",
+    method: "GET",
+    types: ["LOAD_PEOPLE", "SET_PEOPLE", "LOAD_PEOPLE_FAILED"]
+  }
+});
+
+export const SavePerson = person => ({
+  [RSAA]: {
+    endpoint: `http://localhost:3000/people/${person.id}`,
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(person),
+    types: ["SAVE_PERSON", "SET_PERSON", "SAVE_PERSON_FAILED"]
+  }
+});
