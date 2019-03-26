@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { Fab } from "@rmwc/fab";
 import { useScheduler } from "./hooks";
 import { Carousel } from "./Carousel";
@@ -6,14 +6,18 @@ import { toPersonCard } from "./PersonCard";
 
 export const Player = ({ people }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  return PlayerView({ people, currentIndex, onIndexChange: setCurrentIndex });
+};
 
-  const showNextPerson = useCallback(() => setCurrentIndex(i => i + 1), []);
-  const { running, toggleRunning } = useScheduler(showNextPerson, 1000);
-
+export const PlayerView = ({ people, currentIndex, onIndexChange }) => {
+  const { running, toggleRunning } = useScheduler(
+    () => onIndexChange(currentIndex + 1),
+    1000
+  );
   return (
     <>
       <main>
-        <Carousel currentIndex={currentIndex} onChange={setCurrentIndex}>
+        <Carousel currentIndex={currentIndex} onChange={onIndexChange}>
           {people.map(toPersonCard)}
         </Carousel>
       </main>
