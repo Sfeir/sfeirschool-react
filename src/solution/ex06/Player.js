@@ -10,7 +10,7 @@ export const Player = ({ people }) => {
 
   const onNext = () => setCurrentIndex(succ);
   const onPrev = () => setCurrentIndex(pred);
-  const troika = [pred(currentIndex), currentIndex, succ(currentIndex)].map(
+  const triptych = [pred(currentIndex), currentIndex, succ(currentIndex)].map(
     i => people[i]
   );
 
@@ -31,7 +31,7 @@ export const Player = ({ people }) => {
     <>
       <main>
         <Carousel onNext={onNext} onPrev={onPrev}>
-          {troika.map(person => (
+          {triptych.map(person => (
             <PersonCard person={person} key={person.id} />
           ))}
         </Carousel>
