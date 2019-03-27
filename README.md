@@ -1,46 +1,29 @@
-# SfeirSchool React
+# SfeirSchool React - Exercises
 
-## Exercise plan
-
-## Day 1
+## Fundamentals
 
 ### Intro JSX, Elements, Components as functions, Props
 
-No advanced composition yet
-
 - ex01 - HandsOn (JSX and props)
-  only use function - no lambdas
 
 ### Component composition, Component Tree, Elements as Props, Children
-
-Components/Functions as values => prefer lambda notation as of now
-Component Tree != Flow of Props -> Elements as Props (Children are just that)
-Do not show Components / factories as Props yet
 
 - ex02 - Components (composition and children)
 
 ### Local State and Simple Events
 
-Events, Syntheticevents - just a callback (nothing special here)
-Class Components, this binding, What's an element anyway
-
 - ex03 - Local state and clicks (get interactive)
-
--> the class is just a representation
--> hooks FTW - a gentle introduction
-
 - ex03bis -> use useState
 
 ### Lists, Conditional rendering, more about children
 
 - ex04 - Conditional, Lists (show 'em all)
-  -> carousel with arbitrary children
+
+## More advanced concepts
 
 ### Input / Refs / controlled and uncontrolled components
 
 - ex05 - Controlled Components - Input (search)
-
-## Day 2
 
 ### Lifecycle, Effects and lifting state up
 
@@ -48,34 +31,27 @@ Class Components, this binding, What's an element anyway
 
 ### Routing and Context
 
-intro react-router
-
 - ex07 - Navigation
-  (Suspense / Lazy ???)
-
-share people through context
-
 - ex08 - Context
 
-### Forms - the problem statement
+### Forms - the problem statement - Reuse component logic
 
-- Forms (a code review)
+- ex09 - Reuse logic and forms
 
-# TODO
+## Managing state with Redux
 
-### Reusing Logic
+### Adding Redux - reduce and connect
 
-- RenderProps
-- HOCs
-- custom hooks
+- ex10 - put people into redux state
 
-- ex09 - Manage a form
-  Form{sy|ik}
+### Encapsulating Redux - selectors and action creators
 
-### Managing State
+- ex11 - build a public state API
 
-the transactional state pattern => useReducer
-A reducer through Context (write our own Redux)
-Why Redux is so popular
+### Embracing Redux
 
-- ex10 - Application state
+- ex12 - leverage application state
+
+### Redux All The Things
+
+- ex13 - add async processing to state API
