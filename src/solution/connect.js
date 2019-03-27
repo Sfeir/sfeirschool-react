@@ -1,59 +1,45 @@
 import { connect } from "react-redux";
-import { savePerson, loadPeople } from "../utils";
-import {
-  getPeopleLoading,
-  getFilteredPeopleIds,
-  getCurrent,
-  getTriptych,
-  getPersonById,
-  getQuery,
-  SetPeople,
-  SetPerson,
-  SetQuery,
-  SetNextPerson,
-  SetPrevPerson,
-  SetCurrentPerson
-} from "./state";
+
+import * as st from "./state";
 
 export const withLoadPeople = connect(
   state => ({
-    loading: getPeopleLoading(state)
+    loading: st.getPeopleLoading(state)
   }),
-  dispatch => ({
-    loadPeople: () => loadPeople().then(people => dispatch(SetPeople(people)))
-  })
+  {
+    loadPeople: st.LoadPeople
+  }
 );
 
 export const withPersonFromPersonId = connect((state, { personId }) => ({
-  person: getPersonById(state, personId)
+  person: st.getPersonById(state, personId)
 }));
 
 export const withPersonHandlers = connect(
   undefined,
-  dispatch => ({
-    onUpdate: person =>
-      savePerson(person).then(person => dispatch(SetPerson(person))),
-    onDisplay: personId => dispatch(SetCurrentPerson(personId))
-  })
+  {
+    onUpdate: st.SavePerson,
+    onDisplay: st.SetCurrentPerson
+  }
 );
 
 export const withFilteredPeopleIds = connect(
   state => ({
-    people: getFilteredPeopleIds(state),
-    currentId: getCurrent(state),
-    query: getQuery(state)
+    people: st.getFilteredPeopleIds(state),
+    currentId: st.getCurrent(state),
+    query: st.getQuery(state)
   }),
-  dispatch => ({
-    setQuery: query => dispatch(SetQuery(query))
-  })
+  {
+    setQuery: st.SetQuery
+  }
 );
 
 export const withPeopleTriptych = connect(
   state => ({
-    triptych: getTriptych(state)
+    triptych: st.getTriptych(state)
   }),
-  dispatch => ({
-    onNext: () => dispatch(SetNextPerson()),
-    onPrev: () => dispatch(SetPrevPerson())
-  })
+  {
+    onNext: st.SetNextPerson,
+    onPrev: st.SetPrevPerson
+  }
 );

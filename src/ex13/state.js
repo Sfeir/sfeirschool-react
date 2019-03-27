@@ -1,33 +1,17 @@
 import { createSelector } from "reselect";
-import { RSAA } from "redux-api-middleware";
 import { toRing } from "../utils";
 
-const initialState = (patch = {}) => ({
+const initialState = {
   people: {
     map: {},
     all: [],
     loading: true
   },
   query: "",
-  current: null,
-  ...patch
-});
-
-const SESSION_STORAGE_KEY = "people-state";
-
-export const loadFromSession = () => {
-  const json = sessionStorage.getItem(SESSION_STORAGE_KEY);
-  return initialState((json && JSON.parse(json)) || undefined);
+  current: null
 };
 
-export const saveToSession = ({ query, current }) => {
-  sessionStorage.setItem(
-    SESSION_STORAGE_KEY,
-    JSON.stringify({ query, current })
-  );
-};
-
-const onSetPeople = (state, { payload: people }) => {
+const onSetPeople = (state, { people }) => {
   const map = people.reduce(
     (acc, cur) => Object.assign(acc, { [cur.id]: cur }),
     {}
@@ -47,7 +31,7 @@ const onSetPeople = (state, { payload: people }) => {
   };
 };
 
-const onSetPerson = (state, { payload: person }) => ({
+const onSetPerson = (state, { person }) => ({
   ...state,
   people: {
     ...state.people,
@@ -58,7 +42,7 @@ const onSetPerson = (state, { payload: person }) => ({
   }
 });
 
-export const reducer = (state = initialState(), action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_PEOPLE":
       return onSetPeople(state, action);
@@ -127,6 +111,8 @@ export const getFilteredPeopleIds = createSelector(
       .map(p => p.id)
 );
 
+export const SetPeople = (people = []) => ({ type: "SET_PEOPLE", people });
+export const SetPerson = person => ({ type: "SET_PERSON", person });
 export const SetQuery = query => ({ type: "SET_QUERY", query });
 export const SetCurrentPerson = personId => ({
   type: "SET_CURRENT_PERSON",
@@ -135,22 +121,5 @@ export const SetCurrentPerson = personId => ({
 export const SetNextPerson = () => ({ type: "SET_NEXT_PERSON" });
 export const SetPrevPerson = () => ({ type: "SET_PREV_PERSON" });
 
-export const LoadPeople = () => ({
-  [RSAA]: {
-    endpoint: "http://localhost:3000/people",
-    method: "GET",
-    types: ["LOAD_PEOPLE", "SET_PEOPLE", "LOAD_PEOPLE_FAILED"]
-  }
-});
-
-export const SavePerson = person => ({
-  [RSAA]: {
-    endpoint: `http://localhost:3000/people/${person.id}`,
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(person),
-    types: ["SAVE_PERSON", "SET_PERSON", "SAVE_PERSON_FAILED"]
-  }
-});
+// define two action creators, one for loading people,
+// one for saving a person. use redux-api or redux-thunk
