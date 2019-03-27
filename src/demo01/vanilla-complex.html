@@ -16,6 +16,7 @@
     <script>
       let count = 0;
       let countElement = document.getElementById("clickCount");
+      let theButton = document.getElementById("theButton");
 
       function buttonClicked() {
         count++;
@@ -25,10 +26,15 @@
       function update() {
         countElement.innerText = count;
 
-        if (count % 2 === 0) {
+        countElement.style.color = "";
+        theButton.style.borderColor = "";
+
+        if (count % 3 === 0) {
           countElement.style.color = "green";
-        } else {
-          countElement.style.color = "red";
+        }
+
+        if (count % 5 === 0) {
+          theButton.style.borderColor = "red";
         }
       }
 

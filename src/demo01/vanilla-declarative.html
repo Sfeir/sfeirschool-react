@@ -19,12 +19,13 @@
       }
 
       function render() {
-        const style = `color: ${count % 2 === 0 ? "green" : "red"}`;
+        const countStyle = count % 3 === 0 ? "color: green" : "";
+        const buttonStyle = count % 5 === 0 ? "border-color: red" : "";
 
         const html = `
-          <button onclick="buttonClicked()">
+          <button onclick="buttonClicked()" style="${buttonStyle}">
             clicked
-            <span style="${style}">${count}</span>
+            <span style="${countStyle}">${count}</span>
             times
           </button>
         `;

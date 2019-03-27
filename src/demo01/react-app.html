@@ -17,13 +17,15 @@
       let count = 0;
 
       function CountButton(props) {
-        const style = {
-          color: props.count % 2 === 0 ? "green" : "red"
-        };
+        const countStyle =
+          count % 3 === 0 ? { color: "green" } : undefined;
+
+        const buttonStyle =
+          count % 5 === 0 ? { borderColor: "red" } : undefined;
 
         return (
-          <button onClick={props.onClick}>
-            clicked <span style={style}>{props.count}</span> times
+          <button onClick={buttonClicked} style={buttonStyle}>
+            clicked <span style={countStyle}>{count}</span> times
           </button>
         );
       }
