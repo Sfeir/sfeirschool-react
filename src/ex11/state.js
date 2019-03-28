@@ -1,8 +1,7 @@
 const initialState = {
   people: {
     map: {},
-    all: [],
-    loading: true
+    all: null
   },
   query: ""
 };
@@ -15,6 +14,7 @@ const initialState = {
 
 // people.all should just contain the person ids
 // in order received from the server
+// or null while loading
 
 // handle a SET_QUERY action that just sets the
 // query field
@@ -23,13 +23,10 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_PEOPLE":
       return {
-        ...state,
-        people: action.people,
-        loading: false
+        people: action.people
       };
     case "SET_PERSON":
       return {
-        ...state,
         people: state.people.map(p =>
           p.id === action.person.id ? action.person : p
         )

@@ -11,32 +11,26 @@ import { loadPeople, savePerson } from "../../utils";
 const PeopleContext = createContext();
 
 export const PeopleProvider = ({ children }) => {
-  const [loading, setLoading] = useState(true);
-  const [people, setPeople] = useState([]);
+  const [people, setPeople] = useState(null);
 
   useEffect(() => {
     loadPeople().then(data => {
       setPeople(data);
-      setLoading(false);
     });
   }, []);
 
-  const context = useMemo(() => {
-    const getPersonById = id => people.find(p => p.id === id);
-
-    const updatePerson = person => {
-      return savePerson(person).then(person =>
-        setPeople(people.map(p => (p.id === person.id ? person : p)))
-      );
-    };
-
-    return {
-      people,
-      loading,
-      getPersonById,
-      updatePerson
-    };
-  }, [people, loading]);
+  const context = useMemo(
+    () => ({
+      people: people || [],
+      loading: people === null,
+      getPersonById: id => people.find(p => p.id === id),
+      updatePerson: person =>
+        savePerson(person).then(person =>
+          setPeople(people.map(p => (p.id === person.id ? person : p)))
+        )
+    }),
+    [people]
+  );
 
   return (
     <PeopleContext.Provider value={context}>{children}</PeopleContext.Provider>

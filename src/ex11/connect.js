@@ -12,12 +12,12 @@ import {} from "./state";
 
 // the former ones for reference:
 const withPeople = connect(state => ({
-  people: state.people
+  people: state.people || []
 }));
 
 const withLoading = connect(
   state => ({
-    loading: state.loading
+    loading: state.people === null
   }),
   dispatch => ({
     loadPeople: () =>
@@ -27,7 +27,7 @@ const withLoading = connect(
 
 const withPerson = connect(
   (state, { personId }) => ({
-    person: state.people.find(p => p.id === personId)
+    person: state.people && state.people.find(p => p.id === personId)
   }),
   dispatch => ({
     onUpdate: person =>

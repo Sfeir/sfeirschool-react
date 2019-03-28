@@ -5,8 +5,7 @@ import { toRing } from "../utils";
 const initialState = (patch = {}) => ({
   people: {
     map: {},
-    all: [],
-    loading: true
+    all: null
   },
   query: "",
   current: null,
@@ -28,10 +27,7 @@ export const saveToSession = ({ query, current }) => {
 };
 
 const onSetPeople = (state, { payload: people }) => {
-  const map = people.reduce(
-    (acc, cur) => Object.assign(acc, { [cur.id]: cur }),
-    {}
-  );
+  const map = Object.assign({}, ...people.map(p => ({ [p.id]: p })));
   const all = people.map(p => p.id);
   const current =
     all.length > 0
@@ -42,7 +38,7 @@ const onSetPeople = (state, { payload: people }) => {
 
   return {
     ...state,
-    people: { map, all, loading: false },
+    people: { map, all },
     current
   };
 };
@@ -94,9 +90,9 @@ export const reducer = (state = initialState(), action) => {
 
 export const getPersonById = (state, personId) => state.people.map[personId];
 
-export const getPeopleIds = state => state.people.all;
+export const getPeopleIds = state => state.people.all || [];
 export const getPeopleMap = state => state.people.map;
-export const getPeopleLoading = state => state.people.loading;
+export const getPeopleLoading = state => state.people.all === null;
 
 export const getQuery = state => state.query;
 

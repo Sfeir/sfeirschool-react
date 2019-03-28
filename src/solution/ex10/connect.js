@@ -2,12 +2,12 @@ import { connect } from "react-redux";
 import { savePerson, loadPeople } from "../../utils";
 
 export const withPeople = connect(state => ({
-  people: state.people
+  people: state.people || []
 }));
 
 export const withLoading = connect(
   state => ({
-    loading: state.loading
+    loading: state.people === null
   }),
   dispatch => ({
     loadPeople: () =>
@@ -17,7 +17,7 @@ export const withLoading = connect(
 
 export const withPerson = connect(
   (state, { personId }) => ({
-    person: state.people.find(p => p.id === personId)
+    person: state.people && state.people.find(p => p.id === personId)
   }),
   dispatch => ({
     onUpdate: person =>

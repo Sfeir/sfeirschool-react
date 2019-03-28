@@ -3,8 +3,7 @@ import { createSelector } from "reselect";
 const initialState = {
   people: {
     map: {},
-    all: [],
-    loading: true
+    all: null
   },
   query: "",
   current: null // this one is new
@@ -21,12 +20,8 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         people: {
-          map: action.people.reduce(
-            (acc, cur) => Object.assign(acc, { [cur.id]: cur }),
-            {}
-          ),
-          all: action.people.map(p => p.id),
-          loading: false
+          map: Object.assign({}, ...action.people.map(p => ({ [p.id]: p }))),
+          all: action.people.map(p => p.id)
         }
       };
     case "SET_PERSON":
@@ -52,9 +47,9 @@ export const reducer = (state = initialState, action) => {
 
 export const getPersonById = (state, personId) => state.people.map[personId];
 
-export const getPeopleIds = state => state.people.all;
+export const getPeopleIds = state => state.people.all || [];
 export const getPeopleMap = state => state.people.map;
-export const getPeopleLoading = state => state.people.loading;
+export const getPeopleLoading = state => state.people.all === null;
 
 export const getQuery = state => state.query;
 
