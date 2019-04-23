@@ -1,8 +1,4 @@
 {
   "extends": "plugin:react-app/recommended",
-  "plugins": ["react-hooks", "prettier"],
-  "rules": {
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
-  }
+  "plugins": ["prettier"]
 }
