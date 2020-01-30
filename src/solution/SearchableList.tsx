@@ -1,22 +1,28 @@
 import React, { useState, useLayoutEffect } from "react";
 import { TextField } from "@rmwc/textfield";
 
+import { Person } from "./state";
 import { toPersonCard } from "./PersonCard";
 
-const nameContains = query => {
+const nameContains = (query: string) => {
   const re = new RegExp(query, "i");
-  return p => re.test(p.firstname) || re.test(p.lastname);
+  return (p: Person) => re.test(p.firstname) || re.test(p.lastname);
 };
 
-export const SearchableList = ({ people }) => {
+export const SearchableList: React.FC<{ people: Person[] }> = ({ people }) => {
   const [query, setQuery] = useState("");
   const filteredPeople = people.filter(nameContains(query));
   return SearchableListView({ people: filteredPeople, query, setQuery });
 };
 
-export const SearchableListView = ({ people, currentId, query, setQuery }) => {
+export const SearchableListView: React.FC<{
+  people: any[];
+  currentId?: string;
+  query: string;
+  setQuery: (v: string) => void;
+}> = ({ people, currentId = "", query, setQuery }) => {
   useLayoutEffect(() => {
-    const currentCard = document.getElementById(`p-${currentId}`);
+    const currentCard = currentId && document.getElementById(`p-${currentId}`);
     if (currentCard)
       currentCard.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [currentId]);
@@ -33,7 +39,9 @@ export const SearchableListView = ({ people, currentId, query, setQuery }) => {
           }}
           label="search by name"
           value={query}
-          onChange={e => setQuery(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setQuery(e.target.value)
+          }
         />
       </footer>
     </>

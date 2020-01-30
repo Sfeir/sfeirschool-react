@@ -19,8 +19,11 @@ const ConnectedList = withFilteredPeopleIds(SearchableListView);
 const ConnectedPlayer = withPeopleTriptych(PlayerView);
 const ConnectedPerson = withPersonFromPersonId(withPersonHandlers(Person));
 
-export const App = withLoadPeople(({ loadPeople, loading }) => {
-  useEffect(() => void loadPeople(), [loadPeople]);
+const AppView: React.FC<{
+  loading: boolean;
+  loadPeople: () => void;
+}> = ({ loadPeople, loading }) => {
+  useEffect(loadPeople, [loadPeople]);
   return (
     <>
       <Header>
@@ -44,4 +47,6 @@ export const App = withLoadPeople(({ loadPeople, loading }) => {
       )}
     </>
   );
-});
+};
+
+export const App = withLoadPeople(AppView);

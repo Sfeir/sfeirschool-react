@@ -2,7 +2,7 @@ import { createSelector } from "reselect";
 import { RSAA, RSAAAction } from "redux-api-middleware";
 import { toRing } from "../utils";
 
-type Person = {
+export type Person = {
   id: string;
   firstname: string;
   lastname: string;
