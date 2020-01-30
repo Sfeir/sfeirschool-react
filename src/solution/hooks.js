@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useFormikContext } from "formik";
+import { useField as formikUseField, useFormikContext } from "formik";
 
 export const useScheduler = (callback, interval) => {
   const [running, setRunning] = useState(false);
@@ -25,28 +25,17 @@ export const useScheduler = (callback, interval) => {
 };
 
 export const useField = (name, { label = name, validate } = {}) => {
-  const {
-    getFieldProps,
-    registerField,
-    unregisterField,
-    isSubmitting
-  } = useFormikContext();
-
-  useEffect(() => {
-    registerField(name, { validate });
-    return () => unregisterField(name);
-  });
-
-  const [fieldProps, { error }] = getFieldProps(name);
+  const [field, meta] = formikUseField({ name, validate });
+  const { isSubmitting } = useFormikContext();
 
   return {
-    ...fieldProps,
+    ...field,
     label,
     disabled: isSubmitting,
-    invalid: !!error,
+    invalid: !!meta.error,
     helpText: {
       validationMsg: true,
-      children: error
+      children: meta.error
     }
   };
 };
