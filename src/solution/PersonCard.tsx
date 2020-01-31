@@ -3,11 +3,24 @@ import { Link } from "react-router-dom";
 import { Card, CardImage, CardHeader, CardInfo, CardContent } from "./Card";
 import { useConfig } from "./Config";
 import { withPersonFromPersonId } from "./connect";
+import { Person } from "./state";
 
-const PersonCard = ({ person, children, className }) => {
+type PersonCardProps = {
+  person: Person;
+  className?: string;
+};
+
+const PersonCard: React.FC<PersonCardProps> = ({
+  person,
+  children,
+  className
+}) => {
   const { useRouter } = useConfig();
 
-  const PersonLink = ({ toId, name }) =>
+  const PersonLink: React.FC<{
+    toId: string;
+    name: string;
+  }> = ({ toId, name }) =>
     useRouter ? (
       <Link to={`/person/${toId}`}>{name}</Link>
     ) : (
@@ -47,7 +60,7 @@ const PersonCard = ({ person, children, className }) => {
 const MemoizedPersonCard = memo(PersonCard);
 const ConnectedPersonCard = withPersonFromPersonId(PersonCard);
 
-const toPersonCard = person =>
+const toPersonCard = (person: Person | string) =>
   typeof person === "string" ? (
     <ConnectedPersonCard personId={person} key={person} />
   ) : (

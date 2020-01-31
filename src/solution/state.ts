@@ -9,6 +9,7 @@ export type Person = {
   position: string;
   phone: string;
   email: string;
+  photo: string;
   managerId: string;
   manager: string;
 };
