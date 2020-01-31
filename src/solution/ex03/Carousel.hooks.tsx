@@ -1,18 +1,20 @@
 import React, { useState, useMemo } from "react";
 import { Fab } from "@rmwc/fab";
 
+import { Person } from "../state";
 import { range } from "../../utils";
 import { PersonCard } from "../PersonCard";
 
-export const Carousel = ({ people }) => {
+type CarouselProps = {
+  people: Person[];
+};
+
+export const Carousel: React.FC<CarouselProps> = ({ people }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [setPrev, setNext] = useMemo(
-    () => {
-      const { pred, succ } = range(0, people.length - 1);
-      return [() => setCurrentIndex(pred), () => setCurrentIndex(succ)];
-    },
-    [people, setCurrentIndex]
-  );
+  const [setPrev, setNext] = useMemo(() => {
+    const { pred, succ } = range(0, people.length - 1);
+    return [() => setCurrentIndex(pred), () => setCurrentIndex(succ)];
+  }, [people, setCurrentIndex]);
 
   return (
     <div className="flex-row">

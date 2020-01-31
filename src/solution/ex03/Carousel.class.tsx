@@ -3,16 +3,32 @@ import { Fab } from "@rmwc/fab";
 
 import { range } from "../../utils";
 import { PersonCard } from "../PersonCard";
+import { Person } from "../state";
 
-const setPrevIndex = ({ currentIndex }, { people }) => ({
+type CarouselProps = {
+  people: Person[];
+};
+
+type CarouselState = {
+  currentIndex: number;
+};
+
+const setPrevIndex = (
+  { currentIndex }: CarouselState,
+  { people }: CarouselProps
+) => ({
   currentIndex: range(0, people.length - 1).pred(currentIndex)
 });
-const setNextIndex = ({ currentIndex }, { people }) => ({
+
+const setNextIndex = (
+  { currentIndex }: CarouselState,
+  { people }: CarouselProps
+) => ({
   currentIndex: range(0, people.length - 1).succ(currentIndex)
 });
 
-export class Carousel extends React.Component {
-  constructor(props) {
+export class Carousel extends React.Component<CarouselProps, CarouselState> {
+  constructor(props: CarouselProps) {
     super(props);
     this.state = { currentIndex: 0 };
     this.setPrev = this.setPrev.bind(this);

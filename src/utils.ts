@@ -1,9 +1,14 @@
-export const range = (min, max) => ({
-  succ: x => (x === max ? min : x + 1),
-  pred: x => (x === min ? max : x - 1)
+import { Person } from "./solution/state";
+
+export const range = (min: number, max: number) => ({
+  succ: (x: number) => (x === max ? min : x + 1),
+  pred: (x: number) => (x === min ? max : x - 1)
 });
 
-export const toRing = (xs, current) => {
+export const toRing = <T>(
+  xs: ReadonlyArray<T>,
+  current: T
+): { prev: T; next: T } => {
   const { succ, pred } = range(0, xs.length - 1);
   const currentIndex = xs.indexOf(current);
   return currentIndex >= 0
@@ -11,13 +16,13 @@ export const toRing = (xs, current) => {
         prev: xs[pred(currentIndex)],
         next: xs[succ(currentIndex)]
       }
-    : { prev: null, succ: null };
+    : { prev: null, next: null };
 };
 
-export const loadPeople = () =>
+export const loadPeople = (): Promise<Person[]> =>
   fetch("http://localhost:3000/people").then(res => res.json());
 
-export const savePerson = person =>
+export const savePerson = (person: Person): Promise<Person> =>
   fetch("http://localhost:3000/people/" + person.id, {
     method: "PUT",
     headers: {
