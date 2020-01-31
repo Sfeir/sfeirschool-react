@@ -1,18 +1,27 @@
 import React from "react";
 
+import { Person } from "../solution/state";
 import { PersonCard } from "../solution/PersonCard";
 
 // cycle through the people array when clicking the previous
 // and the next buttons. Look in ../utils.js for some utility
 // functions you may need.
 
-const Fab = ({ icon }) => (
+type FabProps = {
+  icon: string;
+};
+
+const Fab: React.FC<FabProps> = ({ icon }) => (
   <button className="mdc-fab mdc-fab--mini">
     <i className="rmwc-icon material-icons mdc-fab__icon">{icon}</i>
   </button>
 );
 
-export const Carousel = ({ people }) => (
+type CarouselProps = {
+  people: Person[];
+};
+
+export const Carousel: React.FC<CarouselProps> = ({ people }) => (
   <div className="flex-row">
     <Fab icon="skip_previous" />
     <div className="carousel">
@@ -23,5 +32,5 @@ export const Carousel = ({ people }) => (
 );
 
 // when you are done:
-// replce the local Fab with the Fab component from RMWC
+// replace the local Fab with the Fab component from RMWC
 // @see https://jamesmfriedman.github.io/rmwc/fabs
