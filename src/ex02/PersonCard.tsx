@@ -1,7 +1,9 @@
 import React from "react";
 import { Card, CardImage, CardHeader, CardInfo } from "./Card";
 
-export const PersonCard = () => (
+type PersonCardProps = {};
+
+export const PersonCard: React.FC<PersonCardProps> = () => (
   <Card>
     <CardImage
       url="https://randomuser.me/portraits/women/85.jpg"

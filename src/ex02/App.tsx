@@ -6,7 +6,11 @@ import { PersonCardModel } from "./PersonCardModel";
 import { PersonCard } from "./PersonCard";
 // import { PersonCard } from "../solution/PersonCard";
 
-export const App = ({ people }) => {
+type AppProps = {
+  people: unknown[];
+};
+
+export const App: React.FC<AppProps> = ({ people }) => {
   const randomPerson = people[Math.floor(Math.random() * people.length)];
 
   return (

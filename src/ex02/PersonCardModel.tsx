@@ -4,7 +4,7 @@ import React from "react";
 // and appropriate subcomponents of Card to be implemented.
 // define a person prop and replace static data
 
-export const PersonCardModel = () => (
+export const PersonCardModel: React.FC = () => (
   <section className="mdc-card">
     <div className="card-content content-type-person-info">
       <figure>
