@@ -1,6 +1,10 @@
 import React from "react";
 
-export function Card(props) {
+type CardProps = {
+  title: string;
+};
+
+export const Card: React.FunctionComponent<CardProps> = props => {
   return (
     <section className="mdc-card" style={{ width: 480 }}>
       <div style={{ padding: "1rem" }}>
@@ -8,4 +12,4 @@ export function Card(props) {
       </div>
     </section>
   );
-}
+};

@@ -7,7 +7,7 @@ import { Card } from "./Card";
 
 const message = "React @ SFEIR";
 
-export function App() {
+export const App: React.FunctionComponent = () => {
   return (
     <>
       <header>replace this header with the Header component</header>
@@ -16,4 +16,4 @@ export function App() {
       </main>
     </>
   );
-}
+};

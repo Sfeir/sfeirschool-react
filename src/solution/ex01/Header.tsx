@@ -2,7 +2,7 @@ import React from "react";
 
 import logo from "../../images/Header.logo.svg";
 
-export function Header() {
+export const Header: React.FunctionComponent = () => {
   return (
     <>
       <header className="mdc-top-app-bar">
@@ -15,4 +15,4 @@ export function Header() {
       <div className="mdc-top-app-bar--fixed-adjust" />
     </>
   );
-}
+};
