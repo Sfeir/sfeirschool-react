@@ -3,7 +3,11 @@ import { Fab } from "@rmwc/fab";
 
 import { range } from "../utils";
 
-export const Carousel = () => {
+type CarouselProps = {
+  children: React.ReactElement[];
+};
+
+export const Carousel: React.FC<CarouselProps> = () => {
   return (
     <div className="flex-row">
       <Fab icon="skip_previous" mini />

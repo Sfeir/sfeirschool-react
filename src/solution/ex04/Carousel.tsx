@@ -3,12 +3,16 @@ import { Fab } from "@rmwc/fab";
 
 import { range } from "../../utils";
 
-export const Carousel = ({ children }) => {
-  const childArray = React.Children.toArray(children);
+type CarouselProps = {
+  children: React.ReactElement[];
+};
+
+export const Carousel: React.FC<CarouselProps> = ({ children }) => {
+  const childArray = React.Children.toArray(children) as React.ReactElement[];
   const [currentIndex, setCurrentIndex] = useState(0);
   const { pred, succ } = range(0, childArray.length - 1);
 
-  const cards = [
+  const cards: [number, string][] = [
     [succ(currentIndex), "next"],
     [currentIndex, "current"],
     [pred(currentIndex), "prev"]
