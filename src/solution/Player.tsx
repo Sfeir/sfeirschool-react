@@ -5,7 +5,11 @@ import { Carousel } from "./Carousel";
 import { toPersonCard } from "./PersonCard";
 import { range } from "../utils";
 
-export const Player = ({ people }) => {
+type PlayerProps = {
+  people: People;
+};
+
+export const Player: React.FC<PlayerProps> = ({ people }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { pred, succ } = range(0, people.length - 1);
 
@@ -18,7 +22,13 @@ export const Player = ({ people }) => {
   return PlayerView({ triptych, onNext, onPrev });
 };
 
-export const PlayerView = ({
+type PlayerViewProps = {
+  triptych: (Person | string)[];
+  onNext: () => void;
+  onPrev: () => void;
+};
+
+export const PlayerView: React.FC<PlayerViewProps> = ({
   triptych = [],
   onNext = () => {},
   onPrev = () => {}

@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { useField as formikUseField, useFormikContext } from "formik";
+import {
+  useField as formikUseField,
+  useFormikContext,
+  FieldConfig
+} from "formik";
 
-export const useScheduler = (callback, interval) => {
+export const useScheduler = (callback: () => void, interval: number) => {
   const [running, setRunning] = useState(false);
-  const callbackRef = useRef();
+  const callbackRef = useRef<() => void>();
 
   useEffect(() => {
     callbackRef.current = callback;
@@ -24,8 +28,12 @@ export const useScheduler = (callback, interval) => {
   return { running, toggleRunning };
 };
 
-export const useField = (name, { label = name, validate } = {}) => {
-  const [field, meta] = formikUseField({ name, validate });
+export const useField = <T>(
+  name: string,
+  options: { label?: string } & Omit<FieldConfig<T>, "name"> = {}
+) => {
+  const { label, ...config } = options;
+  const [field, meta] = formikUseField({ name, ...config });
   const { isSubmitting } = useFormikContext();
 
   return {
