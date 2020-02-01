@@ -1,14 +1,19 @@
 import React, { useState, cloneElement } from "react";
 import { Fab } from "@rmwc/fab";
 import { range } from "../utils";
+import { Person } from "../solution/state";
 import { PersonCard } from "../solution/PersonCard";
 
-const Carousel = ({ children }) => {
-  const childArray = React.Children.toArray(children);
+type CarouselProps = {
+  children: React.ReactElement[];
+};
+
+const Carousel: React.FC<CarouselProps> = ({ children }) => {
+  const childArray = React.Children.toArray(children) as React.ReactElement[];
   const [currentIndex, setCurrentIndex] = useState(0);
   const { pred, succ } = range(0, childArray.length - 1);
 
-  const cards = [
+  const cards: [number, string][] = [
     [succ(currentIndex), "next"],
     [currentIndex, "current"],
     [pred(currentIndex), "prev"]
@@ -27,7 +32,11 @@ const Carousel = ({ children }) => {
   );
 };
 
-export const Player = ({ people }) => {
+type PlayerProps = {
+  people: Person[];
+};
+
+export const Player: React.FC<PlayerProps> = ({ people }) => {
   return (
     <>
       <main>

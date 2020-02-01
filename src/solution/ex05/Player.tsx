@@ -7,10 +7,19 @@ import React, {
 } from "react";
 import { Fab } from "@rmwc/fab";
 import { range } from "../../utils";
+import { Person } from "../state";
 import { PersonCard } from "../PersonCard";
 
-const Carousel = forwardRef(({ children }, ref) => {
-  const childArray = React.Children.toArray(children);
+type CarouselProps = {
+  children: React.ReactElement[];
+};
+
+interface CarouselApi {
+  next: () => void;
+}
+
+const Carousel = forwardRef<CarouselApi, CarouselProps>(({ children }, ref) => {
+  const childArray = React.Children.toArray(children) as React.ReactElement[];
   const [currentIndex, setCurrentIndex] = useState(0);
   const { pred, succ } = range(0, childArray.length - 1);
   const onPrev = () => setCurrentIndex(pred);
@@ -20,7 +29,7 @@ const Carousel = forwardRef(({ children }, ref) => {
     next: onNext
   }));
 
-  const cards = [
+  const cards: [number, string][] = [
     [succ(currentIndex), "next"],
     [currentIndex, "current"],
     [pred(currentIndex), "prev"]
@@ -39,8 +48,12 @@ const Carousel = forwardRef(({ children }, ref) => {
   );
 });
 
-export const Player = ({ people }) => {
-  const carousel = useRef();
+type PlayerProps = {
+  people: Person[];
+};
+
+export const Player: React.FC<PlayerProps> = ({ people }) => {
+  const carousel = useRef<CarouselApi>();
   const showNext = () => {
     carousel.current.next();
   };

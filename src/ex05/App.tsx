@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 
+import { Person } from "../solution/state";
 import { Header } from "../solution/Header";
 
 import { SearchableList } from "./SearchableList";
@@ -8,7 +9,11 @@ import { SearchableList } from "./SearchableList";
 import { Player } from "./Player";
 // import { Player } from "../solution/ex05/Player";
 
-export const App = ({ people }) => {
+type AppProps = {
+  people: Person[];
+};
+
+export const App: React.FC<AppProps> = ({ people }) => {
   const [showList, setShowList] = useState(true);
   const toggleView = () => setShowList(x => !x);
   const toggleIcon = showList ? "view_carousel" : "view_module";
