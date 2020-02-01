@@ -1,10 +1,10 @@
 import React, { createContext, useState, useEffect } from "react";
 import { loadPeople } from "../../utils";
 
-export const PeopleContext = createContext();
+export const PeopleContext = createContext<People>([]);
 
 export const PeopleProvider = ({ children }) => {
-  const [people, setPeople] = useState([]);
+  const [people, setPeople] = useState<People>([]);
 
   useEffect(() => {
     loadPeople().then(setPeople);

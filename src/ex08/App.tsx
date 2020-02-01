@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, RouteComponentProps } from "react-router-dom";
 
 import { Header, HeaderActionItem } from "../solution/Header";
 import { Loading } from "../solution/Loading";
@@ -9,8 +9,8 @@ import { SearchableList } from "../solution/SearchableList";
 import { Player } from "../solution/Player";
 import { Person } from "../solution/Person";
 
-export const App = () => {
-  const [people, setPeople] = useState([]);
+export const App: React.FC = () => {
+  const [people, setPeople] = useState<People>([]);
   useEffect(() => {
     loadPeople().then(setPeople);
   }, []);
@@ -32,7 +32,7 @@ export const App = () => {
           <Route path="/player" render={() => <Player people={people} />} />
           <Route
             path="/person/:id"
-            render={({ match }) => (
+            render={({ match }: RouteComponentProps<{ id: string }>) => (
               <Person person={people.find(p => p.id === match.params.id)} />
             )}
           />

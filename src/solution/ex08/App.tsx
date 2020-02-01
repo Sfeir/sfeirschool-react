@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, RouteComponentProps } from "react-router-dom";
 
 import { Header, HeaderActionItem } from "../Header";
 import { SearchableList } from "../SearchableList";
@@ -9,14 +9,16 @@ import { Loading } from "../Loading";
 
 import { PeopleContext, WithPeople } from "./PeopleContext";
 
-const ContextualList = () => {
+const ContextualList: React.FC = () => {
   const people = useContext(PeopleContext);
   return <SearchableList people={people} />;
 };
 
-const ContextualPlayer = () => <Player people={useContext(PeopleContext)} />;
+const ContextualPlayer: React.FC = () => (
+  <Player people={useContext(PeopleContext)} />
+);
 
-const ContextualPerson = ({ match }) => (
+const ContextualPerson = ({ match }: RouteComponentProps<{ id: string }>) => (
   <WithPeople>
     {people => {
       const person = people.find(p => p.id === match.params.id);
@@ -25,7 +27,7 @@ const ContextualPerson = ({ match }) => (
   </WithPeople>
 );
 
-export const App = () => {
+export const App: React.FC = () => {
   return (
     <>
       <Header>
