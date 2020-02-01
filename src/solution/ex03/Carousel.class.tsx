@@ -3,10 +3,9 @@ import { Fab } from "@rmwc/fab";
 
 import { range } from "../../utils";
 import { PersonCard } from "../PersonCard";
-import { Person } from "../state";
 
 type CarouselProps = {
-  people: Person[];
+  people: People;
 };
 
 type CarouselState = {

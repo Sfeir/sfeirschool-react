@@ -1,7 +1,6 @@
 import React, { useState, cloneElement } from "react";
 import { Fab } from "@rmwc/fab";
 import { range } from "../utils";
-import { Person } from "../solution/state";
 import { PersonCard } from "../solution/PersonCard";
 
 type CarouselProps = {
@@ -33,7 +32,7 @@ const Carousel: React.FC<CarouselProps> = ({ children }) => {
 };
 
 type PlayerProps = {
-  people: Person[];
+  people: People;
 };
 
 export const Player: React.FC<PlayerProps> = ({ people }) => {

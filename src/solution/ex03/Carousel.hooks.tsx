@@ -1,12 +1,11 @@
 import React, { useState, useMemo } from "react";
 import { Fab } from "@rmwc/fab";
 
-import { Person } from "../state";
 import { range } from "../../utils";
 import { PersonCard } from "../PersonCard";
 
 type CarouselProps = {
-  people: Person[];
+  people: People;
 };
 
 export const Carousel: React.FC<CarouselProps> = ({ people }) => {

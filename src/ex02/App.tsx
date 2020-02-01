@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Person } from "../solution/state";
 import { Header } from "../solution/Header";
 
 import { PersonCardModel } from "./PersonCardModel";
@@ -8,7 +7,7 @@ import { PersonCard } from "./PersonCard";
 // import { PersonCard } from "../solution/PersonCard";
 
 type AppProps = {
-  people: Person[];
+  people: People;
 };
 
 export const App: React.FC<AppProps> = ({ people }) => {

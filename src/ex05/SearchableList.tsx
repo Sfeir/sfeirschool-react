@@ -1,7 +1,6 @@
 import React from "react";
 import { TextField } from "@rmwc/textfield";
 
-import { Person } from "../solution/state";
 import { PersonCard } from "../solution/PersonCard";
 
 // hint: to check if a string contains some substring,
@@ -16,7 +15,7 @@ const toPersonCard = (person: Person) => (
 );
 
 type SearchableListProps = {
-  people: Person[];
+  people: People;
 };
 
 export const SearchableList: React.FC<SearchableListProps> = ({ people }) => {

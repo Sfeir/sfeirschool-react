@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Person } from "../solution/state";
 import { Header } from "../solution/Header";
 
 import { Carousel } from "./Carousel";
@@ -8,7 +7,7 @@ import { Carousel } from "./Carousel";
 // import { Carousel } from "../solution/ex03/Carousel.hooks";
 
 type AppProps = {
-  people: Person[];
+  people: People;
 };
 
 export const App: React.FC<AppProps> = ({ people }) => (

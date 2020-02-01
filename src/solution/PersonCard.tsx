@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Card, CardImage, CardHeader, CardInfo, CardContent } from "./Card";
 import { useConfig } from "./Config";
 import { withPersonFromPersonId } from "./connect";
-import { Person } from "./state";
 
 type PersonCardProps = {
   person: Person;

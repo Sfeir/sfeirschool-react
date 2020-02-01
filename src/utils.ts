@@ -1,5 +1,3 @@
-import { Person } from "./solution/state";
-
 export const range = (min: number, max: number) => ({
   succ: (x: number) => (x === max ? min : x + 1),
   pred: (x: number) => (x === min ? max : x - 1)
@@ -19,7 +17,7 @@ export const toRing = <T>(
     : { prev: null, next: null };
 };
 
-export const loadPeople = (): Promise<Person[]> =>
+export const loadPeople = (): Promise<People> =>
   fetch("http://localhost:3000/people").then(res => res.json());
 
 export const savePerson = (person: Person): Promise<Person> =>

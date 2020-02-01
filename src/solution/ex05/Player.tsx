@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import { Fab } from "@rmwc/fab";
 import { range } from "../../utils";
-import { Person } from "../state";
 import { PersonCard } from "../PersonCard";
 
 type CarouselProps = {
@@ -49,7 +48,7 @@ const Carousel = forwardRef<CarouselApi, CarouselProps>(({ children }, ref) => {
 });
 
 type PlayerProps = {
-  people: Person[];
+  people: People;
 };
 
 export const Player: React.FC<PlayerProps> = ({ people }) => {

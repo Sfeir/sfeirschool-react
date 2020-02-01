@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { TopAppBarActionItem } from "@rmwc/top-app-bar";
 
-import { Person } from "../state";
 import { Header } from "../Header";
 import { PersonCard } from "../PersonCard";
 import { Carousel } from "./Carousel";
 
 type AppProps = {
-  people: Person[];
+  people: People;
 };
 
 export const App: React.FC<AppProps> = ({ people }) => {

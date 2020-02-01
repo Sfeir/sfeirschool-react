@@ -2,18 +2,6 @@ import { createSelector } from "reselect";
 import { RSAA, RSAAAction } from "redux-api-middleware";
 import { toRing } from "../utils";
 
-export type Person = {
-  id: string;
-  firstname: string;
-  lastname: string;
-  position: string;
-  phone: string;
-  email: string;
-  photo: string;
-  managerId: string;
-  manager: string;
-};
-
 export type State = Readonly<{
   people: Readonly<{
     map: Readonly<{ [key: string]: Readonly<Person> }>;
@@ -37,7 +25,7 @@ export const SetCurrentPerson = (personId: string) =>
 export const SetNextPerson = () => ({ type: "SET_NEXT_PERSON" } as const);
 export const SetPrevPerson = () => ({ type: "SET_PREV_PERSON" } as const);
 
-export const LoadPeople = (): RSAAAction<State, Person[]> => ({
+export const LoadPeople = (): RSAAAction<State, People> => ({
   [RSAA]: {
     endpoint: "http://localhost:3000/people",
     method: "GET",
@@ -62,7 +50,7 @@ export type Action =
   | ReturnType<typeof SetCurrentPerson>
   | ReturnType<typeof SetNextPerson>
   | ReturnType<typeof SetPrevPerson>
-  | { type: "SET_PEOPLE"; payload: Person[] }
+  | { type: "SET_PEOPLE"; payload: People }
   | { type: "SET_PERSON"; payload: Person };
 
 /////////////////////////////////////////////////
@@ -93,7 +81,7 @@ export const saveToSession = ({ query, current }: State): void => {
 
 const onSetPeople = (
   state: State,
-  { payload: people }: { payload: Person[] }
+  { payload: people }: { payload: People }
 ): State => {
   const map = Object.assign({}, ...people.map(p => ({ [p.id]: p })));
   const all = people.map(p => p.id);

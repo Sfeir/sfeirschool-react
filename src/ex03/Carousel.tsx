@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Person } from "../solution/state";
 import { PersonCard } from "../solution/PersonCard";
 
 // cycle through the people array when clicking the previous
@@ -18,7 +17,7 @@ const Fab: React.FC<FabProps> = ({ icon }) => (
 );
 
 type CarouselProps = {
-  people: Person[];
+  people: People;
 };
 
 export const Carousel: React.FC<CarouselProps> = ({ people }) => (
