@@ -17,7 +17,9 @@ import {
 
 const ConnectedList = withFilteredPeopleIds(SearchableListView);
 const ConnectedPlayer = withPeopleTriptych(PlayerView);
-const ConnectedPerson = withPersonFromPersonId(withPersonHandlers(Person));
+const ConnectedPerson = withPersonFromPersonId(
+  withPersonHandlers(Person as any)
+);
 
 const AppView: React.FC<{
   loading: boolean;

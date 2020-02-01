@@ -3,7 +3,7 @@ import { Card, CardContent, CardActions, CardAction } from "../solution/Card";
 import { TextField } from "@rmwc/textfield";
 import { Select } from "@rmwc/select";
 
-const PersonFields = () => {
+const PersonFields: React.FC = () => {
   return (
     <CardContent type="person-form">
       <TextField label="first name" />
@@ -24,7 +24,11 @@ const PersonFields = () => {
   );
 };
 
-export const PersonForm = ({ person }) => {
+type PersonFormProps = {
+  person: Person;
+};
+
+export const PersonForm: React.FC<PersonFormProps> = ({ person }) => {
   return (
     <Card>
       <form>

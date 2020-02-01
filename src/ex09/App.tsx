@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, RouteComponentProps } from "react-router-dom";
 
 import { Header, HeaderActionItem } from "../solution/Header";
 import { SearchableList } from "../solution/SearchableList";
@@ -9,23 +9,25 @@ import { Loading } from "../solution/Loading";
 import { Person } from "./EditablePerson";
 import { PeopleContext } from "./PeopleContext";
 
-const ContextualList = () => {
+const ContextualList: React.FC = () => {
   const people = useContext(PeopleContext);
   return <SearchableList people={people} />;
 };
 
-const ContextualPlayer = () => {
+const ContextualPlayer: React.FC = () => {
   const people = useContext(PeopleContext);
   return <Player people={people} />;
 };
 
-const ContextualPerson = ({ match }) => {
+const ContextualPerson: React.FC<RouteComponentProps<{ id: string }>> = ({
+  match
+}) => {
   const people = useContext(PeopleContext);
   const person = people.find(p => p.id === match.params.id);
   return <Person person={person} />;
 };
 
-export const App = () => {
+export const App: React.FC = () => {
   const people = useContext(PeopleContext);
   return (
     <>

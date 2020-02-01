@@ -1,17 +1,26 @@
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardImage, CardHeader, CardInfo, CardContent } from "./Card";
+import {
+  Card,
+  CardImage,
+  CardHeader,
+  CardInfo,
+  CardContent,
+  CardActions,
+  CardAction
+} from "./Card";
 import { useConfig } from "./Config";
 import { withPersonFromPersonId } from "./connect";
 
 type PersonCardProps = {
   person: Person;
+  actions?: { label: string; onClick: () => void }[];
   className?: string;
 };
 
 const PersonCard: React.FC<PersonCardProps> = ({
   person,
-  children,
+  actions,
   className
 }) => {
   const { useRouter } = useConfig();
@@ -51,7 +60,13 @@ const PersonCard: React.FC<PersonCardProps> = ({
           </CardInfo>
         )}
       </CardContent>
-      {children}
+      {actions && (
+        <CardActions>
+          {actions.map(({ label, onClick }) => (
+            <CardAction onClick={onClick}>{label}</CardAction>
+          ))}
+        </CardActions>
+      )}
     </Card>
   );
 };

@@ -7,10 +7,10 @@ import { Prompt } from "react-router-dom";
 import { Card, CardContent, CardActions, CardAction } from "./Card";
 import { useField } from "./hooks";
 
-const required = value => (!!value ? null : "required");
+const required = (value: any) => (!!value ? null : "required");
 
 const validate = ({ phone, email }) => {
-  const errors = {};
+  const errors: { phone?: string; email?: string } = {};
   if (!(phone || email)) {
     errors.phone = errors.email =
       "provide either a phone number or an email address";
@@ -18,18 +18,18 @@ const validate = ({ phone, email }) => {
   return errors;
 };
 
-const PersonFields = () => {
-  const firstname = useField("firstname", {
+const PersonFields: React.FC = () => {
+  const firstname = useField<string>("firstname", {
     label: "first name",
     validate: required
   });
-  const lastname = useField("lastname", {
+  const lastname = useField<string>("lastname", {
     label: "last name",
     validate: required
   });
-  const position = useField("position");
-  const phone = useField("phone");
-  const email = useField("email");
+  const position = useField<string>("position");
+  const phone = useField<string>("phone");
+  const email = useField<string>("email");
 
   return (
     <CardContent type="person-form">
@@ -51,10 +51,20 @@ const PersonFields = () => {
   );
 };
 
-export const PersonForm = ({ person, onSubmit, onReset }) => {
+type PersonFormProps = {
+  person: Person;
+  onSubmit: (p: Person) => void;
+  onReset: (p: Person) => void;
+};
+
+export const PersonForm: React.FC<PersonFormProps> = ({
+  person,
+  onSubmit,
+  onReset
+}) => {
   return (
     <Card>
-      <Formik
+      <Formik<Person>
         initialValues={person}
         onSubmit={onSubmit}
         onReset={onReset}

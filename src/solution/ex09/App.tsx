@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, RouteComponentProps } from "react-router-dom";
 
 import { Header, HeaderActionItem } from "../Header";
 import { withPeople, usePeople } from "./PeopleContext";
@@ -11,13 +11,15 @@ import { Loading } from "../Loading";
 const ContextualList = withPeople(SearchableList);
 const ContextualPlayer = withPeople(Player);
 
-const ContextualPerson = ({ match }) => {
+const ContextualPerson: React.FC<RouteComponentProps<{ id: string }>> = ({
+  match
+}) => {
   const { getPersonById, updatePerson } = usePeople();
   const person = getPersonById(match.params.id);
   return <Person person={person} onUpdate={updatePerson} />;
 };
 
-export const App = () => {
+export const App: React.FC = () => {
   const { loading } = usePeople();
   return (
     <>
