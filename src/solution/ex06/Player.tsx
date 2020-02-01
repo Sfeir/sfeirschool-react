@@ -4,7 +4,11 @@ import { range } from "../../utils";
 import { PersonCard } from "../PersonCard";
 import { Carousel } from "../Carousel";
 
-export const Player = ({ people }) => {
+type PlayerProps = {
+  people: People;
+};
+
+export const Player: React.FC<PlayerProps> = ({ people }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { pred, succ } = range(0, people.length - 1);
 

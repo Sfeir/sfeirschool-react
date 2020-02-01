@@ -1,12 +1,18 @@
 import React, { cloneElement } from "react";
 import { Fab } from "@rmwc/fab";
 
-export const Carousel = ({
+type CarouselProps = {
+  children: React.ReactElement[];
+  onNext?: () => void;
+  onPrev?: () => void;
+};
+
+export const Carousel: React.FC<CarouselProps> = ({
   children,
   onNext = () => {},
   onPrev = () => {}
 }) => {
-  const childArray = React.Children.toArray(children);
+  const childArray = React.Children.toArray(children) as React.ReactElement[];
 
   if (childArray.length !== 3) {
     console.warn(
@@ -16,11 +22,13 @@ export const Carousel = ({
   }
 
   const [prev, current, next] = childArray;
-  const childrenWithClass = [
+  const childrenWithClass = ([
     [next, "next"],
     [current, "current"],
     [prev, "prev"]
-  ].map(([child, className]) => cloneElement(child, { className }));
+  ] as [React.ReactElement, string][]).map(([child, className]) =>
+    cloneElement(child, { className })
+  );
 
   return (
     <div className="flex-row">
