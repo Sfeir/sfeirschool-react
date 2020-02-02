@@ -4,7 +4,7 @@ import { PersonForm } from "./PersonForm";
 
 type PersonProps = {
   person: Person;
-  onUpdate: (p: Person) => Promise<void>;
+  onUpdate: (p: Person) => Promise<any>;
   onDisplay?: (id: string) => void;
 };
 

@@ -45,6 +45,7 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "rmwc": "^5.7.2",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "utility-types": "^3.10.0"
   }
 }

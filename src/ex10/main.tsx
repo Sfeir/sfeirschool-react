@@ -10,7 +10,7 @@ import { App } from "./App";
 import { reducer } from "./state";
 // import { reducer } from "../solution/ex10/state";
 
-const store = createStore(reducer, devToolsEnhancer());
+const store = createStore(reducer, devToolsEnhancer({}));
 
 render(
   <Config useRouter>
