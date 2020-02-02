@@ -13,9 +13,8 @@ export const withLoading = connect(
   (dispatch: Dispatch<Action>) => ({})
 );
 
-// provide person from state using the personId prop
-// and the onUpdate callback dispatching SET_PERSON
-export const withPerson = connect(
-  (state: State, ownProps: { personId: string }) => ({}),
-  (dispatch: Dispatch<Action>) => ({})
-);
+// provide person from state using useSelector
+export const usePerson = (id: string) => null;
+
+// and the onUpdate callback dispatching SET_PERSON using useDispatch
+export const useUpdatePerson = () => (person: Person) => Promise.reject();

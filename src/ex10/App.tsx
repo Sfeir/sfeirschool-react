@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, RouteComponentProps } from "react-router-dom";
 
 import { Header, HeaderActionItem } from "../solution/Header";
 import { SearchableList } from "../solution/SearchableList";
@@ -7,12 +7,21 @@ import { Player } from "../solution/Player";
 import { Person } from "../solution/EditablePerson";
 import { Loading } from "../solution/Loading";
 
-import { withLoading, withPeople, withPerson } from "./connect";
-// import { withLoading, withPeople, withPerson } from "../solution/ex10/connect";
+import { withLoading, withPeople, usePerson, useUpdatePerson } from "./connect";
+
+// import {
+//   withLoading,
+//   withPeople,
+//   usePerson,
+//   useUpdatePerson
+// } from "../solution/ex10/connect";
 
 const ConnectedList: any = withPeople(SearchableList);
 const ConnectedPlayer: any = withPeople(Player);
-const ConnectedPerson: any = withPerson(Person);
+
+const ConnectedPerson: React.FC<{ personId: string }> = ({ personId }) => (
+  <Person person={usePerson(personId)} onUpdate={useUpdatePerson()} />
+);
 
 type AppProps = {
   loadPeople?: () => any;
@@ -36,7 +45,7 @@ export const App = withLoading<React.FC<AppProps>>(
             <Route path="/player" render={() => <ConnectedPlayer />} />
             <Route
               path="/person/:id"
-              render={({ match }) => (
+              render={({ match }: RouteComponentProps<{ id: string }>) => (
                 <ConnectedPerson personId={match.params.id} />
               )}
             />
