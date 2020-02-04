@@ -4,6 +4,7 @@ import { useScheduler } from "./hooks";
 import { Carousel } from "./Carousel";
 import { toPersonCard } from "./PersonCard";
 import { range } from "../utils";
+import { useTriptych, useStateApi } from "./state";
 
 type PlayerProps = {
   people: People;
@@ -19,6 +20,12 @@ export const Player: React.FC<PlayerProps> = ({ people }) => {
     i => people[i]
   );
 
+  return PlayerView({ triptych, onNext, onPrev });
+};
+
+export const ConnectedPlayer: React.FC = () => {
+  const triptych = useTriptych();
+  const { setPrev: onPrev, setNext: onNext } = useStateApi();
   return PlayerView({ triptych, onNext, onPrev });
 };
 

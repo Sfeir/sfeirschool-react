@@ -10,6 +10,16 @@ import { Config } from "./Config";
 import { App } from "./App";
 import { reducer, loadFromSession, saveToSession } from "./state";
 
+// const effectMiddleware = (
+//   runner: (d: Dispatch<Action>) => (s: State, a: Action) => void
+// ) => ({ dispatch, getState }: MiddlewareAPI<Dispatch<Action>, State>) => {
+//   const run = runner(dispatch);
+//   return (next: Dispatch<Action>) => (action: Action) => {
+//     next(action);
+//     run(getState(), action);
+//   };
+// };
+
 const store = createStore(
   reducer,
   loadFromSession(),

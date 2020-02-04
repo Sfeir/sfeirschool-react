@@ -1,6 +1,12 @@
 import React, { useState, useLayoutEffect } from "react";
 import { TextField } from "@rmwc/textfield";
 
+import {
+  useQuery,
+  useCurrentId,
+  useFilteredPeople,
+  useStateApi
+} from "./state";
 import { toPersonCard } from "./PersonCard";
 
 const nameContains = (query: string) => {
@@ -14,8 +20,16 @@ export const SearchableList: React.FC<{ people: People }> = ({ people }) => {
   return SearchableListView({ people: filteredPeople, query, setQuery });
 };
 
+export const ConnectedList: React.FC = () => {
+  const query = useQuery();
+  const currentId = useCurrentId();
+  const people = useFilteredPeople();
+  const { setQuery } = useStateApi();
+  return SearchableListView({ people, currentId, query, setQuery });
+};
+
 export const SearchableListView: React.FC<{
-  people: any[];
+  people: (Person | string)[];
   currentId?: string;
   query: string;
   setQuery: (v: string) => void;

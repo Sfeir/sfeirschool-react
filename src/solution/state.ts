@@ -1,57 +1,28 @@
+import { DeepReadonly } from "utility-types";
 import { createSelector } from "reselect";
-import { RSAA, RSAAAction } from "redux-api-middleware";
-import { toRing } from "../utils";
+import { toRing, loadPeople, savePerson } from "../utils";
+import { Dispatch } from "redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useMemo } from "react";
 
-export type State = Readonly<{
-  people: Readonly<{
-    map: Readonly<{ [key: string]: Readonly<Person> }>;
-    all: ReadonlyArray<string> | null;
-  }>;
+export type State = DeepReadonly<{
+  people: {
+    map: { [key: string]: Person };
+    all: string[] | null;
+  };
   query: string;
   current: string | null;
 }>;
 
-///////////////////////////////////////////////
-
-export const SetQuery = (query: string) =>
-  ({ type: "SET_QUERY", query } as const);
-
-export const SetCurrentPerson = (personId: string) =>
-  ({
-    type: "SET_CURRENT_PERSON",
-    personId
-  } as const);
-
-export const SetNextPerson = () => ({ type: "SET_NEXT_PERSON" } as const);
-export const SetPrevPerson = () => ({ type: "SET_PREV_PERSON" } as const);
-
-export const LoadPeople = (): RSAAAction<State, People> => ({
-  [RSAA]: {
-    endpoint: "http://localhost:3000/people",
-    method: "GET",
-    types: ["LOAD_PEOPLE", "SET_PEOPLE", "LOAD_PEOPLE_FAILED"]
-  }
-});
-
-export const SavePerson = (person: Person): RSAAAction<State, Person> => ({
-  [RSAA]: {
-    endpoint: `http://localhost:3000/people/${person.id}`,
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(person),
-    types: ["SAVE_PERSON", "SET_PERSON", "SAVE_PERSON_FAILED"]
-  }
-});
-
 export type Action =
-  | ReturnType<typeof SetQuery>
-  | ReturnType<typeof SetCurrentPerson>
-  | ReturnType<typeof SetNextPerson>
-  | ReturnType<typeof SetPrevPerson>
-  | { type: "SET_PEOPLE"; payload: People }
-  | { type: "SET_PERSON"; payload: Person };
+  // | { type: "LOAD_PEOPLE" }
+  | { type: "SET_PEOPLE"; people: People }
+  // | { type: "SAVE_PERSON"; person: Person }
+  | { type: "SET_PERSON"; person: Person }
+  | { type: "SET_QUERY"; query: string }
+  | { type: "SET_CURRENT_PERSON"; personId: string }
+  | { type: "SET_NEXT_PERSON" }
+  | { type: "SET_PREV_PERSON" };
 
 /////////////////////////////////////////////////
 
@@ -79,10 +50,7 @@ export const saveToSession = ({ query, current }: State): void => {
   );
 };
 
-const onSetPeople = (
-  state: State,
-  { payload: people }: { payload: People }
-): State => {
+const onSetPeople = (state: State, { people }: { people: People }): State => {
   const map = Object.assign({}, ...people.map(p => ({ [p.id]: p })));
   const all = people.map(p => p.id);
   const current =
@@ -99,10 +67,7 @@ const onSetPeople = (
   };
 };
 
-const onSetPerson = (
-  state: State,
-  { payload: person }: { payload: Person }
-): State => ({
+const onSetPerson = (state: State, { person }: { person: Person }): State => ({
   ...state,
   people: {
     ...state.people,
@@ -150,7 +115,7 @@ export const reducer = (
   }
 };
 
-export const getPersonById = (state: State, personId: string) =>
+export const getPersonById = (personId: string) => (state: State) =>
   state.people.map[personId];
 
 export const getPeopleIds = (state: State) => state.people.all || [];
@@ -184,3 +149,63 @@ export const getFilteredPeopleIds = createSelector(
       .filter(nameContains(query))
       .map(p => p.id)
 );
+
+//////////////////////////////////////////////
+
+export const useQuery = () => useSelector(getQuery);
+export const useCurrentId = () => useSelector(getCurrent);
+export const usePerson = (id: string) => useSelector(getPersonById(id));
+
+export const useTriptych = () => {
+  const current = useSelector(getCurrent);
+  const ids = useSelector(getPeopleIds);
+  return useMemo(() => {
+    const { prev, next } = toRing(ids, current);
+    return [prev, current, next];
+  }, [current, ids]);
+};
+
+export const useFilteredPeople = () => {
+  const ids = useSelector(getPeopleIds);
+  const map = useSelector(getPeopleMap);
+  const query = useSelector(getQuery);
+  return useMemo(
+    () =>
+      ids
+        .map(id => map[id])
+        .filter(nameContains(query))
+        .map(p => p.id),
+    [ids, map, query]
+  );
+};
+
+export const useStateApi = () => {
+  const dispatch = useDispatch<Dispatch<Action>>();
+  return useMemo(
+    () => ({
+      loadPeople: () =>
+        loadPeople().then(people => dispatch({ type: "SET_PEOPLE", people })),
+      savePerson: (person: Person) =>
+        savePerson(person).then(person =>
+          dispatch({ type: "SET_PERSON", person })
+        ),
+      setCurrent: (personId: string) =>
+        dispatch({ type: "SET_CURRENT_PERSON", personId }),
+      setNext: () => dispatch({ type: "SET_NEXT_PERSON" }),
+      setPrev: () => dispatch({ type: "SET_PREV_PERSON" }),
+      setQuery: (query: string) => dispatch({ type: "SET_QUERY", query })
+    }),
+    [dispatch]
+  );
+};
+
+//////////////////////////////////////////////
+
+// export const effectRunner = (dispatch: Dispatch<Action>) => (
+//   state: State,
+//   action: Action
+// ) => {
+//   switch (action.type) {
+//     case "LOAD_PEOPLE":
+//   }
+// };

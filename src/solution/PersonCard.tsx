@@ -10,7 +10,7 @@ import {
   CardAction
 } from "./Card";
 import { useConfig } from "./Config";
-import { withPersonFromPersonId } from "./connect";
+import { usePerson } from "./state";
 
 type PersonCardProps = {
   person: Person;
@@ -63,7 +63,9 @@ const PersonCard: React.FC<PersonCardProps> = ({
       {actions && (
         <CardActions>
           {actions.map(({ label, onClick }) => (
-            <CardAction onClick={onClick}>{label}</CardAction>
+            <CardAction onClick={onClick} key={label}>
+              {label}
+            </CardAction>
           ))}
         </CardActions>
       )}
@@ -72,7 +74,12 @@ const PersonCard: React.FC<PersonCardProps> = ({
 };
 
 const MemoizedPersonCard = memo(PersonCard);
-const ConnectedPersonCard = withPersonFromPersonId(PersonCard);
+const ConnectedPersonCard: React.FC<{
+  personId: string;
+  className?: string;
+}> = ({ personId, className }) => (
+  <PersonCard person={usePerson(personId)} className={className} />
+);
 
 const toPersonCard = (person: Person | string) =>
   typeof person === "string" ? (

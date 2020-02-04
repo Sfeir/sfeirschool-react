@@ -1,31 +1,22 @@
 import React, { useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, RouteComponentProps } from "react-router-dom";
 
 import { Header, HeaderActionItem } from "./Header";
-import { SearchableListView } from "./SearchableList";
-import { PlayerView } from "./Player";
-import { Person } from "./EditablePerson";
+import { ConnectedList } from "./SearchableList";
+import { ConnectedPlayer } from "./Player";
+import { ConnectedPerson } from "./EditablePerson";
 import { Loading } from "./Loading";
 
-import {
-  withLoadPeople,
-  withPersonFromPersonId,
-  withPersonHandlers,
-  withFilteredPeopleIds,
-  withPeopleTriptych
-} from "./connect";
+import { useSelector } from "react-redux";
+import { getPeopleLoading, useStateApi } from "./state";
 
-const ConnectedList = withFilteredPeopleIds(SearchableListView);
-const ConnectedPlayer = withPeopleTriptych(PlayerView);
-const ConnectedPerson = withPersonFromPersonId(
-  withPersonHandlers(Person as any)
-);
-
-const AppView: React.FC<{
+type AppProps = {
   loading: boolean;
   loadPeople: () => void;
-}> = ({ loadPeople, loading }) => {
-  useEffect(loadPeople, [loadPeople]);
+};
+
+const AppView: React.FC<AppProps> = ({ loadPeople, loading }) => {
+  useEffect(() => void loadPeople(), [loadPeople]);
   return (
     <>
       <Header>
@@ -40,7 +31,7 @@ const AppView: React.FC<{
           <Route path="/player" component={ConnectedPlayer} />
           <Route
             path="/person/:id"
-            render={({ match }) => (
+            render={({ match }: RouteComponentProps<{ id: string }>) => (
               <ConnectedPerson personId={match.params.id} />
             )}
           />
@@ -51,4 +42,9 @@ const AppView: React.FC<{
   );
 };
 
-export const App = withLoadPeople(AppView);
+export const App: React.FC = () => (
+  <AppView
+    loading={useSelector(getPeopleLoading)}
+    loadPeople={useStateApi().loadPeople}
+  />
+);

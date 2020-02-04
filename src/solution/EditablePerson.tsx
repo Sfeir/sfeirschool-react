@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PersonCard } from "./PersonCard";
 import { PersonForm } from "./PersonForm";
+import { useStateApi, usePerson } from "./state";
 
 type PersonProps = {
   person: Person;
@@ -30,4 +31,12 @@ export const Person: React.FC<PersonProps> = ({
   );
 
   return <main>{person ? card : "404 - this person could not be found"}</main>;
+};
+
+export const ConnectedPerson: React.FC<{ personId: string }> = ({
+  personId
+}) => {
+  const person = usePerson(personId);
+  const { setCurrent: onDisplay, savePerson: onUpdate } = useStateApi();
+  return Person({ person, onUpdate, onDisplay });
 };
