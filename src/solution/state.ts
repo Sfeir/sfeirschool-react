@@ -1,9 +1,7 @@
 import { DeepReadonly } from "utility-types";
 import { createSelector } from "reselect";
-import { toRing, loadPeople, savePerson } from "../utils";
+import { toRing, loadPeople } from "../utils";
 import { Dispatch } from "redux";
-import { useSelector, useDispatch } from "react-redux";
-import { useMemo } from "react";
 
 export type State = DeepReadonly<{
   people: {
@@ -15,7 +13,7 @@ export type State = DeepReadonly<{
 }>;
 
 export type Action =
-  // | { type: "LOAD_PEOPLE" }
+  | { type: "LOAD_PEOPLE" }
   | { type: "SET_PEOPLE"; people: People }
   // | { type: "SAVE_PERSON"; person: Person }
   | { type: "SET_PERSON"; person: Person }
@@ -129,9 +127,12 @@ export const getQuery = (state: State) => state.query;
 export const getCurrent = (state: State) => state.current;
 
 export const getTriptych = createSelector(
+  getPeopleIds,
   getCurrent,
-  createSelector(getPeopleIds, getCurrent, toRing),
-  (curr, { next, prev }) => [prev, curr, next]
+  (ids, curr) => {
+    const { prev, next } = toRing(ids, curr);
+    return [prev, curr, next];
+  }
 );
 
 const nameContains = (query: string) => {
@@ -139,7 +140,7 @@ const nameContains = (query: string) => {
   return (p: Person): boolean => re.test(p.firstname) || re.test(p.lastname);
 };
 
-export const getFilteredPeopleIds = createSelector(
+export const getFilteredPeople = createSelector(
   getPeopleIds,
   getPeopleMap,
   getQuery,
@@ -152,64 +153,13 @@ export const getFilteredPeopleIds = createSelector(
 
 //////////////////////////////////////////////
 
-export const useQuery = () => useSelector(getQuery);
-export const useCurrentId = () => useSelector(getCurrent);
-export const usePerson = (id: string) => useSelector(getPersonById(id));
-
-export const useTriptych = () => {
-  const current = useSelector(getCurrent);
-  const ids = useSelector(getPeopleIds);
-  return useMemo(() => {
-    const { prev, next } = toRing(ids, current);
-    return [prev, current, next];
-  }, [current, ids]);
+export const effectRunner = (dispatch: Dispatch<Action>) => (
+  state: State,
+  action: Action
+) => {
+  switch (action.type) {
+    case "LOAD_PEOPLE":
+      loadPeople().then(people => dispatch({ type: "SET_PEOPLE", people }));
+      break;
+  }
 };
-
-// export const useTriptych2 = () => useSelector(getTriptych);
-
-export const useFilteredPeople = () => {
-  const ids = useSelector(getPeopleIds);
-  const map = useSelector(getPeopleMap);
-  const query = useSelector(getQuery);
-  return useMemo(
-    () =>
-      ids
-        .map(id => map[id])
-        .filter(nameContains(query))
-        .map(p => p.id),
-    [ids, map, query]
-  );
-};
-
-// export const useFilteredPeople2 = () => useSelector(getFilteredPeopleIds);
-
-export const useStateApi = () => {
-  const dispatch = useDispatch<Dispatch<Action>>();
-  return useMemo(
-    () => ({
-      loadPeople: () =>
-        loadPeople().then(people => dispatch({ type: "SET_PEOPLE", people })),
-      savePerson: (person: Person) =>
-        savePerson(person).then(person =>
-          dispatch({ type: "SET_PERSON", person })
-        ),
-      setCurrent: (personId: string) =>
-        dispatch({ type: "SET_CURRENT_PERSON", personId }),
-      setNext: () => dispatch({ type: "SET_NEXT_PERSON" }),
-      setPrev: () => dispatch({ type: "SET_PREV_PERSON" }),
-      setQuery: (query: string) => dispatch({ type: "SET_QUERY", query })
-    }),
-    [dispatch]
-  );
-};
-
-//////////////////////////////////////////////
-
-// export const effectRunner = (dispatch: Dispatch<Action>) => (
-//   state: State,
-//   action: Action
-// ) => {
-//   switch (action.type) {
-//     case "LOAD_PEOPLE":
-//   }
-// };

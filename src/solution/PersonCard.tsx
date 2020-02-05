@@ -10,7 +10,7 @@ import {
   CardAction
 } from "./Card";
 import { useConfig } from "./Config";
-import { usePerson } from "./state";
+import { usePerson } from "./connect";
 
 type PersonCardProps = {
   person: Person;

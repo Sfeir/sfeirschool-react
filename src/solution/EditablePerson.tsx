@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PersonCard } from "./PersonCard";
 import { PersonForm } from "./PersonForm";
-import { useStateApi, usePerson } from "./state";
+import { useStateApi, usePerson } from "./connect";
 
 type PersonProps = {
   person: Person;

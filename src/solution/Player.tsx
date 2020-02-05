@@ -4,7 +4,7 @@ import { useScheduler } from "./hooks";
 import { Carousel } from "./Carousel";
 import { toPersonCard } from "./PersonCard";
 import { range } from "../utils";
-import { useTriptych, useStateApi } from "./state";
+import { useTriptych, useStateApi } from "./connect";
 
 type PlayerProps = {
   people: Readonly<People>;

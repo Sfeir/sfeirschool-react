@@ -2,8 +2,6 @@ import React from "react";
 import { render } from "react-dom";
 import { createStore, applyMiddleware, Dispatch, MiddlewareAPI } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import thunkMiddleware from "redux-thunk";
-import { apiMiddleware } from "redux-api-middleware";
 import { Provider } from "react-redux";
 
 import { Config } from "./Config";
@@ -13,7 +11,8 @@ import {
   loadFromSession,
   saveToSession,
   Action,
-  State
+  State,
+  effectRunner
 } from "./state";
 
 const effectMiddleware = (
@@ -29,7 +28,7 @@ const effectMiddleware = (
 const store = createStore(
   reducer,
   loadFromSession(),
-  composeWithDevTools(applyMiddleware(thunkMiddleware, apiMiddleware))
+  composeWithDevTools(applyMiddleware(effectMiddleware(effectRunner)))
 );
 
 store.subscribe(() => {

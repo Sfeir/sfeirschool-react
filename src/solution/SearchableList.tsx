@@ -6,7 +6,7 @@ import {
   useCurrentId,
   useFilteredPeople,
   useStateApi
-} from "./state";
+} from "./connect";
 import { toPersonCard } from "./PersonCard";
 
 const nameContains = (query: string) => {

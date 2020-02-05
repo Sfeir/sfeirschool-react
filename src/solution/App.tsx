@@ -7,8 +7,7 @@ import { ConnectedPlayer } from "./Player";
 import { ConnectedPerson } from "./EditablePerson";
 import { Loading } from "./Loading";
 
-import { useSelector } from "react-redux";
-import { getPeopleLoading, useStateApi } from "./state";
+import { useIsLoading, useStateApi } from "./connect";
 
 type AppProps = {
   loading: boolean;
@@ -43,8 +42,5 @@ const AppView: React.FC<AppProps> = ({ loadPeople, loading }) => {
 };
 
 export const App: React.FC = () => (
-  <AppView
-    loading={useSelector(getPeopleLoading)}
-    loadPeople={useStateApi().loadPeople}
-  />
+  <AppView loading={useIsLoading()} loadPeople={useStateApi().loadPeople} />
 );
