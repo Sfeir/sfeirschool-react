@@ -47,3 +47,19 @@ export const useField = <T>(
     }
   };
 };
+
+export const useTriggerOnChange = <T>(val: T, v1: T, v2: T, cb: () => void) => {
+  const valRef = useRef<T>();
+  const cbRef = useRef<() => void>();
+
+  useEffect(() => {
+    cbRef.current = cb;
+  }, [cb]);
+
+  useEffect(() => {
+    if (valRef.current === v1 && val === v2) {
+      cbRef.current();
+    }
+    valRef.current = val;
+  }, [val, v1, v2]);
+};

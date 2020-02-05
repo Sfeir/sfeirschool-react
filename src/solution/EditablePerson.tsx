@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { PersonCard } from "./PersonCard";
 import { PersonForm } from "./PersonForm";
 import { useStateApi, usePerson, useSaving } from "./connect";
+import { useTriggerOnChange } from "./hooks";
 
 type PersonProps = {
   person: Person;
@@ -18,14 +19,7 @@ export const Person: React.FC<PersonProps> = ({
 }) => {
   const [editing, setEditing] = useState(false);
   useEffect(() => void onDisplay(person.id), [person.id, onDisplay]);
-
-  const savingRef = useRef<boolean>();
-  useEffect(() => {
-    if (savingRef.current === true && saving === false) {
-      setEditing(false);
-    }
-    savingRef.current = saving;
-  }, [saving]);
+  useTriggerOnChange(saving, true, false, () => setEditing(false));
 
   const card = editing ? (
     <PersonForm
