@@ -14,7 +14,9 @@ const nameContains = (query: string) => {
   return (p: Person) => re.test(p.firstname) || re.test(p.lastname);
 };
 
-export const SearchableList: React.FC<{ people: People }> = ({ people }) => {
+export const SearchableList: React.FC<{ people: Readonly<People> }> = ({
+  people
+}) => {
   const [query, setQuery] = useState("");
   const filteredPeople = people.filter(nameContains(query));
   return SearchableListView({ people: filteredPeople, query, setQuery });

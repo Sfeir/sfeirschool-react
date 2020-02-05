@@ -165,6 +165,8 @@ export const useTriptych = () => {
   }, [current, ids]);
 };
 
+// export const useTriptych2 = () => useSelector(getTriptych);
+
 export const useFilteredPeople = () => {
   const ids = useSelector(getPeopleIds);
   const map = useSelector(getPeopleMap);
@@ -178,6 +180,8 @@ export const useFilteredPeople = () => {
     [ids, map, query]
   );
 };
+
+// export const useFilteredPeople2 = () => useSelector(getFilteredPeopleIds);
 
 export const useStateApi = () => {
   const dispatch = useDispatch<Dispatch<Action>>();

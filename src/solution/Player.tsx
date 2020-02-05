@@ -7,7 +7,7 @@ import { range } from "../utils";
 import { useTriptych, useStateApi } from "./state";
 
 type PlayerProps = {
-  people: People;
+  people: Readonly<People>;
 };
 
 export const Player: React.FC<PlayerProps> = ({ people }) => {

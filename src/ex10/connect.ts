@@ -1,20 +1,26 @@
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { savePerson, loadPeople } from "../utils";
-import { State, Action } from "./state";
+import { Action, getPeople, getIsReady, getPerson } from "./state";
 import { Dispatch } from "redux";
+import { useMemo } from "react";
 
-// provide people from state
-export const withPeople = connect((state: State) => ({}));
-
-// provide loading from state
-// and the loadPeople function dispatching SET_PEOPLE
-export const withLoading = connect(
-  (state: State) => ({}),
-  (dispatch: Dispatch<Action>) => ({})
-);
-
-// provide person from state using useSelector
-export const usePerson = (id: string) => null;
+export const usePeople = () => useSelector(getPeople);
+export const useIsReady = () => useSelector(getIsReady);
+export const usePerson = (id: string) => useSelector(getPerson(id));
 
 // and the onUpdate callback dispatching SET_PERSON using useDispatch
-export const useUpdatePerson = () => (person: Person) => Promise.reject();
+export const useApi = () => {
+  const dispatch = useDispatch<Dispatch<Action>>();
+  return useMemo(
+    () => ({
+      loadPeople: () =>
+        loadPeople().then(people => dispatch({ type: "SET_PEOPLE", people })),
+
+      updatePerson: (person: Person) =>
+        savePerson(person).then(person =>
+          dispatch({ type: "SET_PERSON", person })
+        )
+    }),
+    [dispatch]
+  );
+};
