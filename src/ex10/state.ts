@@ -2,7 +2,10 @@ import { Reducer } from "redux";
 import { DeepReadonly } from "utility-types";
 
 export type State = DeepReadonly<{
-  people: People | null;
+  people: {
+    map: { [key: string]: Person };
+    all: string[] | null;
+  };
 }>;
 
 export type Action =
@@ -10,15 +13,11 @@ export type Action =
   | { type: "SET_PERSON"; person: Person };
 
 const initialState: State = {
-  people: null
+  people: {
+    map: {},
+    all: null
+  }
 };
-
-const replaceInArrayBy = <T>(eq: (v1: T, v2: T) => boolean) => (
-  xs: ReadonlyArray<T>,
-  v: T
-): T[] => xs.map(x => (eq(x, v) ? v : x));
-
-const replacePersonInPeople = replaceInArrayBy<Person>((x, y) => x.id === y.id);
 
 export const reducer: Reducer<State, Action> = (
   state = initialState,
@@ -26,11 +25,23 @@ export const reducer: Reducer<State, Action> = (
 ) => {
   switch (action.type) {
     case "SET_PEOPLE":
-      return { people: action.people };
+      return {
+        people: {
+          map: Object.assign({}, ...action.people.map(p => ({ [p.id]: p }))),
+          all: action.people.map(p => p.id)
+        }
+      };
     case "SET_PERSON":
       return {
-        people: replacePersonInPeople(state.people, action.person)
+        people: {
+          ...state.people,
+          map: {
+            ...state.people.map,
+            [action.person.id]: action.person
+          }
+        }
       };
+    // return produce(state => state.people.map[action.person.id] = action.person)
     default:
       return state;
   }
@@ -38,7 +49,9 @@ export const reducer: Reducer<State, Action> = (
 
 //////////////////
 
-export const getPeople = (state: State) => state.people;
-export const getPerson = (id: string) => (state: State) =>
-  state.people.find(p => p.id === id);
-export const getIsReady = (state: State) => state.people === null;
+export const getPeople = (state: State) =>
+  state.people.all?.map(id => state.people.map[id]) || [];
+
+export const getPerson = (id: string) => (state: State) => state.people.map[id];
+
+export const getIsReady = (state: State) => state.people.all !== null;

@@ -8,8 +8,8 @@ import { Player } from "../Player";
 import { Person } from "../EditablePerson";
 import { Loading } from "../Loading";
 
-const ContextualList = withPeople(SearchableList);
-const ContextualPlayer = withPeople(Player);
+const ContextualList = withPeople(SearchableList as any);
+const ContextualPlayer = withPeople(Player as any);
 
 const ContextualPerson: React.FC<RouteComponentProps<{ id: string }>> = ({
   match
