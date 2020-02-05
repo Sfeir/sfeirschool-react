@@ -1,6 +1,6 @@
 import { DeepReadonly } from "utility-types";
 import { createSelector } from "reselect";
-import { toRing, loadPeople } from "../utils";
+import { toRing, loadPeople, savePerson } from "../utils";
 import { Dispatch } from "redux";
 
 export type State = DeepReadonly<{
@@ -10,12 +10,14 @@ export type State = DeepReadonly<{
   };
   query: string;
   current: string | null;
+  saving?: boolean;
 }>;
 
 export type Action =
   | { type: "LOAD_PEOPLE" }
   | { type: "SET_PEOPLE"; people: People }
-  // | { type: "SAVE_PERSON"; person: Person }
+  | { type: "SAVE_PERSON"; person: Person }
+  | { type: "SAVING" }
   | { type: "SET_PERSON"; person: Person }
   | { type: "SET_QUERY"; query: string }
   | { type: "SET_CURRENT_PERSON"; personId: string }
@@ -73,7 +75,8 @@ const onSetPerson = (state: State, { person }: { person: Person }): State => ({
       ...state.people.map,
       [person.id]: person
     }
-  }
+  },
+  saving: undefined
 });
 
 export const reducer = (
@@ -108,6 +111,8 @@ export const reducer = (
         ...state,
         current: toRing(state.people.all, state.current).prev
       };
+    case "SAVING":
+      return { ...state, saving: true };
     default:
       return state;
   }
@@ -125,6 +130,8 @@ export const getPeopleLoading = (state: State) => state.people.all === null;
 export const getQuery = (state: State) => state.query;
 
 export const getCurrent = (state: State) => state.current;
+
+export const getSaving = (state: State) => state.saving;
 
 export const getTriptych = createSelector(
   getPeopleIds,
@@ -154,12 +161,20 @@ export const getFilteredPeople = createSelector(
 //////////////////////////////////////////////
 
 export const effectRunner = (dispatch: Dispatch<Action>) => (
-  state: State,
+  _state: State,
   action: Action
 ) => {
   switch (action.type) {
     case "LOAD_PEOPLE":
-      loadPeople().then(people => dispatch({ type: "SET_PEOPLE", people }));
-      break;
+      return loadPeople().then(people =>
+        dispatch({ type: "SET_PEOPLE", people })
+      );
+    case "SAVE_PERSON":
+      return dispatch({
+        type: "SAVING",
+        promise: savePerson(action.person).then(person =>
+          dispatch({ type: "SET_PERSON", person })
+        )
+      });
   }
 };
